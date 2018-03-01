@@ -1,0 +1,11 @@
+django
+gunicorn
+mysqlclient
+django-counter-field-py3
+reportlab
+django-crum
+django-versatileimagefield
+python-decouple
+#nano
+#flask
+#redis
