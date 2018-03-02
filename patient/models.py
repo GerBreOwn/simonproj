@@ -82,8 +82,8 @@ class Province(CommonInfo):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30, unique=True)
     counter = CounterField
-    #class Meta:
-        #ordering = ['-counter', 'province_name']
+    class Meta:
+        ordering = ['-counter', 'province_name']
 
     def get_absolute_url(self):
         return reverse('province-detail', args=[str(self.id)])
