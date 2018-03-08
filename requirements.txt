@@ -1,11 +1,11 @@
 django
 gunicorn
 mysqlclient
-django-counter-field-py3
 reportlab
 django-crum
 django-versatileimagefield
 python-decouple
-#nano
+django-admin-easy
+django-read-only-admin
 #flask
 #redis

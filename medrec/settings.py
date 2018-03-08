@@ -26,7 +26,7 @@ SECRET_KEY = 'nf^(#gts_4-vfd74(3i-hv8qcnq&cv-9ozi-l+&j@oeb4)z3k%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.118', '192.168.0.119','127.0.0.1']
+ALLOWED_HOSTS = ['192.168.0.118', '192.168.0.119','127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_counter_field_py3',
+    'patient',
+    'visit',
+    'doctor',
+
 ]
 
 MIDDLEWARE = [

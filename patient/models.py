@@ -9,14 +9,13 @@ import datetime
 from crum import get_current_user
 from django.contrib import admin
 from versatileimagefield.fields import VersatileImageField
-from django_counter_field_py3 import CounterField
 
 class CommonInfo(models.Model):
     is_active = models.BooleanField(default = True, editable = False)
     created_on = models.DateTimeField(auto_now_add = True, editable = False)
     created_by = models.ForeignKey('auth.User', blank=True, null=True, editable = False, default = None, on_delete=models.SET_DEFAULT, related_name = "+")
-    modified_on = models.DateTimeField(auto_now = True)
-    modified_by = models.ForeignKey('auth.User', blank = True, null = True, default = None, editable = False, on_delete=models.SET_DEFAULT, related_name = '+')
+    modified_on = models.DateTimeField(auto_now = True) #, on_delete=models.DO_NOTHING, null=True)
+    modified_by = models.ForeignKey('auth.User', blank = True, null = True, default = None, editable = False, on_delete=models.DO_NOTHING, related_name = '+')
 
     def get_model_perms(self, *args, **kwargs):
         perms = admin.ModelAdmin.get_model_perms(self, *args, **kwargs)
@@ -34,16 +33,15 @@ class CommonInfo(models.Model):
         super(CommonInfo, self).save(*args, **kwargs)
 
     class Meta:
-        #ordering = ['-counter',]
-        abstract = True
+       abstract = True
 
 class Occupation(CommonInfo):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank = True, null = True, unique = True)
-    counter = CounterField
+    #counter = CounterField()
 
     class Meta:
-        ordering = ['-counter', 'name']
+        ordering = ['name']
 
     def get_absolute_url(self):
         return reverse('occup-detail', args=[str(self.id)])
@@ -63,7 +61,7 @@ class Patient(CommonInfo):
     date_of_birth = models.DateField(("Date of birth"), default=datetime.date.today)
     #pic = models.ImageField(blank=True, null=True)
     pat_pic = VersatileImageField('Pat_Pic', upload_to='images')
-    occupation = models.ForeignKey(Occupation, blank=True, null=True, default = None, on_delete=models.SET_DEFAULT)
+    occupation = models.ForeignKey('Occupation', blank=True, null=True, default = None, on_delete=models.SET_DEFAULT)
     email = models.EmailField(blank=True, null=True)
 
     GENDER = (('F', 'Female'),('M', 'Male'),)
@@ -81,9 +79,9 @@ class Patient(CommonInfo):
 class Province(CommonInfo):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30, unique=True)
-    counter = CounterField
+    #counter = CounterField()
     class Meta:
-        ordering = ['-counter', 'province_name']
+        ordering = ['name']
 
     def get_absolute_url(self):
         return reverse('province-detail', args=[str(self.id)])
@@ -91,12 +89,11 @@ class Province(CommonInfo):
     def __str__(self):
         return '%s' % (self.name)
 
-class Town(CommonInfo): #20
+class Town(CommonInfo):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=25, blank = False, null = False, unique = True)
-    zip = models.CharField(max_length=10, blank=True, null=True)
-    prov = models.ForeignKey(Province, default = None, on_delete=models.SET_DEFAULT)
-    counter = CounterField
+    zip_code = models.CharField(max_length=10, blank=True, null=True)
+    prov = models.ForeignKey('Province', default = None, null=False, on_delete=models.SET_DEFAULT)
 
     class Meta:
         ordering = ['name']
