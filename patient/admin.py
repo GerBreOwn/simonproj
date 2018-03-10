@@ -2,7 +2,7 @@ from django.contrib import admin
 #from django.core.urlresolvers import reverse
 
 admin.site.site_title = 'Medical Records Administration'
-admin.site.site_header = 'Medical Records Administration'
+admin.site.site_header = 'Medical Records Patient Administration'
 
 # Register your models here.
 

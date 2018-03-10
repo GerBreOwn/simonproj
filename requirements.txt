@@ -1,5 +1,6 @@
 django
 gunicorn
+pymysql
 mysqlclient
 reportlab
 django-crum

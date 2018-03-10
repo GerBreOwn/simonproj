@@ -9,7 +9,6 @@ import datetime
 from crum import get_current_user
 from django.contrib import admin
 from patient.models import Patient
-from django_counter_field_py3 import CounterField, CounterMixin, connect_counter
 
 class CommonInfo(models.Model): #1
     is_active = models.BooleanField(default = True, editable = False)
@@ -17,7 +16,7 @@ class CommonInfo(models.Model): #1
     created_by = models.ForeignKey('auth.User', blank=True, null=True, editable = False, default = None, on_delete=models.SET_DEFAULT, related_name = "+")
     modified_on = models.DateTimeField(auto_now = True)
     modified_by = models.ForeignKey('auth.User', blank = True, null = True, default = None, editable = False, on_delete=models.SET_DEFAULT)
-    counter = models.IntegerField(blank = True, null = True, default = None, editable = False)
+    #counter = models.IntegerField(blank = True, null = True, default = None, editable = False)
 
     def get_model_perms(self, *args, **kwargs):
         perms = admin.ModelAdmin.get_model_perms(self, *args, **kwargs)
@@ -40,7 +39,7 @@ class CommonInfo(models.Model): #1
 
 
     class Meta:
-        #ordering = ['-counter',]
+        #ordering = [ ]
         abstract = True
 
 
@@ -68,7 +67,7 @@ class BiopsyName(CommonInfo):
 
     class meta:
         app_label = 'BiopsyName'
-        ordering = ['-counter', 'biopsy_name']
+        #ordering = [  'biopsy_name']
         verbose_name = "biopsies"
 
     def get_absolute_url(self):
@@ -83,7 +82,7 @@ class BiopsyResult(CommonInfo): #3
     biopsy_result = models.CharField(max_length=25, blank = False, null = False)
 
     class Meta:
-        ordering = ['-counter','biopsy_result']
+        ordering = ['biopsy_result']
 
     def get_absolute_url(self):
         return reverse('biopsyresult-detail', args=[str(self.id)])
@@ -120,14 +119,14 @@ class Complaint(CommonInfo): #4
         return '%s' % (self.complaint_name)
 
     class meta:
-        ordering = ['-counter', 'complaint_name',]
+        ordering = [  'complaint_name',]
 
 class Dose(CommonInfo): #5
     id = models.AutoField(primary_key=True)
     dose_name = models.CharField(max_length=25, unique = True)
 
     class Meta:
-        ordering = ['-counter', 'dose_name']
+        ordering = ['dose_name']
 
     def get_absolute_url(self):
         return reverse('dose-detail', args=[str(self.id)])
@@ -141,7 +140,7 @@ class Dose(CommonInfo): #5
     #drawing_name = models.BinaryField(blank=True, null=True, unique = True)
 
     ##class Meta:
-        ##ordering = ['-counter', 'patient', 'drawing_name']
+        ##ordering = [  'patient', 'drawing_name']
 
     #def get_absolute_url(self):
         #return reverse('drawing-detail', args=[str(self.id)])
@@ -195,7 +194,7 @@ class Finding(CommonInfo): #10
     visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
 
     class Meta:
-        ordering = ['-counter', 'finding_name']
+        ordering = [  'finding_name']
 
     def get_absolute_url(self):
         return reverse('finding-detail', args=[str(self.id)])
@@ -215,7 +214,7 @@ class HearingTest(CommonInfo): #11
     hearing_name = models.CharField(max_length = 50, blank=True, null = True, unique = True)
 
     class Meta:
-        ordering = ['-counter', 'hearing_name']
+        ordering = [  'hearing_name']
 
     def get_absolute_url(self):
         return reverse('hearing-detail', args=[str(self.id)])
@@ -228,7 +227,7 @@ class HearingResult(CommonInfo): #12
     hearing_result = models.CharField(max_length=25, unique = True)
 
     class Meta:
-        ordering = ['-counter', 'hearing_result']
+        ordering = [  'hearing_result']
 
     def __str__(self):
         return '%s' % (self.hearing_result)
@@ -238,7 +237,7 @@ class Location(CommonInfo): #13
     location = models.CharField(max_length = 25,blank=False, null=False, unique = True)
 
     class Meta:
-        ordering = ['-counter', 'location']
+        ordering = [  'location']
 
     def get_absolute_url(self):
         return reverse('location-detail', args=[str(self.id)])
@@ -252,7 +251,7 @@ class Medicine(CommonInfo): #14
     generic_name = models.CharField(max_length = 50, blank = True, null = True)
 
     class Meta:
-        ordering = ['-counter', 'brand_name']
+        ordering = [  'brand_name']
 
     def get_absolute_url(self):
         return reverse('medication-detail', args=[str(self.id)])
@@ -263,7 +262,7 @@ class Medicine(CommonInfo): #14
 
 class Prescription(CommonInfo):
     id = models.AutoField(primary_key=True)
-    patient = models.ForeignKey('Patient', blank=True, null=True, on_delete=models.PROTECT)#, editable = False)
+    #patient = models.ForeignKey('Patient', blank=True, null=True, on_delete=models.PROTECT)#, editable = False)
     medicine = models.ForeignKey('Medicine', blank=True, null=True, on_delete=models.PROTECT)
     medicine_dose = models.ForeignKey('Dose', blank=True, null=True, on_delete=models.PROTECT)
     prescription_reminder = models.ForeignKey('Reminder', blank=True, null=True, on_delete=models.PROTECT)
@@ -286,7 +285,7 @@ class Reminder(CommonInfo):
     prescription_reminder = models.CharField(max_length=50, blank = True, null = True, unique = True)
 
     class Meta:
-        ordering = ['-counter', 'prescription_reminder']
+        ordering = [  'prescription_reminder']
 
     def get_absolute_url(self):
         return reverse('reminder-detail', args=[str(self.id)])
@@ -301,7 +300,7 @@ class Treatment(CommonInfo):
     visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
 
     class Meta:
-        ordering = ['-counter', 'treatment_name']
+        ordering = ['treatment_name']
 
     def get_absolute_url(self):
         return reverse('treatment-detail', args=[str(self.id)])
@@ -312,7 +311,7 @@ class Treatment(CommonInfo):
 class Visit(CommonInfo): #22
     id = models.AutoField(primary_key=True)
     visit_date = models.DateField(blank=False, null=False)
-    patient = models.ForeignKey(Patient, blank=False, null=False, on_delete=models.PROTECT)
+    # patient = models.ForeignKey('Patient.id', blank=False, null=False, on_delete=models.PROTECT)
 
     def get_absolute_url(self):
         return reverse('visit-detail', args=[str(self.id)])
