@@ -9,6 +9,7 @@ import datetime
 from crum import get_current_user
 from django.contrib import admin
 from patient.models import Patient
+#from .models import Patients
 
 class CommonInfo(models.Model): #1
     is_active = models.BooleanField(default = True, editable = False)
@@ -262,7 +263,7 @@ class Medicine(CommonInfo): #14
 
 class Prescription(CommonInfo):
     id = models.AutoField(primary_key=True)
-    #patient = models.ForeignKey('Patient', blank=True, null=True, on_delete=models.PROTECT)#, editable = False)
+    #patient = models.ForeignKey('patient.Patient', blank=False, null=False, on_delete=models.PROTECT)
     medicine = models.ForeignKey('Medicine', blank=True, null=True, on_delete=models.PROTECT)
     medicine_dose = models.ForeignKey('Dose', blank=True, null=True, on_delete=models.PROTECT)
     prescription_reminder = models.ForeignKey('Reminder', blank=True, null=True, on_delete=models.PROTECT)
@@ -308,10 +309,10 @@ class Treatment(CommonInfo):
     def __str__(self):
         return '%s' % (self.treatment_name)
 
-class Visit(CommonInfo): #22
+class Visit(CommonInfo):
     id = models.AutoField(primary_key=True)
     visit_date = models.DateField(blank=False, null=False)
-    # patient = models.ForeignKey('Patient.id', blank=False, null=False, on_delete=models.PROTECT)
+    patient = models.ForeignKey('patient.Patient', blank=False, null=False, on_delete=models.PROTECT, default=1)
 
     def get_absolute_url(self):
         return reverse('visit-detail', args=[str(self.id)])
