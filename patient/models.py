@@ -13,9 +13,9 @@ from versatileimagefield.fields import VersatileImageField
 class CommonInfo(models.Model):
     is_active = models.BooleanField(default = True, editable = False)
     created_on = models.DateTimeField(auto_now_add = True, editable = False)
-    created_by = models.ForeignKey('auth.User', blank=True, null=True, editable = False, default = None, on_delete=models.SET_DEFAULT, related_name = "+")
+    created_by = models.ForeignKey('auth.User', blank=True, null=True, default = None, on_delete=models.SET_DEFAULT, related_name = "+")
     modified_on = models.DateTimeField(auto_now = True) #, on_delete=models.DO_NOTHING, null=True)
-    modified_by = models.ForeignKey('auth.User', blank = True, null = True, default = None, editable = False, on_delete=models.DO_NOTHING, related_name = '+')
+    modified_by = models.ForeignKey('auth.User', blank = True, null = True, default = None, editable = False, on_delete=models.SET_DEFAULT, related_name = '+')
 
     def get_model_perms(self, *args, **kwargs):
         perms = admin.ModelAdmin.get_model_perms(self, *args, **kwargs)
@@ -29,7 +29,6 @@ class CommonInfo(models.Model):
         if not self.pk:
             self.created_by = user
         self.modified_by = user
-
         super(CommonInfo, self).save(*args, **kwargs)
 
     class Meta:
@@ -54,7 +53,7 @@ class Patient(CommonInfo):
     last_name = models.CharField(max_length=25, db_index = True)
     first_name = models.CharField(max_length=25, db_index = True)
     middle_initial = models.CharField(max_length=1, blank=True, null=True)
-    age = models.IntegerField(blank = False, null = False, editable = False, default = 1)
+    #age = models.IntegerField(blank = False, null = False, editable = False, default = 1)
     contact_num = models.CharField(max_length=15, blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
     town = models.ForeignKey('Town',  blank=False, null=False, default = None, on_delete=models.SET_DEFAULT)

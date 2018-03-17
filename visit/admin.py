@@ -66,7 +66,7 @@ class VisitInstanceAdmin(admin.ModelAdmin):
 	'fields': [('visit_date', 'patient')]
 	}),
 	)
-	view_on_site = False
+	
 
 	inlines = (ComplaintAdminInline, PrescriptionAdminInline, BiopsyAdminInline, HearingAdminInline, ExamAdminInline, )
 

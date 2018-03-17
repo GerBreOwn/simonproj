@@ -9,7 +9,7 @@ import datetime
 from crum import get_current_user
 from django.contrib import admin
 from patient.models import Patient
-#from .models import Patients
+from doctor.models import Doctor
 
 class CommonInfo(models.Model): #1
     is_active = models.BooleanField(default = True, editable = False)
@@ -263,23 +263,20 @@ class Medicine(CommonInfo): #14
 
 class Prescription(CommonInfo):
     id = models.AutoField(primary_key=True)
-    #patient = models.ForeignKey('patient.Patient', blank=False, null=False, on_delete=models.PROTECT)
+    patient_prescpt = models.ForeignKey('patient.Patient', blank=False, null=False, on_delete=models.PROTECT, default=1)
     medicine = models.ForeignKey('Medicine', blank=True, null=True, on_delete=models.PROTECT)
     medicine_dose = models.ForeignKey('Dose', blank=True, null=True, on_delete=models.PROTECT)
     prescription_reminder = models.ForeignKey('Reminder', blank=True, null=True, on_delete=models.PROTECT)
     medicine_quantity = models.IntegerField(blank=True, null=True)
     visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
-    PPRINT = (('Y', 'Yes'), ('N', 'No'),)
-    pprint = models.CharField(max_length=1, choices=PPRINT, blank=False, null=False, default = 'Y', help_text = 'Print this prescription?')
+    Pres_PRINT = (('Y', 'Yes'), ('N', 'No'),)
+    pprint = models.CharField(max_length=1, choices=Pres_PRINT, blank=False, null=False, default = 'Y', help_text = 'Print this prescription?')
 
-    PRE_PAPER = (('P', 'Plain Paper'), ('H', 'With Headers'),)
-    pre_paper = models.CharField(max_length=1, choices=PRE_PAPER, blank=True, null=True, help_text = 'Select paper type.')
+    Pres_PAPER_ch = (('P', 'Plain Paper'), ('H', 'With Headers'),)
+    Pres_paper = models.CharField(max_length=1, choices=Pres_PAPER_ch, blank=True, null=True, help_text = 'Select paper type.')
 
     def get_absolute_url(self):
         return reverse('prescription-detail', args=[str(self.id)])
-
-    #def __str__(self):
-        #return '%s' % (self.medicine)
 
 class Reminder(CommonInfo):
     id = models.AutoField(primary_key=True)
