@@ -5,16 +5,18 @@ from django.db.models import signals
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.apps import AppConfig
+#from django.urls import reverse
 import datetime
 from crum import get_current_user
 from django.contrib import admin
 from versatileimagefield.fields import VersatileImageField
+from django_images.models import Image
 
 class CommonInfo(models.Model):
     is_active = models.BooleanField(default = True, editable = False)
     created_on = models.DateTimeField(auto_now_add = True, editable = False)
-    created_by = models.ForeignKey('auth.User', blank=True, null=True, default = None, on_delete=models.SET_DEFAULT, related_name = "+")
-    modified_on = models.DateTimeField(auto_now = True) #, on_delete=models.DO_NOTHING, null=True)
+    created_by = models.ForeignKey('auth.User', blank=True, null=True, default = None,editable = False, on_delete=models.SET_DEFAULT, related_name = "+")
+    modified_on = models.DateTimeField(auto_now = True, editable = False) #, on_delete=models.DO_NOTHING, null=True)
     modified_by = models.ForeignKey('auth.User', blank = True, null = True, default = None, editable = False, on_delete=models.SET_DEFAULT, related_name = '+')
 
     def get_model_perms(self, *args, **kwargs):
@@ -58,7 +60,7 @@ class Patient(CommonInfo):
     address = models.CharField(max_length=50, blank=True, null=True)
     town = models.ForeignKey('Town',  blank=False, null=False, default = None, on_delete=models.SET_DEFAULT)
     date_of_birth = models.DateField(("Date of birth"), default=datetime.date.today)
-    #pic = models.ImageField(blank=True, null=True)
+    pic = models.ImageField(blank=True, null=True)
     pat_pic = VersatileImageField('Pat_Pic', upload_to='images')
     occupation = models.ForeignKey('Occupation', blank=True, null=True, default = None, on_delete=models.SET_DEFAULT)
     email = models.EmailField(blank=True, null=True)

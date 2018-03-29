@@ -1,7 +1,7 @@
 from django.db import models
 from crum import get_current_user
 from django.contrib import admin
-#from django.core.urlresolvers import reverse
+#from django.urls import reverse
 from patient.models import Town
 # Create your models here.
 
@@ -32,7 +32,8 @@ class CommonInfo(models.Model):
 
 class Doctor(CommonInfo):
 	dr_id = models.AutoField(primary_key = True)
-	dr_name = models.CharField(max_length = 55)
+	dr_fname = models.CharField(max_length = 20, blank = False, null = False)
+	dr_lname = models.CharField(max_length = 15, blank = False, null = False)
 	dr_suffix = models.CharField(max_length = 55, blank = True, null = True)
 	dr_off_hour = models.ForeignKey('DrOfficeHour', on_delete = models.CASCADE, default = 1)
 	dr_telephone = models.CharField(max_length = 12, blank = True, null = True)
@@ -45,7 +46,7 @@ class Doctor(CommonInfo):
 		return reverse('doctor-detail', args=[str(self.id)])
 
 	def __str__(self):
-		return '%s' % (self.dr_name)
+		return '%s %s' % (self.dr_fname, self.dr_lname)
 
 class Hospital(CommonInfo):
 	id = models.AutoField(primary_key = True)

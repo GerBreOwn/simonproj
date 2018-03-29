@@ -8,8 +8,8 @@ django-versatileimagefield
 python-decouple
 django-easy-pdf
 WeasyPrint
-django-livesync
 django-extensions
 django-autocomplete-light
+#django-images
 #flask
 #redis
