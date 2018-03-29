@@ -1,7 +1,8 @@
 django
 gunicorn
 pymysql
-mysqlclient
+#mysqlclient
+mysql-connector-python
 reportlab
 django-crum
 django-versatileimagefield

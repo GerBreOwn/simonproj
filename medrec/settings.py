@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_images',
+    #'django_images',
     'patient',
     'visit',
     'doctor',
@@ -82,7 +82,8 @@ WSGI_APPLICATION = 'medrec.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        #'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'NAME': 'medrec',
         'USER':  'root',
         'PASSWORD':  'CasC#373',
