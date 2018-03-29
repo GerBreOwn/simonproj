@@ -6,10 +6,10 @@ reportlab
 django-crum
 django-versatileimagefield
 python-decouple
-django-easy-pdf
+#django-easy-pdf
 WeasyPrint
-django-extensions
-django-autocomplete-light
+#django-extensions
+#django-autocomplete-light
 #django-images
 #flask
 #redis
