@@ -20,7 +20,7 @@ admin.site.site_header = settings.ADMIN_SITE_HEADER
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^images/', include ('django_images.urls')),
+    #url(r'^images/', include ('django_images.urls')),
 ]
 
 admin.site.site_header = 'MEDREC Administration'
