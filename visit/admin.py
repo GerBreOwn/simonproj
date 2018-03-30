@@ -10,17 +10,17 @@ from .models import  Biopsy, BiopsyResult, Dose, ExamResult, ExamType,  Exam, He
 
 mymodels = [BiopsyResult, Dose, ExamResult, ExamType, HearingTest, HearingResult, Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding]
 
-def register_hidden_models(*model_names):
-    for m in model_names:
-        ma = type(
-            str(m)+'Admin',
-            (admin.ModelAdmin,),
-            {
-                'get_model_perms': lambda self, request: {}
-            })
-        admin.site.register(m, ma)
+# def register_hidden_models(*model_names):
+    # for m in model_names:
+        # ma = type(
+            # str(m)+'Admin',
+            # (admin.ModelAdmin,),
+            # {
+                # 'get_model_perms': lambda self, request: {}
+            # })
+        # admin.site.register(m, ma)
 
-register_hidden_models(mymodels)
+# register_hidden_models(mymodels)
 
 #from .forms import BiopsyForm, ComplaintForm, ExamForm
 
