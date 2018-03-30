@@ -272,8 +272,8 @@ class Prescription(CommonInfo):
     Pres_PRINT = (('Y', 'Yes'), ('N', 'No'),)
     pprint = models.CharField(max_length=1, choices=Pres_PRINT, blank=False, null=False, default = 'Y', help_text = 'Print this prescription?')
 
-    Pres_PAPER_ch = (('P', 'Plain Paper'), ('H', 'With Headers'),)
-    Pres_paper = models.CharField(max_length=1, choices=Pres_PAPER_ch, blank=True, null=True, help_text = 'Select paper type.')
+    #Pres_PAPER_ch = (('P', 'Plain Paper'), ('H', 'With Headers'),)
+    #Pres_paper = models.CharField(max_length=1, choices=Pres_PAPER_ch, blank=True, null=True, help_text = 'Select paper type.')
 
     def get_absolute_url(self):
         return reverse('prescription-detail', args=[str(self.id)])

@@ -1,4 +1,4 @@
-#!/home/gerald/medrecproj2/medrecenv/bin/python3
+#!/home/gerald/.virtualenvs/medrecenv/bin/python3.6
 
 # -*- coding: utf-8 -*-
 import re
