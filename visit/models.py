@@ -303,7 +303,7 @@ class Treatment(CommonInfo):
 
 class Visit(CommonInfo):
     id = models.AutoField(primary_key=True)
-    visit_date = models.DateField(blank=False, null=False)
+    visit_date = models.DateField(auto_now_add = True, blank=False, null=False)
     patient = models.ForeignKey('patient.Patient', blank=False, null=False, on_delete=models.PROTECT, default=1)
 
     def get_absolute_url(self):
