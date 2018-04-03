@@ -10,7 +10,6 @@ import datetime
 from crum import get_current_user
 from django.contrib import admin
 from versatileimagefield.fields import VersatileImageField
-#from django_images.models import Image
 
 class CommonInfo(models.Model):
     is_active = models.BooleanField(default = True, editable = False)
@@ -103,3 +102,10 @@ class Town(CommonInfo):
 
     def __str__(self):
         return '%s' % (self.name)
+
+class Image(models.Model):
+	name = models.CharField(max_length=500)
+	picfile = models.ImageField(upload_to = 'images/', null = True, blank = True, verbose_name = "")
+
+	def __str__(self):
+		return self.name + ": " + str(self.imagefile)
