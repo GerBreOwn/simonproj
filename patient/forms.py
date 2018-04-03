@@ -13,3 +13,7 @@ class PatientForm(forms.ModelForm):
 			'email': forms.TextInput(attrs = {'size': 25}),
 			'occupation': forms.TextInput(attrs = {'size': 25}),
 		}
+class ImageForm(forms.ModelForm):
+	class Meta:
+		model = Image
+		fields = ["last_name", "first_name", "pat_pic"]
