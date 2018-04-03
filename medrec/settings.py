@@ -15,7 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-MEDIA_URL = "/media"
+MEDIA_URL = "/media/"
 
 ADMIN_SITE_HEADER = "Medical Records Administration"
 
@@ -26,7 +26,7 @@ ADMIN_SITE_HEADER = "Medical Records Administration"
 SECRET_KEY = 'nf^(#gts_4-vfd74(3i-hv8qcnq&cv-9ozi-l+&j@oeb4)z3k%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.0.118', '192.168.0.119','127.0.0.1', 'localhost']
 
