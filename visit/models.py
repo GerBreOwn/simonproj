@@ -93,7 +93,7 @@ class BiopsyResult(CommonInfo):
 
 class ComplaintName(CommonInfo):
     id = models.AutoField(primary_key=True)
-    complaint_name = models.CharField(max_length=255, unique = True,   null=False)
+    complaint_name = models.CharField(max_length=255, unique = True)
     #visit = models.ForeignKey('Visit', blank = True, null = True, editable = False)
 
     def __str__(self):
@@ -105,9 +105,9 @@ class ComplaintName(CommonInfo):
     def get_absolute_url(self):
         return reverse('complaintname-detail', args=[str(self.id)])
 
-class Complaint(CommonInfo): #4
+class Complaint(CommonInfo): 
     id = models.AutoField(primary_key=True)
-    complaint_name = models.ForeignKey(ComplaintName, blank = False, null = False, on_delete=models.PROTECT)
+    complaint_name = models.ForeignKey('ComplaintName', blank = False, null = False, on_delete=models.PROTECT)
     complaint_location = models.ForeignKey('Location', blank = False, null = False, on_delete=models.PROTECT)
     visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
     finding = models.ManyToManyField('Finding')
@@ -305,7 +305,7 @@ class Visit(CommonInfo):
     id = models.AutoField(primary_key=True)
     visit_date = models.DateField("Date", default = datetime.date.today)
     patient = models.ForeignKey('patient.Patient',on_delete=models.PROTECT, default=1)
-
+   
     def get_absolute_url(self):
         return reverse('visit-detail', args=[str(self.id)])
 

@@ -34,15 +34,15 @@ ALLOWED_HOSTS = ['192.168.0.118', '192.168.0.119','127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+	'patient',
+    'visit',
+    'doctor',
 	'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'patient',
-    'visit',
-    'doctor',
     'easy_pdf',
    
 ]
