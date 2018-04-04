@@ -34,8 +34,8 @@ class Patient(admin.ModelAdmin):
             # del actions['delete_selected']
 		# return actions
 		
-	view_on_site = False
-	list_display = ('last_name', 'first_name', 'middle_initial', 'date_of_birth', 'contact_num', 'address', 'town','gender', 'email', 'occupation')
-	fields = [('last_name', 'first_name', 'middle_initial'),('gender','date_of_birth'), ('contact_num', 'address', 'town'), ('email', 'occupation')]
+	#view_on_site = False
+	list_display = ('pat_pic','last_name', 'first_name', 'middle_initial', 'date_of_birth', 'contact_num', 'address', 'town','gender', 'email', 'occupation')
+	fields = [('pat_pic'),('last_name', 'first_name', 'middle_initial'),('gender','date_of_birth'), ('contact_num', 'address', 'town'), ('email', 'occupation')]
 	search_fields = ['last_name', 'first_name']
 

@@ -1,4 +1,4 @@
-#!/home/gerald/.virtualenvs/medrecenv/bin/python
+#!/home/gerald/medrecproj/medrecenv/bin/python
 
 import sys
 import getopt
