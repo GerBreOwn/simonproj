@@ -59,8 +59,9 @@ class PrescriptionAdminInline(admin.TabularInline):
 
 
 @admin.register(Visit)
-class VisitInstanceAdmin(admin.ModelAdmin):
+class VisitAdmin(admin.ModelAdmin):
 	view_on_site = False
+	#list_display = ("visit_count",)
 	fieldsets = (
 	('Date & Patient:', {
 	'fields': [('visit_date', 'patient')]
@@ -69,4 +70,3 @@ class VisitInstanceAdmin(admin.ModelAdmin):
 	
 
 	inlines = (ComplaintAdminInline, PrescriptionAdminInline, BiopsyAdminInline, HearingAdminInline, ExamAdminInline, )
-
