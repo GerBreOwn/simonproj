@@ -108,3 +108,6 @@ class Image(models.Model):
 
 	def __str__(self):
 		return self.name + ": " + str(self.imagefile)
+
+def pat_count(self, obj):
+	return obj.self.patient__set.count()

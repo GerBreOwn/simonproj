@@ -311,3 +311,5 @@ class Visit(CommonInfo):
 
     def __str__(self):
         return '%s, %s' % (self.patient, self.visit_date)
+def visit_count(self, obj):
+	return obj.visit__set.count()

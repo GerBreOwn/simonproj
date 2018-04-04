@@ -1,6 +1,8 @@
 from django.contrib import admin
 #from django.urls import reverse
 
+admin.site.disable_action('delete_selected')
+
 admin.site.site_title = 'Medical Records Administration'
 admin.site.site_header = 'Medical Records Patient Administration'
 
@@ -23,19 +25,18 @@ def register_hidden_models(*model_names):
 register_hidden_models(mymodels)
 
 @admin.register(Patient)
-
 class Patient(admin.ModelAdmin):
 	def has_delete_permission(self, request, obj=None):
 		return False
 
-	# def get_actions(self, request):
-        # actions = super(MyAdmin, self).get_actions(request)
-        # if 'delete_selected' in actions:
-            # del actions['delete_selected']
-		# return actions
-		
 	#view_on_site = False
-	list_display = ('pat_pic','last_name', 'first_name', 'middle_initial', 'date_of_birth', 'contact_num', 'address', 'town','gender', 'email', 'occupation')
-	fields = [('pat_pic'),('last_name', 'first_name', 'middle_initial'),('gender','date_of_birth'), ('contact_num', 'address', 'town'), ('email', 'occupation')]
+	list_display = ('last_name', 'first_name', 'middle_initial', 'date_of_birth', 'contact_num', 'address', 'town','gender', 'email', 'occupation', 'pat_pic')
+	fields = [('last_name', 'first_name', 'middle_initial'),('gender','date_of_birth'), ('contact_num', 'address', 'town'), ('email', 'occupation')]
+	
 	search_fields = ['last_name', 'first_name']
 
+# def get_actions(self, request):
+	# actions = super(.get_actions(request)
+	# if 'delete_selected' in actions:
+		# del actions['delete_selected']
+	# return actions
