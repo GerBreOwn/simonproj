@@ -93,7 +93,7 @@ class BiopsyResult(CommonInfo):
 
 class ComplaintName(CommonInfo):
     id = models.AutoField(primary_key=True)
-    complaint_name = models.CharField(max_length=255, unique = True, blank=False, null=False)
+    complaint_name = models.CharField(max_length=255, unique = True,   null=False)
     #visit = models.ForeignKey('Visit', blank = True, null = True, editable = False)
 
     def __str__(self):
@@ -235,7 +235,7 @@ class HearingResult(CommonInfo):
 
 class Location(CommonInfo): 
     id = models.AutoField(primary_key = True)
-    location = models.CharField(max_length = 25,blank=False, null=False, unique = True)
+    location = models.CharField(max_length = 25,    unique = True)
 
     class Meta:
         ordering = [  'location']
@@ -263,7 +263,7 @@ class Medicine(CommonInfo): #14
 
 class Prescription(CommonInfo):
     id = models.AutoField(primary_key=True)
-    #patient_prescpt = models.ForeignKey('patient.Patient', blank=False, null=False, on_delete=models.PROTECT)#, default=1)
+    #patient_prescpt = models.ForeignKey('patient.Patient',     on_delete=models.PROTECT)#, default=1)
     medicine = models.ForeignKey('Medicine', blank=True, null=True, on_delete=models.PROTECT)
     medicine_dose = models.ForeignKey('Dose', blank=True, null=True, on_delete=models.PROTECT)
     prescription_reminder = models.ForeignKey('Reminder', blank=True, null=True, on_delete=models.PROTECT)
@@ -303,8 +303,8 @@ class Treatment(CommonInfo):
 
 class Visit(CommonInfo):
     id = models.AutoField(primary_key=True)
-    visit_date = models.DateField(auto_now_add = True, blank=False, null=False)
-    patient = models.ForeignKey('patient.Patient', blank=False, null=False, on_delete=models.PROTECT, default=1)
+    visit_date = models.DateField("Date", default = datetime.date.today)
+    patient = models.ForeignKey('patient.Patient',on_delete=models.PROTECT, default=1)
 
     def get_absolute_url(self):
         return reverse('visit-detail', args=[str(self.id)])
