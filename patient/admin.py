@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin import site
 #from django.urls import reverse
 
 admin.site.disable_action('delete_selected')
@@ -35,8 +36,3 @@ class Patient(admin.ModelAdmin):
 	
 	search_fields = ['last_name', 'first_name']
 
-# def get_actions(self, request):
-	# actions = super(.get_actions(request)
-	# if 'delete_selected' in actions:
-		# del actions['delete_selected']
-	# return actions
