@@ -11,7 +11,7 @@ from django.contrib import admin
 from patient.models import Patient
 from doctor.models import Doctor
 
-class CommonInfo(models.Model): 
+class CommonInfo(models.Model):
     is_active = models.BooleanField(default = True, editable = False)
     created_on = models.DateTimeField(auto_now_add = True, editable = False)
     created_by = models.ForeignKey('auth.User', blank=True, null=True, editable = False, default = None, on_delete=models.SET_DEFAULT, related_name = "+")
@@ -30,6 +30,7 @@ class CommonInfo(models.Model):
             user = None
         if not self.pk:
             self.created_by = user
+
         self.modified_by = user
 
         super(CommonInfo, self).save(*args, **kwargs)
@@ -44,11 +45,11 @@ class CommonInfo(models.Model):
         abstract = True
 
 
-class Biopsy(CommonInfo): 
+class Biopsy(CommonInfo):
     id = models.AutoField(primary_key=True)
-    biopsy_name = models.ForeignKey('BiopsyName',blank = True, null = True, on_delete=models.SET_NULL)
-    biopsy_location = models.ForeignKey('Location', blank = True, null = True, on_delete=models.SET_NULL)
-    biopsy_result = models.ForeignKey('BiopsyResult', blank = True, null = True, on_delete=models.SET_NULL)
+    biopsy_name = models.ManyToManyField('BiopsyName',blank = True)
+    biopsy_location = models.ManyToManyField('Location', blank = True)
+    biopsy_result = models.ManyToManyField('BiopsyResult', blank = True)
     biopsy_text = models.TextField(blank = True, null = True)
     visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
 
@@ -64,7 +65,7 @@ class Biopsy(CommonInfo):
 
 class BiopsyName(CommonInfo):
     id = models.AutoField(primary_key=True)
-    biopsy_name = models.CharField(max_length=25, blank = False, null = False, unique = True)
+    biopsy_name = models.CharField(max_length=25, unique = True)
 
     class meta:
         app_label = 'BiopsyName'
@@ -78,9 +79,9 @@ class BiopsyName(CommonInfo):
         return '%s' % (self.biopsy_name)
 
 
-class BiopsyResult(CommonInfo): 
+class BiopsyResult(CommonInfo):
     id = models.AutoField(primary_key=True)
-    biopsy_result = models.CharField(max_length=25, blank = False, null = False)
+    biopsy_result = models.CharField(max_length=25, unique = True)
 
     class Meta:
         ordering = ['biopsy_result']
@@ -94,10 +95,9 @@ class BiopsyResult(CommonInfo):
 class ComplaintName(CommonInfo):
     id = models.AutoField(primary_key=True)
     complaint_name = models.CharField(max_length=255, unique = True)
-    #visit = models.ForeignKey('Visit', blank = True, null = True, editable = False)
-
-    def __str__(self):
-        return '%s' % (self.complaint_name)
+    
+    # def __str__(self):
+        # return '%s' % (self.complaint_name)
 
     class meta:
         ordering = ["complaint_name",]
@@ -105,13 +105,14 @@ class ComplaintName(CommonInfo):
     def get_absolute_url(self):
         return reverse('complaintname-detail', args=[str(self.id)])
 
-class Complaint(CommonInfo): 
+class Complaint(CommonInfo):
     id = models.AutoField(primary_key=True)
-    complaint_name = models.ForeignKey('ComplaintName', blank = False, null = False, on_delete=models.PROTECT)
-    complaint_location = models.ForeignKey('Location', blank = False, null = False, on_delete=models.PROTECT)
-    visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
+    complaint_name = models.ManyToManyField('ComplaintName')
+    complaint_location = models.ManyToManyField('Location')
     finding = models.ManyToManyField('Finding')
     treatment = models.ManyToManyField('Treatment')
+    visit = models.ForeignKey('Visit', editable = False,
+    on_delete=models.PROTECT, default = 1)
 
     def get_absolute_url(self):
         return reverse('complaint-detail', args=[str(self.id)])
@@ -122,7 +123,7 @@ class Complaint(CommonInfo):
     class meta:
         ordering = [  'complaint_name',]
 
-class Dose(CommonInfo): 
+class Dose(CommonInfo):
     id = models.AutoField(primary_key=True)
     dose_name = models.CharField(max_length=25, unique = True)
 
@@ -135,7 +136,7 @@ class Dose(CommonInfo):
     def __str__(self):
         return '%s' % (self.dose_name)
 
-#class Drawing(CommonInfo): 
+#class Drawing(CommonInfo):
     #id = models.AutoField(primary_key=True)
     #patient = models.ForeignKey('Patient', models.DO_NOTHING, blank=True, null=True)
     #drawing_name = models.BinaryField(blank=True, null=True, unique = True)
@@ -151,17 +152,19 @@ class Dose(CommonInfo):
 
 class ExamName(CommonInfo):
     id = models.AutoField(primary_key = True)
-    exam_name = models.CharField(max_length = 25, blank = True, null = True, unique = True)
-    visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
+    exam_name = models.CharField(max_length = 25, unique = True,
+    default = "")
+    visit = models.ForeignKey('Visit', blank = True, null = True,
+    editable = False, on_delete=models.SET_NULL, default = 1)
 
 class Exam(CommonInfo):
     id = models.AutoField(primary_key = True)
-    exam_name = models.ForeignKey(ExamName, blank = True, null = True, on_delete=models.SET_NULL)
+    exam_name = models.ManyToManyField(ExamName)
     exam_date = models.DateField(blank=True, null=True)
-    exam_type = models.ForeignKey('ExamType', blank=True, null=True, on_delete=models.SET_NULL)
-    exam_result = models.ForeignKey('ExamResult', blank=True, null=True, on_delete=models.SET_NULL)
+    exam_type = models.ManyToManyField('ExamType')
+    exam_result = models.ManyToManyField('ExamResult')
     exam_text = models.TextField(blank=True, null=True)
-    visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
+    visit = models.ForeignKey('Visit', null=True, editable = False, on_delete=models.SET_NULL)
 
     def get_absolute_url(self):
         return reverse('exam-detail', args=[str(self.id)])
@@ -169,9 +172,10 @@ class Exam(CommonInfo):
     def __str__(self):
         return '%s, %s' % (self.exam_date, self.exam_name)
 
-class ExamResult(CommonInfo): 
+class ExamResult(CommonInfo):
     id = models.AutoField(primary_key=True)
-    exam_result = models.CharField(max_length=25, blank=True, null=True, unique = True)
+    exam_result = models.CharField(max_length=25, unique = True,
+    default = "")
 
     def get_absolute_url(self):
         return reverse('examresult-detail', args=[str(self.id)])
@@ -179,9 +183,10 @@ class ExamResult(CommonInfo):
     def __str__(self):
         return '%s' % (self.exam_result)
 
-class ExamType(CommonInfo): 
+class ExamType(CommonInfo):
     id = models.AutoField(primary_key=True)
-    exam_type = models.CharField(max_length=25, blank=True, null=True, unique = True)
+    exam_type = models.CharField(max_length=25, unique = True, default
+    = "")
 
     def get_absolute_url(self):
         return reverse('examtype-detail', args=[str(self.id)])
@@ -189,9 +194,10 @@ class ExamType(CommonInfo):
     def __str__(self):
         return '%s' % (self.exam_type)
 
-class Finding(CommonInfo): 
+class Finding(CommonInfo):
     id = models.AutoField(primary_key=True)
-    finding_name = models.CharField(max_length=255, blank = True, null = True)#, unique = True)
+    finding_name = models.CharField(max_length=255, unique = True,
+    default ="")
     visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
 
     class Meta:
@@ -205,14 +211,15 @@ class Finding(CommonInfo):
 
 class Hearing(CommonInfo):
     id = models.AutoField(primary_key=True)
-    hearing_test = models.ForeignKey('HearingTest', blank = True, null = True, on_delete=models.SET_NULL)
-    hearing_result = models.ForeignKey('HearingResult', blank = True, null = True, on_delete=models.SET_NULL)
+    hearing_test = models.ManyToManyField('HearingTest')
+    hearing_result = models.ManyToManyField('HearingResult')
     hearing_text = models.TextField(blank=True, null=True)
     visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
 
-class HearingTest(CommonInfo): 
+class HearingTest(CommonInfo):
     id = models.AutoField(primary_key=True)
-    hearing_name = models.CharField(max_length = 50, blank=True, null = True, unique = True)
+    hearing_name = models.CharField(max_length = 50, unique = True,
+    default = "")
 
     class Meta:
         ordering = [  'hearing_name']
@@ -223,7 +230,7 @@ class HearingTest(CommonInfo):
     def __str__(self):
         return '%s' % (self.hearing_name)
 
-class HearingResult(CommonInfo): 
+class HearingResult(CommonInfo):
     id = models.AutoField(primary_key=True)
     hearing_result = models.CharField(max_length=25, unique = True)
 
@@ -233,9 +240,9 @@ class HearingResult(CommonInfo):
     def __str__(self):
         return '%s' % (self.hearing_result)
 
-class Location(CommonInfo): 
+class Location(CommonInfo):
     id = models.AutoField(primary_key = True)
-    location = models.CharField(max_length = 25,    unique = True)
+    location = models.CharField(max_length = 25, unique = True)
 
     class Meta:
         ordering = [  'location']
@@ -248,8 +255,12 @@ class Location(CommonInfo):
 
 class Medicine(CommonInfo): #14
     id = models.AutoField(primary_key=True)
-    brand_name = models.CharField(max_length=50, blank = True, null = True, unique=True)
-    generic_name = models.CharField(max_length = 50, blank = True, null = True)
+    brand_name = models.CharField(max_length=50, unique=True, default =
+    "")
+    generic_name = models.CharField(max_length = 50, unique = True,
+    default = "")
+    medicine_dose = models.ForeignKey('Dose', on_delete=models.PROTECT,
+    default = "")
 
     class Meta:
         ordering = [  'brand_name']
@@ -263,19 +274,21 @@ class Medicine(CommonInfo): #14
 
 class Prescription(CommonInfo):
     id = models.AutoField(primary_key=True)
-    #patient_prescpt = models.ForeignKey('patient.Patient',     on_delete=models.PROTECT)#, default=1)
-    medicine = models.ForeignKey('Medicine', blank=True, null=True, on_delete=models.PROTECT)
-    medicine_dose = models.ForeignKey('Dose', blank=True, null=True, on_delete=models.PROTECT)
-    prescription_reminder = models.ForeignKey('Reminder', blank=True, null=True, on_delete=models.PROTECT)
-    medicine_quantity = models.IntegerField(blank=True, null=True)
-    visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
+    medicine = models.ForeignKey('Medicine', on_delete=models.PROTECT,
+    default = "")
     
+    prescription_reminder = models.ForeignKey('Reminder',
+    on_delete=models.PROTECT, default = "")
+    medicine_quantity = models.IntegerField(default = 0)
+    visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
+
     def get_absolute_url(self):
         return reverse('prescription-detail', args=[str(self.id)])
 
 class Reminder(CommonInfo):
     id = models.AutoField(primary_key=True)
-    prescription_reminder = models.CharField(max_length=50, blank = True, null = True, unique = True)
+    prescription_reminder = models.CharField(max_length=50, unique =
+    True, default ="")
 
     class Meta:
         ordering = [  'prescription_reminder']
@@ -289,7 +302,8 @@ class Reminder(CommonInfo):
 
 class Treatment(CommonInfo):
     id = models.AutoField(primary_key=True)
-    treatment_name = models.CharField(max_length=255, blank = True, null = True)
+    treatment_name = models.CharField(max_length=255, unique = True,
+    default = "" )
     visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
 
     class Meta:
@@ -305,11 +319,13 @@ class Visit(CommonInfo):
     id = models.AutoField(primary_key=True)
     visit_date = models.DateField("Date", default = datetime.date.today)
     patient = models.ForeignKey('patient.Patient',on_delete=models.PROTECT, default=1)
-   
+   # prescription = models.ForeignKey('Prescription', on_delete=models.PROTECT, default = 1)
+
     def get_absolute_url(self):
         return reverse('visit-detail', args=[str(self.id)])
 
     def __str__(self):
         return '%s, %s' % (self.patient, self.visit_date)
+
 def visit_count(self, obj):
-	return obj.visit__set.count()
+    return obj.visit__set.count()

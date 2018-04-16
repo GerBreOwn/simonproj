@@ -32,10 +32,10 @@ class CommonInfo(models.Model):
 
 class Doctor(CommonInfo):
 	dr_id = models.AutoField(primary_key = True)
-	dr_fname = models.CharField(max_length = 20, blank = False, null = False)
-	dr_lname = models.CharField(max_length = 15, blank = False, null = False)
+	dr_first_name = models.CharField(max_length = 20, blank = False, null = False)
+	dr_last_name = models.CharField(max_length = 15, blank = False, null = False)
 	dr_suffix = models.CharField(max_length = 55, blank = True, null = True)
-	dr_off_hour = models.ForeignKey('DrOfficeHour', on_delete = models.CASCADE, default = 1)
+	dr_off_hour = models.ManyToManyField('DrOfficeHour',max_length = 25, blank = True)
 	dr_telephone = models.CharField(max_length = 12, blank = True, null = True)
 	dr_afil = models.ManyToManyField('Hospital',max_length = 25, blank = True)
 	dr_lic_no = models.CharField(max_length = 25, blank = True, null = True)
@@ -46,7 +46,7 @@ class Doctor(CommonInfo):
 		return reverse('doctor-detail', args=[str(self.id)])
 
 	def __str__(self):
-		return '%s %s' % (self.dr_fname, self.dr_lname)
+		return '%s %s' % (self.dr_first_name, self.dr_last_name)
 
 class Hospital(CommonInfo):
 	id = models.AutoField(primary_key = True)
@@ -66,7 +66,7 @@ class DrOfficeHour(CommonInfo):
 	days = models.CharField(max_length = 20, blank = True, null = True)
 	hours_am = models.CharField(max_length = 20, blank = True, null = True)
 	hours_pm = models.CharField(max_length = 20, blank = True, null = True)
-
+	
 	def get_absolute_url(self):
 		return reverse('officehour-detail', args=[str(self.id)])
 

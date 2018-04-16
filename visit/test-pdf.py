@@ -7,35 +7,14 @@ from reportlab.platypus import Image, Paragraph, Table
 from datetime import date
 from django.db import models
 from django.db import connection
-from models import Patient, Visit, Doctor
+from .models import Patient, Visit, Doctor
 
 def __init__(self, connection):
         self.connection = connection
 
 patient = Patient.objects.all(
-SELECT 
-  patient_patient.patient_last_name::text || ', ' || patient_patient.patient_first_name::text as fullname, 
-  extract(year from age(patient_patient.patient_date_of_birth)) AS age, 
-  patient_patient.patient_gender, 
-  visit_medicine.brand_name, 
-  visit_medicine.generic_name, 
-  visit_dose.dose_name, 
-  visit_prescription.medicine_quantity, 
-  visit_reminder.prescription_reminder
-FROM 
-  public.visit_visit, 
-  public.patient_patient, 
-  public.visit_prescription, 
-  public.visit_medicine, 
-  public.visit_dose, 
-  public.visit_reminder
-WHERE 
-  visit_visit.patient_id = patient_patient.id AND
-  visit_prescription.visit_id = visit_visit.id AND
-  visit_prescription.medicine_id = visit_medicine.id AND
-  visit_prescription.medicine_dose_id = visit_dose.id AND
-  visit_prescription.prescription_reminder_id = visit_reminder.id AND
-  visit_visit.id = last;)
+#
+)
 
         
 #fullname = "Gerald S. Brown"

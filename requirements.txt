@@ -11,8 +11,14 @@ python-decouple
 xhtml2pdf>=0.2b1
 django-easy-pdf
 WeasyPrint
+#eremaea
 django-extensions
 django-autocomplete-light
 django-images
+cmdln
+dj-inmemorystorage
+djangorestframework
+requests
+six
 #flask
 #redis

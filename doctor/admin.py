@@ -24,8 +24,8 @@ from .models import Doctor, Hospital, DrOfficeHour
 
 class DoctorAdmin(admin.ModelAdmin):
 	pass
-	#list_display = ('dr_name', 'dr_suffix', 'dr_off_hour', 'dr_telephone', 'dr_lic_no', 'dr_ptr_no','dr_s2_no')
-	#fields = [('dr_name', 'dr_suffix'), ('dr_off_hour','dr_telephone'), ('dr_lic_no', 'dr_ptr_no', 'dr_s2_no')]
+	#list_display = ('dr_first_name', 'dr_last_name', 'dr_suffix', 'dr_off_hour', 'dr_telephone', 'dr_lic_no', 'dr_ptr_no','dr_s2_no')
+	#fields = [('dr_first_name', 'dr_last_name' 'dr_suffix'), ('dr_off_hour','dr_telephone'), ('dr_lic_no', 'dr_ptr_no', 'dr_s2_no')]
 	
 
 class OfficeHourAdmin(admin.ModelAdmin):
