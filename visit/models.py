@@ -261,6 +261,8 @@ class Medicine(CommonInfo): #14
     default = "")
     medicine_dose = models.ForeignKey('Dose', on_delete=models.PROTECT,
     default = "")
+    medicine_reminder = models.ForeignKey('Reminder',
+    on_delete=models.PROTECT, default = "")
 
     class Meta:
         ordering = [  'brand_name']
@@ -276,9 +278,6 @@ class Prescription(CommonInfo):
     id = models.AutoField(primary_key=True)
     medicine = models.ForeignKey('Medicine', on_delete=models.PROTECT,
     default = "")
-    
-    prescription_reminder = models.ForeignKey('Reminder',
-    on_delete=models.PROTECT, default = "")
     medicine_quantity = models.IntegerField(default = 0)
     visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
 
