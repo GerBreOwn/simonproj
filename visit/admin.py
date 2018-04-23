@@ -27,11 +27,11 @@ register_hidden_models(mymodels)
 
 from .forms import BiopsyForm, ComplaintForm, ExamForm
 
-class HiddenModelAdmin(admin.ModelAdmin):
-    def get_model_perms(self, *args, **kwargs):
-        perms = admin.ModelAdmin.get_model_perms(self, *args, **kwargs)
-        perms['list_hide'] = True
-        return perms
+#class HiddenModelAdmin(admin.ModelAdmin):
+    #def get_model_perms(self, *args, **kwargs):
+        #perms = admin.ModelAdmin.get_model_perms(self, *args, **kwargs)
+        #perms['list_hide'] = True
+        #return perms
         
 class BiopsyAdminInline(admin.TabularInline):
 	model = Biopsy
@@ -71,4 +71,4 @@ class VisitAdmin(admin.ModelAdmin):
 	)
 	
 
-	inlines = (ComplaintAdminInline, PrescriptionAdminInline,  BiopsyAdminInline, HearingAdminInline, ExamAdminInline )
+	inlines = (ComplaintAdminInline, PrescriptionAdminInline, BiopsyAdminInline, HearingAdminInline, ExamAdminInline, )
