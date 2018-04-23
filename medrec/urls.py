@@ -23,8 +23,7 @@ admin.site.site_header = settings.ADMIN_SITE_HEADER
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('^eremaea/', eremaea.urls),
-   
+      
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = 'MEDREC Administration'

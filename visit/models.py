@@ -259,8 +259,7 @@ class Medicine(CommonInfo): #14
     "")
     generic_name = models.CharField(max_length = 50, unique = True,
     default = "")
-    medicine_dose = models.ForeignKey('Dose', on_delete=models.PROTECT,
-    default = "")
+    medicine_dose = models.ForeignKey('Dose', on_delete=models.PROTECT, default = "")
     medicine_reminder = models.ForeignKey('Reminder',
     on_delete=models.PROTECT, default = "")
 
@@ -316,15 +315,15 @@ class Treatment(CommonInfo):
 
 class Visit(CommonInfo):
     id = models.AutoField(primary_key=True)
-    visit_date = models.DateField("Date", default = datetime.date.today)
-    patient = models.ForeignKey('patient.Patient',on_delete=models.PROTECT, default=1)
-   # prescription = models.ForeignKey('Prescription', on_delete=models.PROTECT, default = 1)
-
+    #patient_prescpt = models.ForeignKey('patient.Patient',     on_delete=models.PROTECT)#, default=1)
+    medicine = models.ForeignKey('Medicine', blank=True, null=True, on_delete=models.PROTECT)
+    medicine_dose = models.ForeignKey('Dose', blank=True, null=True, on_delete=models.PROTECT)
+    prescription_reminder = models.ForeignKey('Reminder', blank=True, null=True, on_delete=models.PROTECT)
+    medicine_quantity = models.IntegerField(blank=True, null=True)
+    visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
+    
     def get_absolute_url(self):
-        return reverse('visit-detail', args=[str(self.id)])
-
-    def __str__(self):
-        return '%s, %s' % (self.patient, self.visit_date)
+        return reverse('prescription-detail', args=[str(self.id)])
 
 def visit_count(self, obj):
     return obj.visit__set.count()
