@@ -1,6 +1,8 @@
 django
 gunicorn
 pymysql
+django-query-builder
+django-debug-toolbar
 #mysqlclient
 mysql-connector-python
 reportlab
