@@ -10,16 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        #migrations.RemoveField(
-            #model_name='medicine',
-            #name='medicine_dose',
-        #),
-        #migrations.RemoveField(
-            #model_name='medicine',
-            #name='medicine_quantity',
-        #),
-        #migrations.RemoveField(
-            #model_name='medicine',
-            #name='prescription_reminder',
-        #),
+
     ]

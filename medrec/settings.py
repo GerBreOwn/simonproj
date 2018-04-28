@@ -90,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         #'ENGINE': 'mysql.connector.django',
         'NAME': 'medrec',
-        'USER':  'root',
+        'USER':  'medrec',
         'PASSWORD': 'M3dR3c#123',
         'HOST':  'localhost',
         'PORT': '3306',

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin import site
+from djangoql.admin import DjangoQLSearchMixin, DjangoQLSchema
 #from django.urls import reverse
 
 admin.site.disable_action('delete_selected')
@@ -33,6 +34,20 @@ class Patient(admin.ModelAdmin):
 	#view_on_site = False
 	list_display = ('last_name', 'first_name', 'middle_initial', 'date_of_birth', 'contact_num', 'address', 'town','gender', 'email', 'occupation', 'pat_pic')
 	fields = [('last_name', 'first_name', 'middle_initial'),('gender','date_of_birth'), ('contact_num', 'address', 'town'), ('email', 'occupation')]
-	
+
 	search_fields = ['last_name', 'first_name']
 
+# class PatientQLSchema(DjangoQLSchema):
+	# include = (Patient,)
+	# suggest_options = {
+		# Patient: ['last_name']
+	# }
+
+	# def get_fields(self, model):
+		# if model == Patient:
+			# return ['last_name']
+		# return super(PatientQLSchema, self).get_fields(model)
+
+# @admin.register(Patient)
+# class CustomPatientAdmin(DjangoQLSearchMixin, PatientAdmin):
+	# djangoql_schema = PatientQLSchema
