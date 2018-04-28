@@ -28,11 +28,7 @@ SECRET_KEY = 'nf^(#gts_4-vfd74(3i-hv8qcnq&cv-9ozi-l+&j@oeb4)z3k%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['192.168.0.121', '192.168.0.118','192.168.0.122','127.0.0.1', 'localhost']
-=======
 ALLOWED_HOSTS = ['192.168.0.118', '192.168.0.121', '192.168.0.122','127.0.0.1', 'localhost']
->>>>>>> 6460a005b56a8b8814ea897d78b207c8a2bf12e6
 
 
 # Application definition
@@ -47,9 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'easy_pdf',   
+    'easy_pdf',
     'rest_framework',
     'debug_toolbar',
+    'djangoql',
 ]
 
 MIDDLEWARE = [
@@ -90,8 +87,8 @@ WSGI_APPLICATION = 'medrec.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.mysql',
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
+        #'ENGINE': 'mysql.connector.django',
         'NAME': 'medrec',
         'USER':  'root',
         'PASSWORD': 'M3dR3c#123',

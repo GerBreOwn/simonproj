@@ -1,10 +1,11 @@
 django
 gunicorn
 pymysql
+djangoql
 django-query-builder
 django-debug-toolbar
-#mysqlclient
-mysql-connector-python
+mysqlclient
+#mysql-connector-python
 reportlab
 django-crum
 django-model-utils
