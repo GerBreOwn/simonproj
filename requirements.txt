@@ -6,7 +6,8 @@ django-query-builder
 django-debug-toolbar
 mysqlclient
 #mysql-connector-python
-reportlab
+#reportlab
+templated-docs
 django-crum
 django-model-utils
 pillow<=5.0.0,>=2.4.0
