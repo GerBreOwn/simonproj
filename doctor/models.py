@@ -66,10 +66,10 @@ class DrOfficeHour(CommonInfo):
 	days = models.CharField(max_length = 20, blank = True, null = True)
 	hours_am = models.CharField(max_length = 20, blank = True, null = True)
 	hours_pm = models.CharField(max_length = 20, blank = True, null = True)
-	
+
 	def get_absolute_url(self):
 		return reverse('officehour-detail', args=[str(self.id)])
 
 	def __str__(self):
-		return '%s %s' % (self.hours_am, self.hours_pm)
+		return '%s, %s %s' % (self.days, self.hours_am, self.hours_pm)
 
