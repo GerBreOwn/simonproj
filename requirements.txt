@@ -1,13 +1,12 @@
 django
 gunicorn
 pymysql
-djangoql
-django-query-builder
-django-debug-toolbar
 mysqlclient
 #mysql-connector-python
 reportlab
-#templated-docs
+djangoql
+django-query-builder
+reportlab
 django-crum
 django-model-utils
 pillow<=5.0.0,>=2.4.0
@@ -16,7 +15,8 @@ python-decouple
 xhtml2pdf>=0.2b1
 django-easy-pdf
 WeasyPrint
-#eremaea
+django-developer-panel
+django-debug-toolbar
 django-extensions
 django-autocomplete-light
 django-images

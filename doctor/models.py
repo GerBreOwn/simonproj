@@ -31,22 +31,24 @@ class CommonInfo(models.Model):
 		abstract = True
 
 class Doctor(CommonInfo):
-	dr_id = models.AutoField(primary_key = True)
-	dr_first_name = models.CharField(max_length = 20, blank = False, null = False)
-	dr_last_name = models.CharField(max_length = 15, blank = False, null = False)
-	dr_suffix = models.CharField(max_length = 55, blank = True, null = True)
-	#dr_off_hour = models.ManyToManyField('DrOfficeHour',max_length = 25, blank = True)
-	dr_telephone = models.CharField(max_length = 12, blank = True, null = True)
-	#dr_afil = models.ManyToManyField('Hospital',max_length = 25, blank = True)
-	dr_lic_no = models.CharField(max_length = 25, blank = True, null = True)
-	dr_ptr_no = models.CharField(max_length = 25, blank = True, null = True)
-	dr_s2_no = models.CharField(max_length = 25, blank = True, null = True)
+	id = models.AutoField(primary_key = True)
+	first_name = models.CharField(max_length = 25, blank = False, null = False, default = " ")
+	last_name = models.CharField(max_length = 20, blank = False, null = False, default = " ")
+	suffix = models.CharField(max_length = 55, blank = False, null = False, default = "M.D.")
+	#office_hour = models.ManyToManyField('DrOfficeHour',max_length = 25, blank = True)
+	telephone = models.CharField(max_length = 12, blank = True, null = True)
+	#afil = models.ManyToManyField('Hospital',max_length = 25, blank = True)
+	lic_no = models.CharField(max_length = 25, blank = True, null = True)
+	ptr_no = models.CharField(max_length = 25, blank = True, null = True)
+	s2_no = models.CharField(max_length = 25, blank = True, null = True)
+
 
 	def get_absolute_url(self):
 		return reverse('doctor-detail', args=[str(self.id)])
 
 	def __str__(self):
-		return '%s %s' % (self.dr_first_name, self.dr_last_name)
+		#return '%s %s' % (self.first_name, self.last_name)
+		return '%s' % (self.last_name)
 
 # class Hospital(CommonInfo):
 	# id = models.AutoField(primary_key = True)
@@ -71,5 +73,7 @@ class Doctor(CommonInfo):
 		# return reverse('officehour-detail', args=[str(self.id)])
 
 	# def __str__(self):
+		# return '%s %s %s' % (self.days, self.hours_am, self.hours_pm)
 		# return '%s, %s %s' % (self.days, self.hours_am, self.hours_pm)
+
 
