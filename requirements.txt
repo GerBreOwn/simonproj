@@ -4,6 +4,9 @@ pymysql
 mysqlclient
 #mysql-connector-python
 reportlab
+djangoql
+django-query-builder
+reportlab
 django-crum
 django-model-utils
 pillow<=5.0.0,>=2.4.0

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from djangoql.admin import DjangoQLSearchMixin
 
 admin.site.site_title = 'Medical Records Administration'
 admin.site.site_header = 'Medical Records Doctor Administration'
@@ -24,8 +25,8 @@ from .models import Doctor#, Hospital, DrOfficeHour
 
 class DoctorAdmin(admin.ModelAdmin):
 	pass
-	#list_display = ('ffirst_name', 'last_name', 'suffix',  'telephone', 'lic_no', 'ptr_no','s2_no')#'dr_off_hour',
-	fields = [('ffirst_name', 'last_name', 'suffix'), ('telephone'), ('lic_no', 'ptr_no', 's2_no')] #'dr_off_hour',
+	#list_display = ('first_name', 'last_name', 'suffix',  'telephone', 'lic_no', 'ptr_no','s2_no')#'dr_off_hour',
+	#fields = [('first_name', 'last_name', 'suffix'), ('telephone'), ('lic_no', 'ptr_no', 's2_no')] #'dr_off_hour',
 
 # class OfficeHourAdmin(admin.ModelAdmin):
 	# list_display = ('hours_am', 'hours_pm')
