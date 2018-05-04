@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-	'djdev_panel.middleware.DebugMiddleware',
+#	'djdev_panel.middleware.DebugMiddleware',
 	'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -104,7 +104,7 @@ DATABASES = {
         #'ENGINE': 'mysql.connector.django',
         'NAME': 'medrec',
         'USER':  'root',
-        'PASSWORD': 'M3dR3c#123',
+        'PASSWORD': 'CasC#373',
         'HOST':  'localhost',
         'PORT': '3306',
     }
