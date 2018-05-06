@@ -14,6 +14,7 @@ from models import Patient, Visit, Doctor
 from django.shortcuts import render
 
 @staff_member_required
+
 def admin_presc_pdf(request, prescription_id):
 	presc = get_object_or_404(Prescription, id = prescription_id)
 	html = render_to_string('prescs/presc/pdf.html'), {'presc': presc})

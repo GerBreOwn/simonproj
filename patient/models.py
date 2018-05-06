@@ -77,7 +77,7 @@ class Patient(CommonInfo):
 class Province(CommonInfo):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30, unique=True)
-    #counter = CounterField()
+
     class Meta:
         ordering = ['name']
 
@@ -91,7 +91,7 @@ class Town(CommonInfo):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=25, blank = False, null = False, unique = True)
     zip_code = models.CharField(max_length=10, blank=True, null=True)
-    prov = models.ForeignKey('Province', default = None,  on_delete=models.SET_DEFAULT)
+    prov = models.ForeignKey('Province', default = None, blank = True, null = True,  on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['name']

@@ -10,9 +10,9 @@ admin.site.site_header = 'Medical Records Visits Administration'
 
 # Register your models here.
 
-from .models import  Biopsy, BiopsyResult, Dose, ExamResult, ExamType,  Exam, HearingTest, HearingResult, Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Complaint, Patient
+from .models import  Biopsy,  Dose,   Exam, HearingTest, HearingResult, Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Complaint, Patient # BiopsyResult, ExamResult,  ExamType,
 
-mymodels = [BiopsyResult, Dose, ExamResult, ExamType, HearingTest, HearingResult, Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding]
+mymodels = [ Dose,   HearingTest, HearingResult, Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding] #BiopsyResult, ExamResult,ExamType,
 
 def register_hidden_models(*model_names):
 	for m in model_names:
@@ -58,7 +58,18 @@ class HearingAdminInline(admin.TabularInline):
 	classes = ['collapse']
 	extra = 1
 
+def presc_pdf(obj):
+	return '<a href="{}">PDF</a>'.format(
+		reverse('presc:admin_presc_pdf', args=[obj.id]))
+presc_pdf.allow_tags = True
+presc_pdf.short_description = 'Prescription form'
+
+
 class PrescriptionAdminInline(admin.TabularInline):
+	list_display = ['id',
+	                # ...
+	                #presc_detail,
+	                presc_pdf]
 	model = Prescription
 	extra = 1
 
