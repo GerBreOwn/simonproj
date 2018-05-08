@@ -10,9 +10,9 @@ admin.site.site_header = 'Medical Records Visits Administration'
 
 # Register your models here.
 
-from .models import  Biopsy,  Dose,   Exam, HearingTest, HearingResult, Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Complaint, Patient # BiopsyResult, ExamResult,  ExamType,
+from .models import  Biopsy,  Dose,   Exam, HearingTest, HearingResult, Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Complaint, Patient, Payment, Charge # BiopsyResult, ExamResult,  ExamType,
 
-mymodels = [ Dose,   HearingTest, HearingResult, Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding] #BiopsyResult, ExamResult,ExamType,
+mymodels = [ Dose,   HearingTest, HearingResult, Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding, Payment, Charge] #BiopsyResult, ExamResult,ExamType,
 
 def register_hidden_models(*model_names):
 	for m in model_names:
@@ -62,7 +62,7 @@ def presc_pdf(obj):
 	return '<a href="{}">PDF</a>'.format(
 		reverse('presc:admin_presc_pdf', args=[obj.id]))
 presc_pdf.allow_tags = True
-presc_pdf.short_description = 'Prescription form'
+presc_pdf.short_description = 'Prescription PDF'
 
 
 class PrescriptionAdminInline(admin.TabularInline):
@@ -79,7 +79,7 @@ class VisitAdmin(admin.ModelAdmin):
 	view_on_site = True
 	fieldsets = (
 	('Date & Patient:', {
-	'fields': [('visit_date', 'patient')]
+	'fields': [('visit_date', 'patient',)]# 'payment',)]
 	}),
 	)
 

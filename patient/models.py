@@ -56,10 +56,10 @@ class Patient(CommonInfo):
     middle_initial = models.CharField(max_length=1, blank=True, null=True)
     contact_num = models.CharField(max_length=15, blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
-    town = models.ForeignKey('Town', default = None, on_delete=models.SET_DEFAULT)
+    #town = models.ForeignKey('Town', default = None, on_delete=models.SET_DEFAULT)
     date_of_birth = models.DateField(("Date of birth"), default=datetime.date.today)
     pat_pic = VersatileImageField('Pat_Pic', upload_to='images/',  blank=True, null=True)
-    occupation = models.ForeignKey('Occupation', blank=True, null=True, default = None, on_delete=models.SET_DEFAULT)
+    #occupation = models.ForeignKey('Occupation', blank=True, null=True, default = None, on_delete=models.SET_DEFAULT)
     email = models.EmailField(blank=True, null=True)
 
     GENDER = (('F', 'Female'),('M', 'Male'),)

@@ -274,7 +274,7 @@ class Payment(CommonInfo):
 
 class Charge(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	amount = models.IntegerField()
+	amount = models.IntegerField(blank=True, null=True)
 
 	def get_absolute_url(self):
 		return reverse('charge-detail', args=[str(self.id)])
