@@ -1,3 +1,5 @@
+#Admin file for Visit
+
 from django.contrib import admin
 from django.contrib.admin import site
 from django.contrib.admin import site as admin_site
@@ -10,9 +12,9 @@ admin.site.site_header = 'Medical Records Visits Administration'
 
 # Register your models here.
 
-from .models import  Biopsy,  Dose,   Exam, HearingTest, HearingResult, Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Complaint, Patient, Payment, Charge # BiopsyResult, ExamResult,  ExamType,
+from .models import  Biopsy,  Dose,   Exam, HearingTest, HearingResult, Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Complaint, Patient, VisitCharge, MedicineCharge
 
-mymodels = [ Dose,   HearingTest, HearingResult, Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding, Payment, Charge] #BiopsyResult, ExamResult,ExamType,
+mymodels = [ Dose,   HearingTest, HearingResult, Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding, VisitCharge, MedicineCharge,]
 
 def register_hidden_models(*model_names):
 	for m in model_names:
@@ -66,10 +68,10 @@ presc_pdf.short_description = 'Prescription PDF'
 
 
 class PrescriptionAdminInline(admin.TabularInline):
-	list_display = ['id',
-	                # ...
-	                #presc_detail,
-	                presc_pdf]
+	# list_display = ['id',
+	                # # ...
+	                # #presc_detail,
+	                # presc_pdf]
 	model = Prescription
 	extra = 1
 
@@ -79,9 +81,11 @@ class VisitAdmin(admin.ModelAdmin):
 	view_on_site = True
 	fieldsets = (
 	('Date & Patient:', {
-	'fields': [('visit_date', 'patient',)]# 'payment',)]
-	}),
-	)
+   'fields': (('visit_date', 'patient'), ('visit_payment', 'medicine_payment'))
+   }),
+   )
 
 
-	inlines = (ComplaintAdminInline, PrescriptionAdminInline, BiopsyAdminInline, HearingAdminInline, ExamAdminInline, )
+
+
+	inlines = (ComplaintAdminInline, PrescriptionAdminInline, BiopsyAdminInline, HearingAdminInline, ExamAdminInline )

@@ -1,3 +1,4 @@
+#Admin file for Patient
 from django.contrib import admin
 from django.contrib.admin import site
 from djangoql.admin import DjangoQLSearchMixin, DjangoQLSchema
@@ -10,7 +11,7 @@ admin.site.site_header = 'Medical Records Patient Administration'
 
 # Register your models here.
 
-from .models import  Patient#, Province, Town, Occupation
+from .models import  Patient, Province, Town, Occupation
 
 #mymodels = [Province, Town, Occupation]
 
@@ -28,14 +29,17 @@ from .models import  Patient#, Province, Town, Occupation
 
 @admin.register(Patient)
 class Patient(admin.ModelAdmin):
-	def has_delete_permission(self, request, obj=None):
-		return False
+	# def has_delete_permission(self, request, obj=None):
+		# return False
+	# view_on_site = True
+	# list_display = ('last_name', 'first_name', 'middle_initial', 'date_of_birth', 'contact_num', 'address', 'gender', 'email', 'town','occupation', 'pat_pic') #'town','occupation',
+	# fieldsets = [('last_name', 'first_name', 'middle_initial'),('gender','date_of_birth'), ('contact_num', 'address', 'town'), ('email', 'occupation')]
 
-	#view_on_site = False
-	# list_display = ('last_name', 'first_name', 'middle_initial', 'date_of_birth', 'contact_num', 'address', 'town','gender', 'email', 'occupation', 'pat_pic')
-	# fields = [('last_name', 'first_name', 'middle_initial'),('gender','date_of_birth'), ('contact_num', 'address', 'town'), ('email', 'occupation')]
-	#list_display = ('last_name', 'first_name', 'middle_initial', 'date_of_birth', 'contact_num', 'address', 'town','gender', 'email', 'occupation', 'pat_pic')
-	#fields = [('last_name', 'first_name', 'middle_initial'),('gender','date_of_birth'), ('contact_num', 'address', 'town'), ('email', 'occupation')]
+	# fieldsets = (
+	 # ('Patient Entry', {
+	 # 'fields':  [('last_name',)]
+	 # }),
+	 # )
 
 	search_fields = ['last_name', 'first_name']
 

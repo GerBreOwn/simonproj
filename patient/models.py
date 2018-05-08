@@ -38,13 +38,12 @@ class CommonInfo(models.Model):
 class Occupation(CommonInfo):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank = True, null = True, unique = True)
-    #counter = CounterField()
 
     class Meta:
         ordering = ['name']
 
     def get_absolute_url(self):
-        return reverse('occup-detail', args=[str(self.id)])
+        return reverse('occupation-detail', args=[str(self.id)])
 
     def __str__(self):
         return '%s' % (self.name)
@@ -56,10 +55,10 @@ class Patient(CommonInfo):
     middle_initial = models.CharField(max_length=1, blank=True, null=True)
     contact_num = models.CharField(max_length=15, blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
-    #town = models.ForeignKey('Town', default = None, on_delete=models.SET_DEFAULT)
+    town = models.ForeignKey('Town', default = None, on_delete=models.DO_NOTHING)
     date_of_birth = models.DateField(("Date of birth"), default=datetime.date.today)
     pat_pic = VersatileImageField('Pat_Pic', upload_to='images/',  blank=True, null=True)
-    #occupation = models.ForeignKey('Occupation', blank=True, null=True, default = None, on_delete=models.SET_DEFAULT)
+    occupation = models.ForeignKey('Occupation', blank=True, null=True, default = None, on_delete=models.DO_NOTHING)
     email = models.EmailField(blank=True, null=True)
 
     GENDER = (('F', 'Female'),('M', 'Male'),)
@@ -91,7 +90,7 @@ class Town(CommonInfo):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=25, blank = False, null = False, unique = True)
     zip_code = models.CharField(max_length=10, blank=True, null=True)
-    prov = models.ForeignKey('Province', default = None, blank = True, null = True,  on_delete=models.CASCADE)
+    prov = models.ForeignKey('Province', default = None, blank = True, null = True,  on_delete=models.DO_NOTHING)
 
     class Meta:
         ordering = ['name']

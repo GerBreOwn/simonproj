@@ -1,3 +1,5 @@
+#Model file for Visit
+
 from django.db import models
 from django.db import connection
 from django.db.models import F
@@ -265,19 +267,32 @@ class Medicine(CommonInfo):
 		return '%s' % (self.brand_name)
 
 
-class Payment(CommonInfo):
+# class Payment(CommonInfo):
+	# id = models.AutoField(primary_key=True)
+	# charge = models.ForeignKey('Charge',blank=True, null=True, on_delete=models.PROTECT)
+
+	# def get_absolute_url(self):
+		# return reverse('payment-detail', args=[str(self.id)])
+
+class VisitCharge(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	charge = models.ForeignKey('Charge',blank=True, null=True, on_delete=models.PROTECT)
+	visit_amount = models.PositiveIntegerField(blank=True, null=True)
 
 	def get_absolute_url(self):
-		return reverse('payment-detail', args=[str(self.id)])
+		return reverse('visitcharge-detail', args=[str(self.id)])
 
-class Charge(CommonInfo):
+	def __str__(self):
+		return '%s' % (self.visit_amount)
+
+
+class MedicineCharge(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	amount = models.IntegerField(blank=True, null=True)
+	medicine_amount = models.PositiveIntegerField(blank=True, null=True)
 
 	def get_absolute_url(self):
-		return reverse('charge-detail', args=[str(self.id)])
+		return reverse('medicinecharge-detail', args=[str(self.id)])
+	def __str__(self):
+		return '%s' % (self.medicine_amount)
 
 class Prescription(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -322,6 +337,8 @@ class Visit(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	visit_date = models.DateField("Date", default = datetime.date.today)
 	patient = models.ForeignKey('patient.Patient',on_delete=models.PROTECT, default=1)
+	visit_payment = models.ForeignKey('VisitCharge', on_delete=models.PROTECT, default=1)
+	medicine_payment = models.ForeignKey('MedicineCharge', on_delete = models.PROTECT, default = 1)
 
 	def get_absolute_url(self):
 		return reverse('visit-detail', args=[str(self.id)])
