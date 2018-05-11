@@ -16,10 +16,12 @@ class BiopsyForm(forms.ModelForm):
 class ComplaintForm(forms.ModelForm):
 	class Meta:
 		widgets = {
-			'complaintname': forms.Select(attrs = {'size': 30}),
-			'location': forms.Select(attrs = {'size': 30}),
-			'finding': forms.CheckboxSelectMultiple(attrs = {'size': 30}),
-			'treatment': forms.CheckboxSelectMultiple(attrs = {'size': 30}),
+			'complaintname': forms.Select(attrs = {'size': 25}),
+			'location': forms.Select(attrs = {'size': 25}),
+			'finding': forms.CheckboxSelectMultiple(attrs = {'size': 25}),
+			'treatment': forms.CheckboxSelectMultiple(attrs = {'size': 25}),
+			'diagnosis': forms.Textarea(attrs = {'rows':5, 'cols':10}),
+			'remarks': forms.Textarea(attrs = {'rows':5, 'col': 10}),
 		}
 
 class ExamForm(forms.ModelForm):

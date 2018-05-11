@@ -114,6 +114,8 @@ class Complaint(CommonInfo):
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
 	finding = models.ManyToManyField('Finding')
 	treatment = models.ManyToManyField('Treatment')
+	diagnosis = models.TextField('Diagnosis', blank = True, null = True)
+	remarks = models.TextField('Remarks', blank = True, null = True)
 
 	def get_absolute_url(self):
 		return reverse('complaint-detail', args=[str(self.id)])
@@ -124,22 +126,18 @@ class Complaint(CommonInfo):
 	class meta:
 		ordering = [  'complaint_name',]
 
-# class Diagnosis(CommonInfo):
-	# id = models.AutoField(primary_key=True)
-
-
 class Dose(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	dose_name = models.CharField(max_length=25)#, unique = True)
+	dose_amount = models.CharField(max_length=25)#, unique = True)
 
 	class Meta:
-		ordering = ['dose_name']
+		ordering = ['dose_amount']
 
 	def get_absolute_url(self):
 		return reverse('dose-detail', args=[str(self.id)])
 
 	def __str__(self):
-		return '%s' % (self.dose_name)
+		return '%s' % (self.dose_amount)
 
 #class Drawing(CommonInfo):
 	#id = models.AutoField(primary_key=True)
@@ -336,9 +334,9 @@ class Treatment(CommonInfo):
 class Visit(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	visit_date = models.DateField("Date", default = datetime.date.today)
-	patient = models.ForeignKey('patient.Patient',on_delete=models.PROTECT, default=1)
-	visit_payment = models.ForeignKey('VisitCharge', on_delete=models.PROTECT, default=1)
-	medicine_payment = models.ForeignKey('MedicineCharge', on_delete = models.PROTECT, default = 1)
+	patient = models.ForeignKey('patient.Patient',on_delete=models.PROTECT, default = None)
+	visit_payment = models.ForeignKey('VisitCharge', on_delete=models.PROTECT)
+	medicine_payment = models.ForeignKey('MedicineCharge', on_delete = models.PROTECT, default = None)
 
 	def get_absolute_url(self):
 		return reverse('visit-detail', args=[str(self.id)])

@@ -5,7 +5,6 @@ from django.db.models import signals
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.apps import AppConfig
-#from django.urls import reverse
 import datetime
 from crum import get_current_user
 from django.contrib import admin
@@ -34,6 +33,7 @@ class CommonInfo(models.Model):
 
     class Meta:
        abstract = True
+
 
 class Occupation(CommonInfo):
     id = models.AutoField(primary_key=True)

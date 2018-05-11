@@ -1,5 +1,7 @@
 #Admin file for Visit
 
+from django.forms import TextInput, Textarea
+from django.db import models
 from django.contrib import admin
 from django.contrib.admin import site
 from django.contrib.admin import site as admin_site
@@ -12,7 +14,9 @@ admin.site.site_header = 'Medical Records Visits Administration'
 
 # Register your models here.
 
-from .models import  Biopsy,  Dose,   Exam, HearingTest, HearingResult, Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Complaint, Patient, VisitCharge, MedicineCharge
+from .models import  Biopsy, Complaint, Dose,   Exam, HearingTest, HearingResult, Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine,  Patient, VisitCharge, MedicineCharge
+
+from .forms import BiopsyForm, ComplaintForm, ExamForm
 
 mymodels = [ Dose,   HearingTest, HearingResult, Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding, VisitCharge, MedicineCharge,]
 
@@ -28,14 +32,11 @@ def register_hidden_models(*model_names):
 
 register_hidden_models(mymodels)
 
-
-from .forms import BiopsyForm, ComplaintForm, ExamForm
-
 #class HiddenModelAdmin(admin.ModelAdmin):
-    #def get_model_perms(self, *args, **kwargs):
-        #perms = admin.ModelAdmin.get_model_perms(self, *args, **kwargs)
-        #perms['list_hide'] = True
-        #return perms
+	#def get_model_perms(self, *args, **kwargs):
+		#perms = admin.ModelAdmin.get_model_perms(self, *args, **kwargs)
+		#perms['list_hide'] = True
+		#return perms
 
 class BiopsyAdminInline(admin.TabularInline):
 	model = Biopsy
@@ -69,9 +70,9 @@ presc_pdf.short_description = 'Prescription PDF'
 
 class PrescriptionAdminInline(admin.TabularInline):
 	# list_display = ['id',
-	                # # ...
-	                # #presc_detail,
-	                # presc_pdf]
+					# # ...
+					# #presc_detail,
+					# presc_pdf]
 	model = Prescription
 	extra = 1
 
@@ -84,7 +85,6 @@ class VisitAdmin(admin.ModelAdmin):
    'fields': (('visit_date', 'patient'), ('visit_payment', 'medicine_payment'))
    }),
    )
-
 
 
 

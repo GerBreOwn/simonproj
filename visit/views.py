@@ -1,5 +1,5 @@
 from django.conf import settings
-fromdjango.http import HttpResponse
+from django.http import HttpResponse
 from django.template.loader import render_to_string
 import weasyprint
 from reportlab.lib.pagesizes import HALF_LETTER
@@ -16,6 +16,7 @@ from django.shortcuts import render
 @staff_member_required
 
 def admin_presc_pdf(request, prescription_id):
+
 	presc = get_object_or_404(Prescription, id = prescription_id)
 	html = render_to_string('prescs/presc/pdf.html'), {'presc': presc})
 	response = HttpResponse(content_type='application/pdf')

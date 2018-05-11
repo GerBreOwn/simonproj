@@ -7,9 +7,6 @@ MEDIA_URL = "/media/"
 
 ADMIN_SITE_HEADER = "Medical Records Administration"
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'nf^(#gts_4-vfd74(3i-hv8qcnq&cv-9ozi-l+&j@oeb4)z3k%'
 
@@ -32,10 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'easy_pdf',
     'rest_framework',
-    'debug_toolbar',
-
+    #'debug_toolbar',
     'djangoql',
-
 ]
 
 MIDDLEWARE = [
@@ -52,9 +47,9 @@ MIDDLEWARE = [
     ]
 MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)
 
-if DEBUG:
-	INTERNAL_IPS = ('127.0.0.1', 'localhosr',)
-	MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+# if DEBUG:
+	# INTERNAL_IPS = ('127.0.0.1', 'localhosr',)
+	# MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 
 
 ROOT_URLCONF = 'medrec.urls'
