@@ -20,9 +20,16 @@ class ComplaintForm(forms.ModelForm):
 			'location': forms.Select(attrs = {'size': 25}),
 			'finding': forms.CheckboxSelectMultiple(attrs = {'size': 25}),
 			'treatment': forms.CheckboxSelectMultiple(attrs = {'size': 25}),
+			
+		}
+		
+class DiagnosisForm(forms.ModelForm):
+	class Meta:
+		widgets = {
 			'diagnosis': forms.Textarea(attrs = {'rows':5, 'cols':10}),
 			'remarks': forms.Textarea(attrs = {'rows':5, 'col': 10}),
 		}
+		
 
 class ExamForm(forms.ModelForm):
 	class Meta:

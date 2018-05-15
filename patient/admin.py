@@ -25,32 +25,6 @@ def register_hidden_models(*model_names):
 
 register_hidden_models(mymodels)
 
-# @admin.register(Patient)
-# class PatientAdmin(DjangoQLSearchMixin, admin.ModelAdmin):
-	# pass
-
-
-
-# class PatientQLSchema(DjangoQLSchema):
-	# include = (Patient,)
-	# suggest_options = {
-		# Group1: ['last-name'],
-	# }
-
-	# def get_fields(self, nodel):
-		# # if model == Group1:
-			# # return['last_name']
-		# return super(PatientQLSchema, self).get_fields(model)
-
-# class CustomPatientAdmin(DjangoQLSearchMixin, PatientAdmin):
-	# djangoql_schema = PatientQLSchema
-	# pass
-
-# class GroupNameField(StrField):
-	# model = Group
-	# name = 'last_name'
-	# suggest_options = True
-
 @admin.register(Patient)
 class Patient(admin.ModelAdmin):
 	def has_delete_permission(self, request, obj=None):
@@ -64,4 +38,4 @@ class Patient(admin.ModelAdmin):
 	('email', 'occupation')]
 
 	search_fields = ['last_name', 'first_name']
-
+	

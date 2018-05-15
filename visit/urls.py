@@ -1,3 +1,9 @@
-url(r'^admin/prescription/(?P<prescription_id+)/pdf/$',
-	views.admin_presc_pdf,
-	name='admin_presc_pdf'),
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    url(r'^admin/visit/(?P<prescription_id>\d+)/pdf/$',
+		views.admin_prescription_pdf,
+		name='admin_prescription_pdf'),
+		],

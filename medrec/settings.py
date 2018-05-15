@@ -29,8 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'easy_pdf',
     'rest_framework',
-    #'debug_toolbar',
     'djangoql',
+#    'report_builder',
+    #'explorer',
 ]
 
 MIDDLEWARE = [
@@ -64,8 +65,15 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                #'django.contrib.sites',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.static',
+                'django.template.context_processors.media',
             ],
+            # 'loaders': [
+				# 'django.template.loaders.filesystem.Loader',
+				# 'django.template.loaders.app_directories.Loader',
+				 # ],
         },
     },
 ]

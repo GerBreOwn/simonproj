@@ -1,5 +1,6 @@
 #Admin file for Visit
 
+from django.urls  import reverse
 from django.forms import TextInput, Textarea
 from django.db import models
 from django.contrib import admin
@@ -14,11 +15,11 @@ admin.site.site_header = 'Medical Records Visits Administration'
 
 # Register your models here.
 
-from .models import  Biopsy, Complaint, Dose,   Exam, HearingTest, HearingResult, Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine,  Patient, VisitCharge, MedicineCharge
+from .models import  Biopsy, Complaint, Dose, Diagnosis,   Exam, HearingTest, HearingResult, Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine,  Patient, VisitCharge, MedicineCharge
 
-from .forms import BiopsyForm, ComplaintForm, ExamForm
+from .forms import BiopsyForm, ComplaintForm, ExamForm, DiagnosisForm
 
-mymodels = [ Dose,   HearingTest, HearingResult, Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding, VisitCharge, MedicineCharge,]
+mymodels = [ Dose, Diagnosis,   HearingTest, HearingResult, Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding, VisitCharge, MedicineCharge,]
 
 def register_hidden_models(*model_names):
 	for m in model_names:
@@ -37,6 +38,11 @@ register_hidden_models(mymodels)
 		#perms = admin.ModelAdmin.get_model_perms(self, *args, **kwargs)
 		#perms['list_hide'] = True
 		#return perms
+		
+class DiagnosisAdminInline(admin.TabularInline):
+	model = Diagnosis
+	classes = ['collapse']
+	extra = 1		
 
 class BiopsyAdminInline(admin.TabularInline):
 	model = Biopsy
@@ -61,20 +67,25 @@ class HearingAdminInline(admin.TabularInline):
 	classes = ['collapse']
 	extra = 1
 
-def presc_pdf(obj):
+def prescription_detail(obj):
+	return '<a href="{}">View</a>'.format(
+		reverse('prescriptions:admin_prescription_detail', args=[obj.id]))
+	prescription_detail.allow_tags = True
+
+def prescription_pdf(obj):
 	return '<a href="{}">PDF</a>'.format(
-		reverse('presc:admin_presc_pdf', args=[obj.id]))
-presc_pdf.allow_tags = True
-presc_pdf.short_description = 'Prescription PDF'
+		reverse('prescription:admin_prescription_pdf', args=[obj.id]))
+prescription_pdf.allow_tags = True
+prescription_pdf.short_description = 'Prescription PDF'
 
 
-class PrescriptionAdminInline(admin.TabularInline):
-	# list_display = ['id',
-					# # ...
-					# #presc_detail,
-					# presc_pdf]
-	model = Prescription
-	extra = 1
+#class PrescriptionAdminInline(admin.TabularInline):
+class PrescriptionAdmin(admin.ModelAdmin):
+	 list_display = ['id',
+					prescription_detail,
+					prescription_pdf]
+	# model = Prescription
+	# extra = 1
 
 
 @admin.register(Visit)
@@ -88,4 +99,4 @@ class VisitAdmin(admin.ModelAdmin):
 
 
 
-	inlines = (ComplaintAdminInline, PrescriptionAdminInline, BiopsyAdminInline, HearingAdminInline, ExamAdminInline )
+	inlines = (ComplaintAdminInline, DiagnosisAdminInline, BiopsyAdminInline, HearingAdminInline, ExamAdminInline ) # PrescriptionAdminInline,
