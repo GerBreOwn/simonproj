@@ -71,28 +71,11 @@ class BiopsyName(CommonInfo):
 
 	class meta:
 		app_label = 'BiopsyName'
-		#ordering = [  'biopsy_name']
+		ordering = [  'biopsy_name']
 		verbose_name = "biopsies"
-
-	# def get_absolute_url(self):
-		# return reverse('biopsy-detail', args=[str(self.id)])
 
 	def __str__(self):
 		return '%s' % (self.biopsy_name)
-
-
-# class BiopsyResult(CommonInfo):
-	# id = models.AutoField(primary_key=True)
-	# biopsy_result = models.CharField(max_length=25, blank = False, null = False)
-
-	# class Meta:
-		# ordering = ['biopsy_result']
-
-	# def get_absolute_url(self):
-		# return reverse('biopsyresult-detail', args=[str(self.id)])
-
-	# def __str__(self):
-		# return '%s' % (self.biopsy_result)
 
 class ComplaintName(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -105,20 +88,14 @@ class ComplaintName(CommonInfo):
 	class meta:
 		ordering = ["complaint_name",]
 
-	# def get_absolute_url(self):
-		# return reverse('complaintname-detail', args=[str(self.id)])
-
 class Complaint(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	complaint_name = models.ForeignKey('ComplaintName', blank = False, null = False, on_delete=models.PROTECT)
 	complaint_location = models.ForeignKey('Location', blank = True, null = True, on_delete=models.PROTECT)
-	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
 	finding = models.ManyToManyField('Finding')
 	treatment = models.ManyToManyField('Treatment')
+	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)	
 	
-	# def get_absolute_url(self):
-		# return reverse('complaint-detail', args=[str(self.id)])
-
 	def __str__(self):
 		return '%s' % (self.complaint_name)
 
@@ -132,17 +109,14 @@ class Diagnosis(CommonInfo):
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
 	
 	class Meta:
-		verbose_name = 'Diagnosis'
+		verbose_name_plural = 'Diagnosis'
 
 class Dose(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	dose_amount = models.CharField(max_length=25)#, unique = True)
+	dose_amount = models.CharField(max_length=25, unique = True)
 
 	class Meta:
 		ordering = ['dose_amount']
-
-	# def get_absolute_url(self):
-		# return reverse('dose-detail', args=[str(self.id)])
 
 	def __str__(self):
 		return '%s' % (self.dose_amount)
@@ -159,9 +133,6 @@ class Exam(CommonInfo):
 	exam_result = models.TextField(blank=True, null=True)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
 
-	# def get_absolute_url(self):
-		# return reverse('exam-detail', args=[str(self.id)])
-
 	def __str__(self):
 		return '%s, %s' % (self.exam_date, self.exam_name)
 
@@ -172,9 +143,6 @@ class Finding(CommonInfo):
 
 	class Meta:
 		ordering = [  'finding_name']
-
-	# def get_absolute_url(self):
-		# return reverse('finding-detail', args=[str(self.id)])
 
 	def __str__(self):
 		return '%s' % (self.finding_name)
@@ -192,9 +160,6 @@ class HearingTest(CommonInfo):
 
 	class Meta:
 		ordering = [  'hearing_name']
-
-	# def get_absolute_url(self):
-		# return reverse('hearing-detail', args=[str(self.id)])
 
 	def __str__(self):
 		return '%s' % (self.hearing_name)
@@ -216,9 +181,6 @@ class Location(CommonInfo):
 	class Meta:
 		ordering = [  'location']
 
-	# def get_absolute_url(self):
-		# return reverse('location-detail', args=[str(self.id)])
-
 	def __str__(self):
 		return '%s' % (self.location)
 
@@ -230,26 +192,12 @@ class Medicine(CommonInfo):
 	class Meta:
 		ordering = [  'brand_name']
 
-	# def get_absolute_url(self):
-		# return reverse('medication-detail', args=[str(self.id)])
-
 	def __str__(self):
 		return '%s' % (self.brand_name)
-
-
-# class Payment(CommonInfo):
-	# id = models.AutoField(primary_key=True)
-	# charge = models.ForeignKey('Charge',blank=True, null=True, on_delete=models.PROTECT)
-
-	# def get_absolute_url(self):
-		# return reverse('payment-detail', args=[str(self.id)])
 
 class VisitCharge(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	visit_amount = models.PositiveIntegerField(blank=True, null=True)
-
-	# def get_absolute_url(self):
-		# return reverse('visitcharge-detail', args=[str(self.id)])
 
 	def __str__(self):
 		return '%s' % (self.visit_amount)
@@ -259,21 +207,16 @@ class MedicineCharge(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	medicine_amount = models.PositiveIntegerField(blank=True, null=True)
 
-	# def get_absolute_url(self):
-		# return reverse('medicinecharge-detail', args=[str(self.id)])
 	def __str__(self):
 		return '%s' % (self.medicine_amount)
 
 class Prescription(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	medicine = models.ForeignKey('Medicine', blank=True, null=True, on_delete=models.PROTECT)
-	medicine_dose = models.ForeignKey(Dose, blank=True, null=True, on_delete=models.PROTECT)
+	medicine_dose = models.ForeignKey('Dose', blank=True, null=True, on_delete=models.PROTECT)
 	medicine_reminder = models.ForeignKey('Reminder', blank=True, null=True, on_delete=models.PROTECT)
 	medicine_quantity = models.IntegerField(blank=True, null=True)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
-
-	# def get_absolute_url(self):
-		# return reverse('prescription-detail', args=[str(self.id)])
 
 class Reminder(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -281,9 +224,6 @@ class Reminder(CommonInfo):
 
 	class Meta:
 		ordering = [  'medicine_reminder']
-
-	# def get_absolute_url(self):
-		# return reverse('reminder-detail', args=[str(self.id)])
 
 	def __str__(self):
 		return '%s' % (self.medicine_reminder)
@@ -297,9 +237,6 @@ class Treatment(CommonInfo):
 	class Meta:
 		ordering = ['treatment_name']
 
-	# def get_absolute_url(self):
-		# return reverse('treatment-detail', args=[str(self.id)])
-
 	def __str__(self):
 		return '%s' % (self.treatment_name)
 
@@ -310,9 +247,6 @@ class Visit(CommonInfo):
 	visit_payment = models.ForeignKey('VisitCharge', on_delete=models.PROTECT, default = None)
 	medicine_payment = models.ForeignKey('MedicineCharge', on_delete = models.PROTECT, default = None)
 
-	# def get_absolute_url(self):
-		 # return reverse('visit.views.details', args=[str(self.id)])
-		
 	def __str__(self):
 		return '%s, %s' % ( self.visit_date, self.patient)
 

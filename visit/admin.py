@@ -79,18 +79,18 @@ prescription_pdf.allow_tags = True
 prescription_pdf.short_description = 'Prescription PDF'
 
 
-#class PrescriptionAdminInline(admin.TabularInline):
-class PrescriptionAdmin(admin.ModelAdmin):
-	 list_display = ['id',
-					prescription_detail,
-					prescription_pdf]
-	# model = Prescription
-	# extra = 1
+class PrescriptionAdminInline(admin.TabularInline):
+#class PrescriptionAdmin(admin.ModelAdmin):
+	 # list_display = ['id',
+					# prescription_detail,
+					# prescription_pdf]
+	model = Prescription
+	extra = 1
 
 
 @admin.register(Visit)
 class VisitAdmin(admin.ModelAdmin):
-	view_on_site = True
+	#view_on_site = True
 	fieldsets = (
 	('Date & Patient:', {
    'fields': (('visit_date', 'patient'), ('visit_payment', 'medicine_payment'))
@@ -99,4 +99,4 @@ class VisitAdmin(admin.ModelAdmin):
 
 
 
-	inlines = (ComplaintAdminInline, DiagnosisAdminInline, BiopsyAdminInline, HearingAdminInline, ExamAdminInline ) # PrescriptionAdminInline,
+	inlines = (ComplaintAdminInline,PrescriptionAdminInline, DiagnosisAdminInline, BiopsyAdminInline, HearingAdminInline, ExamAdminInline ) # PrescriptionAdminInline,

@@ -44,9 +44,6 @@ class Occupation(CommonInfo):
 	class Meta:
 		ordering = ['name']
 
-	# def get_absolute_url(self):
-		# return reverse('patient.views.details', args=[str(self.id)])
-
 	def __str__(self):
 		return '%s' % (self.name)
 
@@ -74,11 +71,8 @@ class Patient(CommonInfo):
 	class Meta:
 		ordering = ['last_name', 'first_name']
 
-	# def get_absolute_url(self):
-		# return reverse('patient.views.details', args=[str(self.id)])
-
 	def __str__(self):
-		return '%s %s' % ( self.first_name, self.last_name)
+		return '%s, %s' % ( self.last_name, self.first_name)
 
 class Province(CommonInfo):
 	id = models.AutoField(primary_key=True)

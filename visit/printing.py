@@ -1,4 +1,4 @@
-from reportlab.lib.pagesizes import letter, A4
+from reportlab.lib.pagesizes import half_letter, letter, A4
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER
