@@ -248,7 +248,7 @@ class Visit(CommonInfo):
 	medicine_payment = models.ForeignKey('MedicineCharge', on_delete = models.PROTECT, default = None)
 
 	def __str__(self):
-		return '%s, %s' % ( self.visit_date, self.patient)
+		return '%s' % ( self.patient)
 
 def visit_count(self, obj):
 	return obj.visit__set.count()
