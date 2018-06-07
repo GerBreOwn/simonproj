@@ -1,0 +1,1 @@
+mysqldump -u 'root' -p'CasC#373' medrec > /media/gerald/WDElements/Backups/liveDB_`date +\%Y\%m\%d_\%H\%M`.sql

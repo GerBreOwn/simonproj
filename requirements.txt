@@ -3,6 +3,8 @@ gunicorn
 pymysql
 mysqlclient
 #mysql-connector-python
+secretary
+django-report-builder
 reportlab
 djangoql
 django-query-builder
@@ -15,7 +17,6 @@ python-decouple
 xhtml2pdf>=0.2b1
 django-easy-pdf
 WeasyPrint
-#django-report-builder
 django-developer-panel
 django-extensions
 django-autocomplete-light

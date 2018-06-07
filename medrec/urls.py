@@ -5,23 +5,17 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls import include, url
+#from . import views
 
-admin.site.site_header = settings.ADMIN_SITE_HEADER
+admin.site.site_header = 'MEDREC Administration'
+admin.site.site_url = None
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
-		
-    #path('report_builder/', include('report_builder.urls'))
-#    url(r'^report_builder/', include('report_builder.urls')),
+    url(r'^report_builder/', include('report_builder.urls')),
+    #url(r'^generate/document/$', views.generate_document, name='generate_document')
+   ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-admin.site.site_header = 'MEDREC Administration'
 
-# ~ if settings.DEBUG:
-    # ~ import debug_toolbar
-    # ~ urlpatterns += [
-        # ~ url(r'^__debug__/', include(debug_toolbar.urls)),
-    # ~ ]
 

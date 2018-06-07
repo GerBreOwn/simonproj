@@ -13,7 +13,7 @@ SECRET_KEY = 'nf^(#gts_4-vfd74(3i-hv8qcnq&cv-9ozi-l+&j@oeb4)z3k%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.119', '192.168.0.109', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['192.168.0.121', '192.168.0.18', '192.168.0.121', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'easy_pdf',
     'rest_framework',
     'djangoql',
-#    'report_builder',
+    'report_builder',
     #'explorer',
 ]
 

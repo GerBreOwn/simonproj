@@ -90,7 +90,7 @@ class PrescriptionAdminInline(admin.TabularInline):
 
 @admin.register(Visit)
 class VisitAdmin(admin.ModelAdmin):
-	#view_on_site = True
+	view_on_site = False
 	fieldsets = (
 	('Date & Patient:', {
    'fields': (('visit_date', 'patient'), ('visit_payment', 'medicine_payment'))
