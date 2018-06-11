@@ -27,16 +27,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'easy_pdf',
-    'rest_framework',
-    'djangoql',
-    'report_builder',
-    #'explorer',
 ]
 
 MIDDLEWARE = [
-#	'djdev_panel.middleware.DebugMiddleware',
-#	'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -44,14 +37,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-#    'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
 MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)
-
-# if DEBUG:
-	# INTERNAL_IPS = ('127.0.0.1', 'localhosr',)
-	# MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-
 
 ROOT_URLCONF = 'medrec.urls'
 

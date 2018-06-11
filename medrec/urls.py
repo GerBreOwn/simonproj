@@ -12,8 +12,6 @@ admin.site.site_url = None
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^report_builder/', include('report_builder.urls')),
-    #url(r'^generate/document/$', views.generate_document, name='generate_document')
    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

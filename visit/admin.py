@@ -7,7 +7,6 @@ from django.contrib import admin
 from django.contrib.admin import site
 from django.contrib.admin import site as admin_site
 from djangoql.admin import DjangoQLSearchMixin
-
 #from django.core.urlresolvers import reverse
 
 admin.site.site_title = 'Medical Records Administration'
@@ -15,11 +14,11 @@ admin.site.site_header = 'Medical Records Visits Administration'
 
 # Register your models here.
 
-from .models import  Biopsy, Complaint, Dose, Diagnosis,   Exam, HearingTest, HearingResult, Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine,  Patient, VisitCharge, MedicineCharge
+from .models import  Biopsy, Complaint, Dose, Diagnosis, Exam, HearingTest,  Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine,  Patient, VisitCharge, MedicineCharge # HearingResult,
 
 from .forms import BiopsyForm, ComplaintForm, ExamForm, DiagnosisForm
 
-mymodels = [ Dose, Diagnosis,   HearingTest, HearingResult, Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding, VisitCharge, MedicineCharge,]
+mymodels = [ Dose, Diagnosis,   HearingTest,  Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding, VisitCharge, MedicineCharge,] # HearingResult,
 
 def register_hidden_models(*model_names):
 	for m in model_names:
@@ -33,12 +32,6 @@ def register_hidden_models(*model_names):
 
 register_hidden_models(mymodels)
 
-#class HiddenModelAdmin(admin.ModelAdmin):
-	#def get_model_perms(self, *args, **kwargs):
-		#perms = admin.ModelAdmin.get_model_perms(self, *args, **kwargs)
-		#perms['list_hide'] = True
-		#return perms
-		
 class DiagnosisAdminInline(admin.TabularInline):
 	model = Diagnosis
 	classes = ['collapse']
@@ -80,10 +73,6 @@ prescription_pdf.short_description = 'Prescription PDF'
 
 
 class PrescriptionAdminInline(admin.TabularInline):
-#class PrescriptionAdmin(admin.ModelAdmin):
-	 # list_display = ['id',
-					# prescription_detail,
-					# prescription_pdf]
 	model = Prescription
 	extra = 1
 

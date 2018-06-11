@@ -1,16 +1,11 @@
 from django import forms
 from django.forms import Widget
-#import floppyforms as fforms
-
-#class PrescriptionForm(fforms.Form):
-	#dr_name = fforms.CharField()
-
 
 class BiopsyForm(forms.ModelForm):
 	class Meta:
 		widgets = {
-			#'biopsy': forms.Select(attrs = {'size': 20}),
 			'biopsy_result': forms.Select(attrs = {'size': 30}),
+			#'result': forms.Select(attrs = {'size': 30}),
 		}
 
 class ComplaintForm(forms.ModelForm):
@@ -53,6 +48,6 @@ class PrescriptionForm(forms.ModelForm):
 		widgets = {
 			'medicine': forms.Select(attrs = {'size': 30}),
 			'medicine_dose': forms.Select(attrs = {'size': 30}),
-			'medicine_quantity': forms.TextInput(attrs = {'size': 10}),
+			'medicine_duration': forms.TextInput(attrs = {'size': 10}),
 			'reminder': forms.TextInput(attrs = {'size': 30}),
 		}
