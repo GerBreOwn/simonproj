@@ -4,8 +4,10 @@ from django.forms import Widget
 class BiopsyForm(forms.ModelForm):
 	class Meta:
 		widgets = {
-			'biopsy_result': forms.Select(attrs = {'size': 30}),
-			#'result': forms.Select(attrs = {'size': 30}),
+			'biopsy_name': forms.Select(attrs = {'size': 25}),
+			'biopsy_result': forms.Select(attrs = {'size': 25}),
+			'biopsy_location': forms.Select(attrs = {'size': 25})
+			
 		}
 
 class ComplaintForm(forms.ModelForm):
@@ -48,6 +50,6 @@ class PrescriptionForm(forms.ModelForm):
 		widgets = {
 			'medicine': forms.Select(attrs = {'size': 30}),
 			'medicine_dose': forms.Select(attrs = {'size': 30}),
-			'medicine_duration': forms.TextInput(attrs = {'size': 10}),
+			'medicine_duration': forms.TextInput(attrs = {'size': 5}),
 			'reminder': forms.TextInput(attrs = {'size': 30}),
 		}

@@ -1,6 +1,5 @@
 #Admin file for Doctor
 from django.contrib import admin
-from djangoql.admin import DjangoQLSearchMixin
 
 admin.site.site_title = 'Medical Records Administration'
 admin.site.site_header = 'Medical Records Doctor Administration'

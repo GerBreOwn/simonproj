@@ -6,19 +6,17 @@ from django.db import models
 from django.contrib import admin
 from django.contrib.admin import site
 from django.contrib.admin import site as admin_site
-from djangoql.admin import DjangoQLSearchMixin
-#from django.core.urlresolvers import reverse
 
 admin.site.site_title = 'Medical Records Administration'
 admin.site.site_header = 'Medical Records Visits Administration'
 
 # Register your models here.
 
-from .models import  Biopsy, Complaint, Dose, Diagnosis, Exam, HearingTest,  Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine,  Patient, VisitCharge, MedicineCharge # HearingResult,
+from .models import  Biopsy, BiopsyResult, BiopsyLocation, Complaint, Dose, Diagnosis, Exam, HearingTest,  Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine,  Patient, VisitPayment, MedicinePayment, HearingResult
 
 from .forms import BiopsyForm, ComplaintForm, ExamForm, DiagnosisForm
 
-mymodels = [ Dose, Diagnosis,   HearingTest,  Treatment, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine, Finding, VisitCharge, MedicineCharge,] # HearingResult,
+mymodels = [ Dose, Diagnosis,   HearingTest,  Treatment, ComplaintName, BiopsyName, BiopsyResult, BiopsyLocation, Location, Hearing, ExamName, Reminder, Medicine, Finding, VisitPayment, MedicinePayment, HearingResult,] 
 
 def register_hidden_models(*model_names):
 	for m in model_names:
@@ -31,6 +29,10 @@ def register_hidden_models(*model_names):
 		admin.site.register(m, ma)
 
 register_hidden_models(mymodels)
+
+#~ class ArticleAdmin(admin.ModelAdmin):
+    #~ raw_id_fields = ("patient",)
+
 
 class DiagnosisAdminInline(admin.TabularInline):
 	model = Diagnosis
@@ -82,10 +84,8 @@ class VisitAdmin(admin.ModelAdmin):
 	view_on_site = False
 	fieldsets = (
 	('Date & Patient:', {
-   'fields': (('visit_date', 'patient'), ('visit_payment', 'medicine_payment'))
+   'fields': (('visit_date', 'patient'), ('visit_payment'), ('medicine_payment'))
    }),
    )
-
-
 
 	inlines = (ComplaintAdminInline,PrescriptionAdminInline, DiagnosisAdminInline, BiopsyAdminInline, HearingAdminInline, ExamAdminInline ) # PrescriptionAdminInline,

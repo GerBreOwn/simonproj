@@ -1,13 +1,13 @@
 django
 gunicorn
-pymysql
+#pymysql
 mysqlclient
 #django-reports-admin
 #mysql-connector-python
 #secretary
 #django-report-builder
+django-suit
 reportlab
-#djangoql
 #django-query-builder
 django-crum
 #django-model-utils

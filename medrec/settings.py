@@ -21,12 +21,14 @@ INSTALLED_APPS = [
     'patient',
     'visit',
     'doctor',
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 MIDDLEWARE = [
@@ -67,24 +69,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'medrec.wsgi.application'
 
-# ~ DEBUG_TOOLBAR_PANELS = [
-    # ~ 'debug_toolbar.panels.versions.VersionsPanel',
-    # ~ 'debug_toolbar.panels.timer.TimerPanel',
-    # ~ 'debug_toolbar.panels.settings.SettingsPanel',
-    # ~ 'debug_toolbar.panels.headers.HeadersPanel',
-    # ~ 'debug_toolbar.panels.request.RequestPanel',
-    # ~ 'debug_toolbar.panels.sql.SQLPanel',
-    # ~ 'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    # ~ 'debug_toolbar.panels.templates.TemplatesPanel',
-    # ~ 'debug_toolbar.panels.cache.CachePanel',
-    # ~ 'debug_toolbar.panels.signals.SignalsPanel',
-    # ~ 'debug_toolbar.panels.logging.LoggingPanel',
-    # ~ 'debug_toolbar.panels.redirects.RedirectsPanel',
-# ~ ]
-
-# ~ DEBUG_TOOLBAR_CONFIG = {
-	# ~ 'INTERCEPT:REDIRECTS': False,}
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
@@ -96,10 +80,15 @@ DATABASES = {
         'PASSWORD': 'CasC#373',
         'HOST':  'localhost',
         'PORT': '3306',
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-    }
+       }
 }
 
+SUIT_CONFIG = {
+	'ADMIN_NAME' : 'MEDREC Administration',
+	'SHOW_REQUIRED_ASTERISK' : True,
+	'MENU_EXCLUDE' : ('auth.group', 'auth'),
+	'CONFIRM_UNSAVED_CHANGES' : False,
+}		
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -118,7 +107,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/

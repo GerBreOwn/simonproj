@@ -11,6 +11,16 @@ import datetime
 from crum import get_current_user
 from django.contrib import admin
 from versatileimagefield.fields import VersatileImageField
+from django.core.exceptions import ValidationError
+
+def validate_date(date_of_birth):
+		if date_of_birth == datetime.datetime.today:
+			raise ValidationError('Date of Birth cannot equal today')
+			
+def present_or_future_date(value):
+    if value > datetime.date.today():
+        raise forms.ValidationError("The date cannot be in the future")
+    return value			
 
 class CommonInfo(models.Model):
 	is_active = models.BooleanField(default = True, editable = False)
@@ -55,7 +65,7 @@ class Patient(CommonInfo):
 	contact_num = models.CharField(max_length=15, blank=True, null=True)
 	address = models.CharField(max_length=50, blank=True, null=True)
 	town = models.ForeignKey('Town', default = None, on_delete=models.DO_NOTHING)
-	date_of_birth = models.DateField(("Date of birth"), default=datetime.date.today)
+	date_of_birth = models.DateField(("Date of birth"),validators=[validate_date])# default=datetime.date.today)
 	pat_pic = VersatileImageField('Pat_Pic', upload_to='images/',  blank=True, null=True)
 	occupation = models.ForeignKey('Occupation', blank=True, null=True, default = None, on_delete=models.DO_NOTHING)
 	email = models.EmailField(blank=True, null=True)

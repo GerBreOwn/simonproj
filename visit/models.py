@@ -49,10 +49,9 @@ class CommonInfo(models.Model):
 
 class Biopsy(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	biopsy_name = models.ForeignKey('BiopsyName',blank = True, null = True, on_delete=models.SET_NULL)
-	biopsy_location = models.ForeignKey('Location', blank = True, null = True, on_delete=models.SET_NULL)
-	#biopsy_result = models.CharField(max_length = 50, blank = True, null = True)
-	result = models.ForeignKey('BiopsyResult', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
+	biopsy_name = models.ForeignKey('BiopsyName', blank = True, null = True, on_delete=models.SET_NULL)
+	biopsy_location = models.ForeignKey('Location',blank = True, null = True, editable = False, on_delete=models.SET_NULL)
+	biopsy_result = models.ForeignKey('BiopsyResult',blank = True, null = True, editable = False, on_delete=models.SET_NULL)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
 
 	class meta:
@@ -60,6 +59,16 @@ class Biopsy(CommonInfo):
 		
 	def __str__(self):
 		return '%s' % (self.biopsy_name)
+		
+class BiopsyLocation(CommonInfo):
+	id = models.AutoField(primary_key = True)
+	location = models.CharField(max_length = 25)
+
+	class Meta:
+		ordering = [  'location']
+
+	def __str__(self):
+		return '%s' % (self.location)		
 
 class BiopsyName(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -87,8 +96,7 @@ class BiopsyResult(CommonInfo):
 class ComplaintName(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	complaint_name = models.CharField(max_length=250)#, unique = True)
-	#visit = models.ForeignKey('Visit', blank = True, null = True, editable = False)
-
+	
 	def __str__(self):
 		return '%s' % (self.complaint_name)
 
@@ -97,8 +105,8 @@ class ComplaintName(CommonInfo):
 
 class Complaint(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	complaint_name = models.ForeignKey('ComplaintName', blank = False, null = False, on_delete=models.PROTECT)
-	complaint_location = models.ForeignKey('Location', blank = False, null = False, on_delete=models.PROTECT, default = 'ear')
+	complaint_name = models.ForeignKey('ComplaintName', on_delete=models.PROTECT)
+	complaint_location = models.ForeignKey('Location', on_delete=models.PROTECT)
 	finding = models.ManyToManyField('Finding')
 	treatment = models.ManyToManyField('Treatment')
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)	
@@ -132,8 +140,7 @@ class Exam(CommonInfo):
 	id = models.AutoField(primary_key = True)
 	exam_name = models.ForeignKey('ExamName', blank = True, null = True, on_delete=models.SET_NULL)
 	exam_date = models.DateField(blank=True, null=True)
-	#exam_result = models.CharField(max_length = 25, blank=True, null=True)
-	result = models.ForeignKey('ExamResult', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
+	exam_result = models.ForeignKey('ExamResult', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
 
 	def __str__(self):
@@ -141,9 +148,14 @@ class Exam(CommonInfo):
 
 class ExamName(CommonInfo):
 	id = models.AutoField(primary_key = True)
-	exam_name = models.CharField(max_length = 25, blank = True, null = True)#, unique = True)
-	#visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
+	exam_name = models.CharField(max_length = 25, blank = True, null = True)
+	
+	class Meta:
+		ordering = ['exam_name']
 		
+	def __str__(self):
+		return '%s' % (self.exam_name)
+			
 class ExamResult(CommonInfo):
 	id = models.AutoField(primary_key = True)
 	exam_result = models.CharField(max_length = 25, blank=True, null=True)
@@ -156,7 +168,7 @@ class ExamResult(CommonInfo):
 
 class Finding(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	finding_name = models.CharField(max_length=250, blank = True, null = True)#, unique = True)
+	finding_name = models.CharField(max_length=250, blank = True, null = True)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
 
 	class Meta:
@@ -173,7 +185,7 @@ class Hearing(CommonInfo):
 
 class HearingTest(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	hearing_name = models.CharField(max_length = 25, blank=True, null = True)#, unique = True)
+	hearing_name = models.CharField(max_length = 25, blank=True, null = True)
 
 	class Meta:
 		ordering = [  'hearing_name']
@@ -193,7 +205,7 @@ class HearingResult(CommonInfo):
 
 class Location(CommonInfo):
 	id = models.AutoField(primary_key = True)
-	location = models.CharField(max_length = 25)#, unique = True)
+	location = models.CharField(max_length = 25)
 
 	class Meta:
 		ordering = [  'location']
@@ -212,15 +224,7 @@ class Medicine(CommonInfo):
 	def __str__(self):
 		return '%s' % (self.brand_name)
 
-class VisitCharge(CommonInfo):
-	id = models.AutoField(primary_key=True)
-	visit_amount = models.PositiveIntegerField(blank=True, null=True)
-
-	def __str__(self):
-		return '%s' % (self.visit_amount)
-
-
-class MedicineCharge(CommonInfo):
+class MedicinePayment(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	medicine_amount = models.PositiveIntegerField(blank=True, null=True)
 
@@ -232,7 +236,7 @@ class Prescription(CommonInfo):
 	medicine = models.ForeignKey('Medicine', blank=True, null=True, on_delete=models.PROTECT)
 	medicine_dose = models.ForeignKey('Dose', blank=True, null=True, on_delete=models.PROTECT)
 	medicine_reminder = models.ForeignKey('Reminder', blank=True, null=True, on_delete=models.PROTECT)
-	medicine_duration = models.IntegerField(blank=True, null=True)
+	medicine_duration_days = models.IntegerField(blank=True, null=True)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.PROTECT)
 
 class Reminder(CommonInfo):
@@ -244,7 +248,6 @@ class Reminder(CommonInfo):
 
 	def __str__(self):
 		return '%s' % (self.medicine_reminder)
-
 
 class Treatment(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -261,14 +264,19 @@ class Visit(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	visit_date = models.DateField("Date", default = datetime.date.today)
 	patient = models.ForeignKey('patient.Patient',on_delete=models.PROTECT, default = None)
-	visit_payment = models.ForeignKey('VisitCharge', on_delete=models.PROTECT, default = None)
-	medicine_payment = models.ForeignKey('MedicineCharge', on_delete = models.PROTECT, default = None)
+	visit_payment = models.ForeignKey('VisitPayment', on_delete=models.PROTECT, default = None)
+	medicine_payment = models.ForeignKey('MedicinePayment', on_delete = models.PROTECT, default = None)
 
 	def __str__(self):
 		return '%s' % ( self.patient)
 		
 	class Meta:
 		ordering = ['patient']
+		
+class VisitPayment(CommonInfo):
+	id = models.AutoField(primary_key=True)
+	visit_amount = models.PositiveIntegerField(blank=True, null=True)
 
-def visit_count(self, obj):
-	return obj.visit__set.count()
+	def __str__(self):
+		return '%s' % (self.visit_amount)
+		

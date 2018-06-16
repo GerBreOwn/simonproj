@@ -9,7 +9,7 @@ class PatientForm(forms.ModelForm):
 			'middle_initial': forms.TextInput(attrs = {'size': 1}),
 			'address': forms.TextInput(attrs = {'size': 25}),
 			'town': forms.TextInput(attrs = {'size': 25}),
-			'date_of_birth': forms.TextInput(attrs = {'size': 25}),
+			'date_of_birth': forms.TextInput(attrs = {'size': 25}, validators=[present_or_future_date]),
 			'email': forms.TextInput(attrs = {'size': 25}),
 			'occupation': forms.TextInput(attrs = {'size': 25}),
 		}

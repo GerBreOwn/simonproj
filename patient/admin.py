@@ -2,8 +2,6 @@
 
 from django.contrib import admin
 from django.contrib.admin import site
-from djangoql.admin import DjangoQLSearchMixin
-from djangoql.schema import StrField, DjangoQLSchema
 from .models import  Patient, Province, Town, Occupation
 
 admin.site.disable_action('delete_selected')
