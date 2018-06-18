@@ -54,15 +54,11 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                #'django.contrib.sites',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.static',
                 'django.template.context_processors.media',
             ],
-            # 'loaders': [
-				# 'django.template.loaders.filesystem.Loader',
-				# 'django.template.loaders.app_directories.Loader',
-				 # ],
+           
         },
     },
 ]
@@ -87,7 +83,9 @@ SUIT_CONFIG = {
 	'ADMIN_NAME' : 'MEDREC Administration',
 	'SHOW_REQUIRED_ASTERISK' : True,
 	'MENU_EXCLUDE' : ('auth.group', 'auth'),
-	'CONFIRM_UNSAVED_CHANGES' : False,
+	#'MENU': {'',},
+	'HEADER_TIME_FORMAT' : 'h:i',
+	'MENU_OPEN_FIRST_CHILD': False,
 }		
 
 # Password validation

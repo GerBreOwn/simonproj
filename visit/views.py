@@ -10,7 +10,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import HALF_LETTER
 
 #import weasyprint
-from visit.models import Visit, Dose, Medicine, Prescription, Reminder
+from visit.models import Visit, Dose, MedicineBrand, MedicineGeneric, Prescription, Reminder
 from patient.models import Patient
 from doctor.models import Doctor
 

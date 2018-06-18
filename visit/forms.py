@@ -5,9 +5,8 @@ class BiopsyForm(forms.ModelForm):
 	class Meta:
 		widgets = {
 			'biopsy_name': forms.Select(attrs = {'size': 25}),
+			'biopsy_location': forms.Select(attrs = {'size': 25}),
 			'biopsy_result': forms.Select(attrs = {'size': 25}),
-			'biopsy_location': forms.Select(attrs = {'size': 25})
-			
 		}
 
 class ComplaintForm(forms.ModelForm):
@@ -23,8 +22,8 @@ class ComplaintForm(forms.ModelForm):
 class DiagnosisForm(forms.ModelForm):
 	class Meta:
 		widgets = {
-			'diagnosis': forms.Textarea(attrs = {'rows':5, 'cols':10}),
-			'remarks': forms.Textarea(attrs = {'rows':5, 'col': 10}),
+			'diagnosis': forms.TextInput(attrs = {'size': 30}),
+			'remarks': forms.TextInput(attrs = {'size': 30}),
 		}
 		
 
@@ -48,8 +47,10 @@ class HearingForm(forms.ModelForm):
 class PrescriptionForm(forms.ModelForm):
 	class Meta:
 		widgets = {
-			'medicine': forms.Select(attrs = {'size': 30}),
-			'medicine_dose': forms.Select(attrs = {'size': 30}),
+			'medicine_brand': forms.Select(attrs = {'size': 15}),
+			'medicine_generic': forms.Select(attrs = {'size': 15}),
+			'medicine_dose': forms.Select(attrs = {'size': 10}),
 			'medicine_duration': forms.TextInput(attrs = {'size': 5}),
-			'reminder': forms.TextInput(attrs = {'size': 30}),
+			'medicine_reminder': forms.TextInput(attrs = {'size': 50}),
+			'medicine_quantity': forms.TextInput(attrs = {'size': 25}),
 		}

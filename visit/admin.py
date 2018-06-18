@@ -12,11 +12,11 @@ admin.site.site_header = 'Medical Records Visits Administration'
 
 # Register your models here.
 
-from .models import  Biopsy, BiopsyResult, BiopsyLocation, Complaint, Dose, Diagnosis, Exam, HearingTest,  Visit, Finding, Treatment, Prescription, Location, ComplaintName, BiopsyName, Hearing, ExamName, Reminder, Medicine,  Patient, VisitPayment, MedicinePayment, HearingResult
+from .models import  Biopsy,  BiopsyLocation, BiopsyName, BiopsyResult, Complaint, Dose, Diagnosis, Exam, Finding, HearingTest, Treatment, Prescription, Location, ComplaintName, Hearing, ExamName, Reminder, MedicineBrand, MedicineGeneric,  Patient, MedicinePayment, HearingResult, NumOfDays, MedicineQuantity, Visit, VisitPayment
 
-from .forms import BiopsyForm, ComplaintForm, ExamForm, DiagnosisForm
+from .forms import BiopsyForm, ComplaintForm, DiagnosisForm, ExamForm
 
-mymodels = [ Dose, Diagnosis,   HearingTest,  Treatment, ComplaintName, BiopsyName, BiopsyResult, BiopsyLocation, Location, Hearing, ExamName, Reminder, Medicine, Finding, VisitPayment, MedicinePayment, HearingResult,] 
+mymodels = [ Dose, Diagnosis, HearingTest, Treatment, ComplaintName, BiopsyName, BiopsyResult, BiopsyLocation, Location, Hearing, ExamName, Reminder, MedicineBrand, MedicineGeneric, Finding, VisitPayment, MedicinePayment, HearingResult, NumOfDays, MedicineQuantity] 
 
 def register_hidden_models(*model_names):
 	for m in model_names:
@@ -30,15 +30,6 @@ def register_hidden_models(*model_names):
 
 register_hidden_models(mymodels)
 
-#~ class ArticleAdmin(admin.ModelAdmin):
-    #~ raw_id_fields = ("patient",)
-
-
-class DiagnosisAdminInline(admin.TabularInline):
-	model = Diagnosis
-	classes = ['collapse']
-	extra = 1		
-
 class BiopsyAdminInline(admin.TabularInline):
 	model = Biopsy
 	classes = ['collapse']
@@ -48,6 +39,11 @@ class ComplaintAdminInline(admin.TabularInline):
 	model = Complaint
 	extra = 1
 
+class DiagnosisAdminInline(admin.TabularInline):
+	model = Diagnosis
+	classes = ['collapse']
+	extra = 1	
+	
 class ExamAdminInline(admin.TabularInline):
 	model = Exam
 	classes = ['collapse']
@@ -74,7 +70,7 @@ prescription_pdf.allow_tags = True
 prescription_pdf.short_description = 'Prescription PDF'
 
 
-class PrescriptionAdminInline(admin.TabularInline):
+class PrescriptionAdminInline(admin.StackedInline):
 	model = Prescription
 	extra = 1
 
@@ -88,4 +84,10 @@ class VisitAdmin(admin.ModelAdmin):
    }),
    )
 
-	inlines = (ComplaintAdminInline,PrescriptionAdminInline, DiagnosisAdminInline, BiopsyAdminInline, HearingAdminInline, ExamAdminInline ) # PrescriptionAdminInline,
+	inlines = (ComplaintAdminInline,
+		PrescriptionAdminInline, 
+		DiagnosisAdminInline, 
+		BiopsyAdminInline, 
+		HearingAdminInline, 
+		ExamAdminInline 
+		) 
