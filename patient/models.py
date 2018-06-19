@@ -56,6 +56,13 @@ class Occupation(CommonInfo):
 
 	def __str__(self):
 		return '%s' % (self.name)
+		
+	def save(self, *args, **kwargs):
+		for field_name in ['name']:
+			val = getattr(self, field_name, False)
+			if val:
+				setattr(self, field_name, val.capitalize())
+		super(Product, self).save(*args, **kwargs)
 
 class Patient(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -83,6 +90,13 @@ class Patient(CommonInfo):
 
 	def __str__(self):
 		return '%s, %s' % ( self.last_name, self.first_name)
+		
+	def save(self, *args, **kwargs):
+		for field_name in ['first_name', 'last_name']:
+			val = getattr(self, field_name, False)
+			if val:
+				setattr(self, field_name, val.capitalize())
+		super(Product, self).save(*args, **kwargs)
 
 class Province(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -91,11 +105,15 @@ class Province(CommonInfo):
 	class Meta:
 		ordering = ['name']
 
-	# def get_absolute_url(self):
-		# return reverse('province.views.details', args=[str(self.id)])
-
 	def __str__(self):
 		return '%s' % (self.name)
+		
+	def save(self, *args, **kwargs):
+		for field_name in ['name']:
+			val = getattr(self, field_name, False)
+			if val:
+				setattr(self, field_name, val.capitalize())
+		super(Product, self).save(*args, **kwargs)
 
 class Town(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -106,11 +124,15 @@ class Town(CommonInfo):
 	class Meta:
 		ordering = ['name']
 
-	# def get_absolute_url(self):
-		# return reverse('town.views.details', args=[str(self.id)])
-
 	def __str__(self):
 		return '%s' % (self.name)
+
+	def save(self, *args, **kwargs):
+		for field_name in ['name']:
+			val = getattr(self, field_name, False)
+			if val:
+				setattr(self, field_name, val.capitalize())
+		super(Product, self).save(*args, **kwargs)
 
 class Image(models.Model):
 	name = models.CharField(max_length=500)

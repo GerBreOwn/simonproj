@@ -13,7 +13,7 @@ SECRET_KEY = 'nf^(#gts_4-vfd74(3i-hv8qcnq&cv-9ozi-l+&j@oeb4)z3k%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.121', '192.168.0.18', '192.168.0.121', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['192.168.0.121', '192.168.0.119', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -83,7 +83,6 @@ SUIT_CONFIG = {
 	'ADMIN_NAME' : 'MEDREC Administration',
 	'SHOW_REQUIRED_ASTERISK' : True,
 	'MENU_EXCLUDE' : ('auth.group', 'auth'),
-	#'MENU': {'',},
 	'HEADER_TIME_FORMAT' : 'h:i',
 	'MENU_OPEN_FIRST_CHILD': False,
 }		
@@ -120,4 +119,7 @@ USE_L10N = True
 USE_TZ = False
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
+
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), '192.168.0.119/static/',]

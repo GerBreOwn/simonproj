@@ -33,9 +33,8 @@ class CommonInfo(models.Model):
 		if not self.pk:
 			self.created_by = user
 		self.modified_by = user
-
 		super(CommonInfo, self).save(*args, **kwargs)
-
+		
 	def count_changes(self):
 		with connection.cursor() as cursor:
 			cursor.execute("update self set counter =+ 1 where self.id = %s", [self.pk])
@@ -46,13 +45,9 @@ class CommonInfo(models.Model):
 
 class Biopsy(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	
 	biopsy_name = models.ForeignKey('BiopsyName', blank = True, null = True, on_delete=models.SET_NULL)
-	
 	biopsy_location = models.ForeignKey('BiopsyLocation',blank = True, null = True, on_delete=models.SET_NULL)
-	
 	biopsy_result = models.ForeignKey('BiopsyResult',blank = True, null = True, on_delete=models.SET_NULL)
-	
 	visit = models.ForeignKey('Visit', blank = True, null = True, on_delete=models.SET_NULL)
 
 	class meta:
@@ -62,6 +57,13 @@ class Biopsy(CommonInfo):
 		
 	def __str__(self):
 		return '%s' % (self.biopsy_name)
+		
+	def save(self, *args, **kwargs):
+		for field_name in ['biopsy_name', 'biopsy_location', 'biopsy_result' ]:
+			val = getattr(self, field_name, False)
+			if val:
+				setattr(self, field_name, val.capitalize())
+		super(Product, self).save(*args, **kwargs)
 				
 class BiopsyLocation(CommonInfo):
 	id = models.AutoField(primary_key = True)
@@ -105,6 +107,13 @@ class ComplaintName(CommonInfo):
 	
 	def __str__(self):
 		return '%s' % (self.complaint_name)
+		
+	def save(self, *args, **kwargs):
+		for field_name in ['complaint_name']:
+			val = getattr(self, field_name, False)
+			if val:
+				setattr(self, field_name, val.capitalize())
+		super(Product, self).save(*args, **kwargs)
 
 class Complaint(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -231,6 +240,13 @@ class Location(CommonInfo):
 
 	def __str__(self):
 		return '%s' % (self.location)
+		
+	def save(self, *args, **kwargs):
+		for field_name in ['location']:
+			val = getattr(self, field_name, False)
+			if val:
+				setattr(self, field_name, val.capitalize())
+		super(Product, self).save(*args, **kwargs)
 
 class MedicineBrand(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -242,6 +258,13 @@ class MedicineBrand(CommonInfo):
 	def __str__(self):
 		return '%s' % (self.brand_name)
 		
+	def save(self, *args, **kwargs):
+		for field_name in ['brand_name']:
+			val = getattr(self, field_name, False)
+			if val:
+				setattr(self, field_name, val.capitalize())
+		super(Product, self).save(*args, **kwargs)
+		
 class MedicineGeneric(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	generic_name = models.CharField(max_length = 50)
@@ -250,27 +273,38 @@ class MedicineGeneric(CommonInfo):
 		ordering = [  'generic_name']
 
 	def __str__(self):
-		return '%s' % (self.generic_name)		
+		return '%s' % (self.generic_name)
+		
+	def save(self, *args, **kwargs):
+		for field_name in ['generic_name']:
+			val = getattr(self, field_name, False)
+			if val:
+				setattr(self, field_name, val.capitalize())
+		super(Product, self).save(*args, **kwargs)		
 
 class MedicinePayment(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	medicine_amount = models.PositiveIntegerField(blank=True, null=True)
-
+	
+	class Meta:
+		ordering = ['medicine_amount']
+	
 	def __str__(self):
 		return '%s' % (self.medicine_amount)
 		
 class MedicineQuantity(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	med_quantity = models.CharField(max_length = 15, blank = True, null = True)
-	
+	class Meta:
+		ordering = [ 'med_quantity' ]
 	def __str__(self):
 		return '%s' % (self.med_quantity)
 		
 class NumOfDays(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	
 	numofdays = models.PositiveIntegerField(blank=True, null=True)
-	
+	class Meta:
+		ordering = ['numofdays']
 	def __str__(self):
 		return '%s' % (self.numofdays)
 
@@ -287,12 +321,17 @@ class Prescription(CommonInfo):
 class Reminder(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	medicine_reminder = models.CharField(max_length=50, blank = True, null = True)
-
 	class Meta:
 		ordering = [  'medicine_reminder']
-
 	def __str__(self):
 		return '%s' % (self.medicine_reminder)
+		
+	def save(self, *args, **kwargs):
+		for field_name in ['medicine_reminder']:
+			val = getattr(self, field_name, False)
+			if val:
+				setattr(self, field_name, val.capitalize())
+		super(Product, self).save(*args, **kwargs)
 
 class Treatment(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -321,7 +360,8 @@ class Visit(CommonInfo):
 class VisitPayment(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	visit_amount = models.PositiveIntegerField(blank=True, null=True)
-
+	class Meta:
+		ordering = ['visit_amount']
 	def __str__(self):
 		return '%s' % (self.visit_amount)
 		
