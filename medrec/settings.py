@@ -82,7 +82,7 @@ DATABASES = {
 SUIT_CONFIG = {
 	'ADMIN_NAME' : 'MEDREC Administration',
 	'SHOW_REQUIRED_ASTERISK' : True,
-	'MENU_EXCLUDE' : ('auth.group', 'auth'),
+	'MENU_EXCLUDE' : ('auth.group', 'auth', '-', 'doctor_group','doctor'),
 	'HEADER_TIME_FORMAT' : 'h:i',
 	'MENU_OPEN_FIRST_CHILD': False,
 }		
@@ -120,6 +120,4 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
-
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), '192.168.0.119/static/',]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
