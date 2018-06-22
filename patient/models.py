@@ -12,6 +12,8 @@ from crum import get_current_user
 from django.contrib import admin
 from versatileimagefield.fields import VersatileImageField
 from django.core.exceptions import ValidationError
+from django_counter_field import CounterField
+from django_counter_field import CounterMixin, connect_counter
 
 def validate_date(date_of_birth):
 		if date_of_birth == datetime.datetime.today:
@@ -50,9 +52,10 @@ class CommonInfo(models.Model):
 class Occupation(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length=50, blank = True, null = True, unique = True)
-
+	occup_count = Counter()
+	
 	class Meta:
-		ordering = ['name']
+		ordering = ['-occup_count','name']
 
 	def __str__(self):
 		return '%s' % (self.name)
@@ -64,7 +67,8 @@ class Occupation(CommonInfo):
 				setattr(self, field_name, val.capitalize())
 		super(Product, self).save(*args, **kwargs)
 
-class Patient(CommonInfo):
+class Patient(CounterMixin, CommonInfo):
+#class Patient(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	first_name = models.CharField(max_length=25, db_index = True)
 	last_name = models.CharField(max_length=25, db_index = True)
@@ -76,10 +80,12 @@ class Patient(CommonInfo):
 	pat_pic = VersatileImageField('Pat_Pic', upload_to='images/',  blank=True, null=True)
 	occupation = models.ForeignKey('Occupation', blank=True, null=True, default = None, on_delete=models.DO_NOTHING)
 	email = models.EmailField(blank=True, null=True)
-
 	GENDER = (('F', 'Female'),('M', 'Male'),)
 	gender = models.CharField(max_length=1, choices=GENDER,  default = 'F', help_text = 'Select Gender')
-
+	
+	connect_counter('occup_count', Patient.occupation)
+	connect_counter('town_count', Patient.town)
+	
 	@property
 	def age(self) -> int:
 		diff = date.today() - self.date_of_birth
@@ -120,9 +126,10 @@ class Town(CommonInfo):
 	name = models.CharField(max_length=25, blank = False, null = False, unique = True)
 	zip_code = models.CharField(max_length=10, blank=True, null=True)
 	prov = models.ForeignKey('Province', default = None, blank = True, null = True,  on_delete=models.DO_NOTHING)
-
+	#town_count = CounterField()
+	
 	class Meta:
-		ordering = ['name']
+		ordering = ['-town_count','name']
 
 	def __str__(self):
 		return '%s' % (self.name)
@@ -140,6 +147,3 @@ class Image(models.Model):
 
 	def __str__(self):
 		return self.name + ": " + str(self.imagefile)
-
-def pat_count(self, obj):
-	return obj.self.patient__set.count()

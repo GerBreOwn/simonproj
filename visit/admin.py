@@ -80,7 +80,7 @@ class VisitAdmin(admin.ModelAdmin):
 	view_on_site = False
 	fieldsets = (
 	('Date & Patient:', {
-   'fields': (('visit_date', 'patient'), ('visit_payment'), ('medicine_payment'))
+   'fields': ('visit_date', 'patient', 'visit_payment', 'medicine_payment')
    }),
    )
 
