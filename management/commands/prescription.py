@@ -64,7 +64,7 @@ for p in pr:
 
 pr1.showPage()
 pr1.save()
-#response.write(pdf)
+response.write(pdf)
 #return response
 
 	

@@ -12,8 +12,8 @@ from crum import get_current_user
 from django.contrib import admin
 from versatileimagefield.fields import VersatileImageField
 from django.core.exceptions import ValidationError
-from django_counter_field import CounterField
-from django_counter_field import CounterMixin, connect_counter
+# ~ from django_counter_field import CounterField
+# ~ from django_counter_field import CounterMixin, connect_counter
 
 def validate_date(date_of_birth):
 		if date_of_birth == datetime.datetime.today:
@@ -52,10 +52,10 @@ class CommonInfo(models.Model):
 class Occupation(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length=50, blank = True, null = True, unique = True)
-	occup_count = Counter()
+	#occup_count = Counter()
 	
 	class Meta:
-		ordering = ['-occup_count','name']
+		ordering = ['name']
 
 	def __str__(self):
 		return '%s' % (self.name)
@@ -67,8 +67,8 @@ class Occupation(CommonInfo):
 				setattr(self, field_name, val.capitalize())
 		super(Product, self).save(*args, **kwargs)
 
-class Patient(CounterMixin, CommonInfo):
-#class Patient(CommonInfo):
+#class Patient(CounterMixin, CommonInfo):
+class Patient(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	first_name = models.CharField(max_length=25, db_index = True)
 	last_name = models.CharField(max_length=25, db_index = True)
@@ -83,8 +83,8 @@ class Patient(CounterMixin, CommonInfo):
 	GENDER = (('F', 'Female'),('M', 'Male'),)
 	gender = models.CharField(max_length=1, choices=GENDER,  default = 'F', help_text = 'Select Gender')
 	
-	connect_counter('occup_count', Patient.occupation)
-	connect_counter('town_count', Patient.town)
+	# ~ connect_counter('occup_count', Patient.occupation)
+	# ~ connect_counter('town_count', Patient.town)
 	
 	@property
 	def age(self) -> int:
@@ -129,7 +129,7 @@ class Town(CommonInfo):
 	#town_count = CounterField()
 	
 	class Meta:
-		ordering = ['-town_count','name']
+		ordering = ['name']
 
 	def __str__(self):
 		return '%s' % (self.name)

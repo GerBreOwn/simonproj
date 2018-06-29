@@ -6,8 +6,8 @@ python-dateutil
 #django-reports-admin
 #mysql-connector-python
 #secretary
-#django-report-builder
-django-counter-field
+django-report-builder
+#django-counter-field-py3
 django-suit
 reportlab
 django-crum
