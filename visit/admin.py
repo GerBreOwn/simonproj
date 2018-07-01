@@ -78,11 +78,14 @@ class PrescriptionAdminInline(admin.StackedInline):
 @admin.register(Visit)
 class VisitAdmin(admin.ModelAdmin):
 	view_on_site = False
+	#list_display = ("patient", "visit_count")
 	fieldsets = (
 	('Date & Patient:', {
    'fields': ('visit_date', 'patient', 'visit_payment', 'medicine_payment')
-   }),
-   )
+    }),
+    )
+    
+	
 
 	inlines = (ComplaintAdminInline,
 		PrescriptionAdminInline, 

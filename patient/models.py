@@ -51,7 +51,7 @@ class CommonInfo(models.Model):
 
 class Occupation(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	name = models.CharField(max_length=50, blank = True, null = True, unique = True)
+	name = models.CharField(max_length=50, blank = True, null = True, default = None)
 	#occup_count = Counter()
 	
 	class Meta:

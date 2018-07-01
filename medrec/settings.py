@@ -23,8 +23,6 @@ INSTALLED_APPS = [
     'doctor',
     'suit',
     'prescription',
-    #'django_counter_field',
- #   'report_builder',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -83,7 +81,7 @@ DATABASES = {
 }
 
 SUIT_CONFIG = {
-	'ADMIN_NAME' : 'MEDREC Administration',
+	'ADMIN_NAME' : 'MEDICAL RECORDS Administration',
 	'SHOW_REQUIRED_ASTERISK' : True,
 	'MENU_EXCLUDE' : ('auth.group', 'auth', '-', 'doctor_group','doctor'),
 	'HEADER_TIME_FORMAT' : 'h:i',
