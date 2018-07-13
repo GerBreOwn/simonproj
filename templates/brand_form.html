@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post" id="brandForm" data-cities-url="{% url 'ajax_load_brands' %}" novalidate>
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <button type="submit">Save</button>
+<!--
+    <a href="{% url 'person_changelist' %}">Nevermind</a>
+-->
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_medicinegeneric").change(function () {
+      var url = $("#brandForm").attr("data-brands-url");  // get the url of the `load_cities` view
+      var medicinegenericId = $(this).val();  // get the selected medicinegeneric ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'medicinegeneric': medicinegenericId       // add the medicinegeneric id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_medicinebrand").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+
+{% endblock %}
