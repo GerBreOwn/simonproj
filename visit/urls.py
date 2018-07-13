@@ -1,9 +1,8 @@
-from django.urls import path
+from django.urls import path, include
 
 from . import views
 
 urlpatterns = [
-    url(r'^admin/visit/(?P<prescription_id>\d+)/pdf/$',
-		views.admin_prescription_pdf,
-		name='admin_prescription_pdf'),
-		],
+    # ~ path('ajax/load-brand/', views.load_brand, name='ajax_load_brands'),
+    # url(r'^generate_payments/$', views.generate_payments,name='generate_payments'),
+	]

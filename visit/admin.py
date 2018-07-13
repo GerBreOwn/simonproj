@@ -7,6 +7,9 @@ from django.contrib import admin
 from django.contrib.admin import site
 from django.contrib.admin import site as admin_site
 
+#from reports.base import ModelReport
+#from .payment import PaymentReport
+
 admin.site.site_title = 'Medical Records Administration'
 admin.site.site_header = 'Medical Records Visits Administration'
 
@@ -29,6 +32,14 @@ def register_hidden_models(*model_names):
 		admin.site.register(m, ma)
 
 register_hidden_models(mymodels)
+
+# ~ class PaymentReport(ModelReport):
+    # ~ name = "Daily Payment Report"
+    # ~ qs = Visit.objects.all()
+    # ~ report = PaymentReport()
+    # ~ report.run_report()
+    # ~ report.generate_output
+    # ~ report.collect_data()
 
 class BiopsyAdminInline(admin.TabularInline):
 	model = Biopsy

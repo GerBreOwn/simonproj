@@ -22,19 +22,38 @@ class CommonInfo(models.Model):
 		self.modified_by = user
 		super(CommonInfo, self).save(*args, **kwargs)
 
-	# ~ def count_changes(self):
-		# ~ with connection.cursor() as cursor:
-			# ~ cursor.execute("update self set counter =+ 1 where self.id = %s", [self.pk])
-
 	class Meta:
 		#ordering = ['-counter',]
 		abstract = True
 
+class Hospital(CommonInfo):
+	id = models.AutoField(primary_key = True)
+	hosp_name = models.CharField(max_length = 25, blank = True, null = True)
+	
+	class Meta:
+		ordering = ['hosp_name']
+
+	def __str__(self):
+		return '%s' % ( self.hosp_name)
+		
+	# ~ def save(self, *args, **kwargs):
+		# ~ for field_name in ['hosp_name']:
+			# ~ val = getattr(self, field_name, False)
+			# ~ if val:
+				# ~ setattr(self, field_name, val.capitalize())
+		# ~ super(Hospital, self).save(*args, **kwargs)
+		
+
 class Doctor(CommonInfo):
 	id = models.AutoField(primary_key = True)
-	first_name = models.CharField(max_length = 25, blank = False, null = False, default = " ")
-	last_name = models.CharField(max_length = 20, blank = False, null = False, default = " ")
-	suffix = models.CharField(max_length = 55, blank = False, null = False, default = "M.D.")
+	first_name = models.CharField(max_length = 25, default = " ")
+	last_name = models.CharField(max_length = 20, default = " ")
+	suffix = models.CharField(max_length = 55, default = "M.D.")
+	diplomate = models.CharField(max_length = 66)#, default = "Diplomate")
+	hosp_main = models.ForeignKey('Hospital', on_delete=models.DO_NOTHING, default = None)# related_name = "Main", 
+	hosp_affil = models.ManyToManyField('Hospital', related_name = "Affiliate")#,blank=True, null=True, on_delete=models.DO_NOTHING, , default = None)
+	hours_am = models.CharField(max_length = 25, blank = True, null = True)
+	hours_pm = models.CharField(max_length = 25, blank = True, null = True)
 	telephone = models.CharField(max_length = 12, blank = True, null = True)
 	lic_no = models.CharField(max_length = 25, blank = True, null = True)
 	ptr_no = models.CharField(max_length = 25, blank = True, null = True)

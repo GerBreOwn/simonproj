@@ -18,18 +18,21 @@ ALLOWED_HOSTS = ['192.168.0.121', '192.168.0.119', '127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'doctor',
     'patient',
     'visit',
-    'doctor',
+    'django_counter_field_py3',
     'suit',
-    'prescription',
+    #'report_builder',
+    #'reports',
+    #'admin_reports',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+	'templated_docs',
 ]
 
 MIDDLEWARE = [

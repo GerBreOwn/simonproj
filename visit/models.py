@@ -42,7 +42,6 @@ class CommonInfo(models.Model):
 	class Meta:
 		abstract = True
 
-
 class Biopsy(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	biopsy_name = models.ForeignKey('BiopsyName', blank = True, null = True, on_delete=models.SET_NULL)
@@ -63,7 +62,7 @@ class Biopsy(CommonInfo):
 			val = getattr(self, field_name, False)
 			if val:
 				setattr(self, field_name, val.capitalize())
-		super(Product, self).save(*args, **kwargs)
+		super(Biopsy, self).save(*args, **kwargs)
 				
 class BiopsyLocation(CommonInfo):
 	id = models.AutoField(primary_key = True)
@@ -113,7 +112,7 @@ class ComplaintName(CommonInfo):
 			val = getattr(self, field_name, False)
 			if val:
 				setattr(self, field_name, val.capitalize())
-		super(Product, self).save(*args, **kwargs)
+		super(ComplaintName, self).save(*args, **kwargs)
 
 class Complaint(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -246,25 +245,8 @@ class Location(CommonInfo):
 			val = getattr(self, field_name, False)
 			if val:
 				setattr(self, field_name, val.capitalize())
-		super(Product, self).save(*args, **kwargs)
+		super(Location, self).save(*args, **kwargs)
 
-class MedicineBrand(CommonInfo):
-	id = models.AutoField(primary_key=True)
-	brand_name = models.CharField(max_length=50)
-
-	class Meta:
-		ordering = [  'brand_name']
-
-	def __str__(self):
-		return '%s' % (self.brand_name)
-		
-	def save(self, *args, **kwargs):
-		for field_name in ['brand_name']:
-			val = getattr(self, field_name, False)
-			if val:
-				setattr(self, field_name, val.capitalize())
-		super(Product, self).save(*args, **kwargs)
-		
 class MedicineGeneric(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	generic_name = models.CharField(max_length = 50)
@@ -280,7 +262,26 @@ class MedicineGeneric(CommonInfo):
 			val = getattr(self, field_name, False)
 			if val:
 				setattr(self, field_name, val.capitalize())
-		super(Product, self).save(*args, **kwargs)		
+		super(MedicineBrand, self).save(*args, **kwargs)		
+
+class MedicineBrand(CommonInfo):
+	id = models.AutoField(primary_key=True)
+	brand_name = models.CharField(max_length=50)
+	generic_name = models.ForeignKey(MedicineGeneric, on_delete= models.CASCADE)
+
+	class Meta:
+		ordering = [  'brand_name']
+
+	def __str__(self):
+		return '%s' % (self.brand_name)
+		
+	def save(self, *args, **kwargs):
+		for field_name in ['brand_name']:
+			val = getattr(self, field_name, False)
+			if val:
+				setattr(self, field_name, val.capitalize())
+		super(MedicineBrand, self).save(*args, **kwargs)
+		
 
 class MedicinePayment(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -310,8 +311,8 @@ class NumOfDays(CommonInfo):
 
 class Prescription(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	medicine_brand = models.ForeignKey('MedicineBrand', blank=True, null=True, on_delete=models.PROTECT)
 	medicine_generic = models.ForeignKey('MedicineGeneric', blank=True, null=True, on_delete=models.PROTECT)
+	medicine_brand = models.ForeignKey('MedicineBrand', blank=True, null=True, on_delete=models.PROTECT)
 	medicine_dose = models.ForeignKey('Dose', blank=True, null=True, on_delete=models.PROTECT)
 	medicine_reminder = models.ForeignKey('Reminder', blank=True, null=True, on_delete=models.PROTECT)
 	medicine_duration_days = models.ForeignKey('NumOfDays', blank=True, null=True, on_delete=models.PROTECT)
@@ -331,7 +332,7 @@ class Reminder(CommonInfo):
 			val = getattr(self, field_name, False)
 			if val:
 				setattr(self, field_name, val.capitalize())
-		super(Product, self).save(*args, **kwargs)
+		super(Reminder, self).save(*args, **kwargs)
 
 class Treatment(CommonInfo):
 	id = models.AutoField(primary_key=True)

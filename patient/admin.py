@@ -32,7 +32,7 @@ class Patient(admin.ModelAdmin):
 	view_on_site = False
 	list_display = ('last_name', 'first_name', 'middle_initial', 
 	'date_of_birth', 'contact_num', 'address', 'gender', 'email', 
-	'town','occupation', 'pat_pic')#, 'visit_count')
+	'town','occupation', 'pat_pic')
 
 	fields = [('last_name', 'first_name', 'middle_initial'),
 	('gender','date_of_birth'),
@@ -40,17 +40,4 @@ class Patient(admin.ModelAdmin):
 	('email', 'occupation')]
 
 	search_fields = ['last_name', 'first_name']
-	
-	# ~ def get_queryset(self, request):
-		# ~ queryset = super().get_queryset(request)
-		# ~ queryset = queryset.annotate(
-			# ~ _patient_count=Visit.objects.Count("patient", distinct=True),
-			# ~ )
-		# ~ return queryset
-   
-	# ~ def visit_count(self, obj):
-		# ~ return visit.visit_set.count()
-	
-class Prescription(admin.ModelAdmin):
-	pass
-	
+		
