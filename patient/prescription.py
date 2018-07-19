@@ -5,7 +5,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.http import HttpResponse
 
-from visit.models import Visit
+from .visit.models import Visit
 from doctor.models import *
 
 import datetime

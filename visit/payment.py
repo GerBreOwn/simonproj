@@ -1,4 +1,4 @@
-from reports.base import ModelReport
+from admin_reports import Report, register
 from .models import Visit
 
 class PaymentReport(ModelReport):

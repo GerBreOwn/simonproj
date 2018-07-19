@@ -1,10 +1,11 @@
-# scripts/prescription.py
+#!/usr/bin/env python3
+# /management/commands/prescription.py
 
 from django.core.management.base import BaseCommand, CommandError
 from django.http import HttpResponse
 
 #from .visit.models import * 
-from .models import Visit, Prescription
+from .visit.models import Visit, Prescription
 from .doctor.models import *
 
 import datetime

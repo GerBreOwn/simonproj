@@ -12,7 +12,7 @@ admin.site.site_url = None
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-#    path('report_builder', include('report_builder.urls'))
+    #url(r'^generate/document/$', views.generate_document,name='generate_document')
    ]
 
 

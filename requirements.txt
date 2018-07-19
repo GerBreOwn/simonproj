@@ -1,12 +1,14 @@
-django
+django==2.0.7
 gunicorn
 #pymysql
 mysqlclient
+django-appypod
+#django-model-report
 python-dateutil
 #django-reports-admin
 #admin-reports
 #mysql-connector-python
-secretary
+#secretary
 #templated-docs
 #django-report-builder
 #django-counter-field-py3

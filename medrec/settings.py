@@ -21,18 +21,19 @@ INSTALLED_APPS = [
     'doctor',
     'patient',
     'visit',
-    'django_counter_field_py3',
+#    'django_counter_field_py3',
     'suit',
+#    'model-report',
     #'report_builder',
-    #'reports',
-    #'admin_reports',
+#    'reports',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'templated_docs',
+#    'admin_reports',
+#	'templated_docs',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,9 @@ MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)
 ROOT_URLCONF = 'medrec.urls'
 
 TEMPLATES = [
+	{
+		'BACKEND': 'djappypod.backend.OdtTemplates',
+	},
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
@@ -88,7 +92,8 @@ SUIT_CONFIG = {
 	'SHOW_REQUIRED_ASTERISK' : True,
 	'MENU_EXCLUDE' : ('auth.group', 'auth', '-', 'doctor_group','doctor'),
 	'HEADER_TIME_FORMAT' : 'h:i',
-	'MENU_OPEN_FIRST_CHILD': False,
+	'MENU_OPEN_FIRST_CHILD': True,
+	'CONFIRM_UNSAVED_CHANGES': True,
 }		
 
 # Password validation

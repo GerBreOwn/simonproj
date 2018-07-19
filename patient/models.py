@@ -12,8 +12,8 @@ from crum import get_current_user
 from django.contrib import admin
 from versatileimagefield.fields import VersatileImageField
 from django.core.exceptions import ValidationError
-from django_counter_field_py3 import CounterField
-from django_counter_field_py3 import CounterMixin, connect_counter
+# ~ from django_counter_field_py3 import CounterField
+# ~ from django_counter_field_py3 import CounterMixin, connect_counter
 
 def validate_date(date_of_birth):
 		if date_of_birth == datetime.datetime.today:
@@ -68,7 +68,7 @@ class Occupation(CommonInfo):
 				setattr(self, field_name, val.capitalize())
 		super(Occupation, self).save(*args, **kwargs)
 
-class Patient(CounterMixin, CommonInfo):
+class Patient(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	first_name = models.CharField(max_length=25, db_index = True)
 	last_name = models.CharField(max_length=25, db_index = True)

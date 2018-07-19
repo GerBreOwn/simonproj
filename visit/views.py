@@ -6,11 +6,13 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.contrib.admin.views.decorators import staff_member_required
 
+from django.view.generic.detail import DetailView
+from djappypod.response import OdtTemplateResponse
+
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import HALF_LETTER
 
-from visit.models import Visit, Dose, MedicineBrand, MedicineGeneric, 
-Prescription, Reminder, MedicinePayment, VisitPayment
+from visit.models import Visit, Dose, MedicineBrand, MedicineGeneric, Prescription, Reminder, MedicinePayment, VisitPayment
 from patient.models import Patient
 from doctor.models import Doctor
 
@@ -22,6 +24,17 @@ from templated_docs.http import FileResponse
 
 
 @staff_member_required
+class Payments(DetailView):
+	response_class = OdtTemplateResponse
+	template_name = "payments.odt"
+	
+
+def generate_document(request):
+   # Model data
+   people = Visit.objects.all().order_by('patient')
+
+   return ReportGenerator().create_report(people)
+
 
 def get_document(request):
 	context = ('user': request.user,'foo': 'bar')

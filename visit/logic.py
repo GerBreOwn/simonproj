@@ -4,6 +4,7 @@ from django.http import HttpResponse
 import os, tempfile
 
 class ReportGenerator():
+	""" Class ReportGenerator """
 	@staticmethod
 	def create_report(data):
 		engine = Renderer()
