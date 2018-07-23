@@ -353,10 +353,10 @@ class Visit(CommonInfo):
 	medicine_payment = models.ForeignKey('MedicinePayment', on_delete = models.PROTECT, default = None)
 
 	def __str__(self):
-		return '%s' % ( self.patient)
+		return '%s, %s' % ( self.patient, self.visit_date)
 		
 	class Meta:
-		ordering = ['patient']
+		ordering = ['patient', 'visit_date']
 		
 class VisitPayment(CommonInfo):
 	id = models.AutoField(primary_key=True)

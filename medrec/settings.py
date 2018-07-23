@@ -23,17 +23,12 @@ INSTALLED_APPS = [
     'visit',
 #    'django_counter_field_py3',
     'suit',
-#    'model-report',
-    #'report_builder',
-#    'reports',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-#    'admin_reports',
-#	'templated_docs',
 ]
 
 MIDDLEWARE = [
@@ -50,10 +45,7 @@ MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)
 ROOT_URLCONF = 'medrec.urls'
 
 TEMPLATES = [
-	{
-		'BACKEND': 'djappypod.backend.OdtTemplates',
-	},
-    {
+	    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,

@@ -1,12 +1,14 @@
 from django.contrib import admin
 from django.urls import include, path
-from model_report import report
-#import admin_reports
+
+from . import views
 
 urlpatterns = [
-	path('admin/', admin.site.urls),
-	path(r'', include('model_report.urls')),
-	#url(r'^admin/', include(admin_reports.site.urls)),
-	#path('admin/', admin_reports.site.urls, name='payment-report'),
-   
-	]
+	path('visit/', views.daily_payment),
+	# ~ url(r'^generate/document/$', views.generate_document,name='generate_document'),
+	# ~ path('admin/', admin.site.urls),
+	# ~ path(r'', include('model_report.urls')),
+	# ~ #path('generate/document/', views.generate_document,name='generate_document'),
+	# ~ #url(r'^generate/document/$', views.generate_document,name='generate_document')
+]
+
