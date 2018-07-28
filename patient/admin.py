@@ -2,8 +2,9 @@
 
 from django.contrib import admin
 from django.contrib.admin import site
+from django.urls import path
 from .models import  Patient, Province, Town, Occupation
-
+from patient.views import prescription_view
 
 admin.site.disable_action('delete_selected')
 
@@ -40,4 +41,21 @@ class Patient(admin.ModelAdmin):
 	('email', 'occupation')]
 
 	search_fields = ['last_name', 'first_name']
+
+	def get_urls(self):
+		urls = super().get_urls()
+		my_urls = [
+			path('my_view', self.admin_site.admin_view(self.my_view)),
+			]
+		return my_urls + urls
 		
+	def my_view(self, request):
+		pass 	
+
+	def admin_action(self, request, queryset):
+		actions = ["export_as_pdf"]
+		pass
+
+	def export_as_pdf(self, request, queryset):
+		
+		export_as_pdf.short_description = "Print Prescription"

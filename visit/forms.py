@@ -1,12 +1,13 @@
 from django import forms
 from django.forms import Widget
+from django.contrib.admin import widgets
 from .models import Prescription, MedicineBrand
 from admin_reports import Report
 import datetime
 
 class PaymentReportForm(forms.Form):
-	from_date = forms.DateField(label = "From:")
-	to_date = forms.DateField(label = "To:")
+	from_date = forms.DateField(label = "From:", widget=widgets.AdminDateWidget())
+	to_date = forms.DateField(label = "To:", widget=widgets.AdminDateWidget())
 	
 class PaymentReport(Report):
 	def aggregate(self, from_date=None, to_date=None, **kwargs):

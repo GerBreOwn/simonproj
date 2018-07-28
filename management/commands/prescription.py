@@ -6,7 +6,8 @@ from django.http import HttpResponse
 
 #from .visit.models import * 
 from .visit.models import Visit, Prescription
-from .doctor.models import *
+from .doctor.models import Doctor, Hospital
+from .patient.models import Patient
 
 import datetime
 from datetime import date
@@ -26,7 +27,7 @@ help = 'Generate & print prescription forms'
 ## Doctor data
 dr = Doctor.objects.filter(id = 1)
 for d1 in dr:
-	print(d1.first_name, d1.last_name, d1.suffix)
+	#print(d1.first_name, d1.last_name, d1.suffix)
 	l1 = d1.first_name + d1.last_name + d1.suffix
 	l2 = d1.diplomate
 	l3 = d1.hosp_main
@@ -41,12 +42,8 @@ for d1 in dr:
 lw1 = stringWidth(l1)	
 lw2 = stringWidth(l2)
 
-
-	
-	
 ## Hospital data
-	
-	
+		
 ## Visit data
 vi = Visit.objects.latest('id')
 vi_id = vi.id
@@ -88,39 +85,41 @@ pdf_text_object.textOut(l2)
 ### Line 3 Main Hospital
 pr1.setFont('Helvetica', 12)
 x = 185
-pr1.drawString(*coord(22,x, mm), l3)
+y = 22
+pr1.drawString(*coord(y,x, mm), l3)
 
 ### Line 4 Mon-Fri AM line
 pr1.setFont('Helvetica', 10)
 x = 183
-pr1.drawString(*coord(22, x, mm), 'Mon. - Fri. :')
-pr1.drawString(*coord(30, x, mm), l4)
+y = 30
+pr1.drawString(*coord(y, x, mm), 'Mon. - Fri. :')
+pr1.drawString(*coord(y, x, mm), l4)
 
 ### Line 5 Mon - Fri PM line
 x = 180
-pr1.drawString(*coord(30, x, mm), l5)
+pr1.drawString(*coord(y, x, mm), l5)
 ## Affils
 pr1.setFont('Helvetica', 12)
-pr1.drawString(*coord(90, x, mm), 'HOSPITAL AFFILIATIONS')
+pr1.drawString(*coord(y + 60, x, mm), 'HOSPITAL AFFILIATIONS')
 
 ### Line 6 Sat AM line
 pr1.setFont('Helvetica', 10)
 x = 174
-pr1.drawString(*coord(22, x, mm), 'Saturday :')
-pr1.drawString(*coord(30, x, mm), l4)
+pr1.drawString(*coord(y - 8, x, mm), 'Saturday :')
+pr1.drawString(*coord(y, x, mm), l4)
 
 ### Line 7 Telephone
 x = 171
-pr1.drawString(*coord(22, x, mm), 'Tel. No. :')
-pr1.drawString(*coord(30, x, mm), l6)
+pr1.drawString(*coord(y - 8, x, mm), 'Tel. No. :')
+pr1.drawString(*coord(y, x, mm), l6)
 
 ## This generates the patient's information
 pr1.setFont('Helvetica', 10)
-pr1.drawString(*coord(22,153,mm), vi_pat)
-pr1.drawString(*coord(107, 153, mm), age)
-pr1.drawString(*coord(122, 153, mm), vi_gen)
-pr1.drawString(*coord(22, 145, mm), vi_twn)
-pr1.drawString(*coord(106, 145, mm), today)
+pr1.drawString(*coord(y - 8,153,mm), vi_pat)
+pr1.drawString(*coord(y + 77, 153, mm), age)
+pr1.drawString(*coord(y + 92, 153, mm), vi_gen)
+pr1.drawString(*coord(y -8, 145, mm), vi_twn)
+pr1.drawString(*coord(y + 76, 145, mm), today)
 
 x = 135
 y = 22

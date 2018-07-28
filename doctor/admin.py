@@ -5,7 +5,7 @@ admin.site.site_title = 'Medical Records Administration'
 admin.site.site_header = 'Medical Records Doctor Administration'
 # Register your models here.
 
-from .models import Doctor, Hospital
+from .models import Doctor#, Hospital
 
 #mymodels = [Doctor, Hospital]
 

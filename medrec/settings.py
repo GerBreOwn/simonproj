@@ -16,20 +16,29 @@ DEBUG = True
 ALLOWED_HOSTS = ['192.168.0.121', '192.168.0.119', '127.0.0.1', 'localhost']
 
 # Application definition
+#SUIT = True
 
 INSTALLED_APPS = [
     'doctor',
     'patient',
     'visit',
 #    'django_counter_field_py3',
-    'suit',
+     'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+#    'proyekt',
+ #   'suit_dashboard',
 ]
+
+# ~ if SUIT:
+	# ~ INSTALLED_APPS = [
+		# ~ 'suit',
+		# ~ 'django.contrib.admin.apps.SimpleAdminConfig',
+	# ~ ] + INSTALLED_APPS[1:]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -86,7 +95,10 @@ SUIT_CONFIG = {
 	'HEADER_TIME_FORMAT' : 'h:i',
 	'MENU_OPEN_FIRST_CHILD': True,
 	'CONFIRM_UNSAVED_CHANGES': True,
-}		
+	'LIST_PER_PAGE': 20,
+	'label': 'Print Prescription', 'url':'path(admin/patient/)', 'icon': 'icon-user',
+	'label': 'Payment Report', 'url': 'path(visit/)', 'icon': 'icon-user',
+}	
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

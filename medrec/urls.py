@@ -1,22 +1,27 @@
+from django.contrib.admin.sites import AdminSite
 from django.contrib import admin
-from django.urls import path
-# ~ from django.conf import settings
-# ~ from django.conf.urls import include, url
-# ~ from django.conf.urls.static import static
-# ~ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.urls import include, path
+from django.conf.urls import include, url
 
-#from . import views
+from patient import views as patient_views
+from visit import views as visit_views
 
 admin.site.site_header = 'MEDREC Administration'
-#admin.site.site_url = None
+
+class DashboardSite(AdminSite):
+	def get_urls(self):
+		urls = super(DashboardSite, self).get_urls()
+		custom_urls = [
+			path('^$', self.admin_view(HomeView.as_view()), name='admin'),
+			]
+		del urls[2]
+		return custom_urls + urls
 
 urlpatterns = [
-    #path('visit/', views.daily_payment),
-    path('visit/', views.site.urls),
+	path('admin/patient/', patient_views.prescription_view),
+	path('admin/visit/', visit_views.daily_payment),
     path('admin/', admin.site.urls),
-    
-    
-   ]
+    ]
 
 
 

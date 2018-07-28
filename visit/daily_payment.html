@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Payments for {{ now }}{% endblock %}
+{% block content %}
+<h1>Payments for {{ now }}</h1>
+{% for pay in pay_list}
+<p>{{pay.patient}} {{pay.visit_amount}}{{pay.medicine_amount}}</p>
+{% endfor %}
+{% endblock %}
