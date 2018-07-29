@@ -52,12 +52,7 @@ class CommonInfo(models.Model):
 class Occupation(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length=50, blank = True, null = True, default = None)
-	# ~ occup_count = CounterField()
-	# ~ connect_counter('occup_count', Patient.occupation)
 	
-	# ~ class Meta:
-		# ~ ordering = ['-occup_count', 'name']
-
 	def __str__(self):
 		return '%s' % (self.name)
 		
@@ -82,15 +77,12 @@ class Patient(CommonInfo):
 	email = models.EmailField(blank=True, null=True)
 	GENDER = (('F', 'Female'),('M', 'Male'),)
 	gender = models.CharField(max_length=1, choices=GENDER,  default = 'F', help_text = 'Select Gender')
-	# ~ connect_counter('occup_count', Patient.occupation)
-	# ~ connect_counter('occup_count', Occupation.name)
-	# ~ connect_counter('town_count', Town.name)
 	
 	class Meta:
 		ordering = ['last_name', 'first_name']
 	
 	def __str__(self):
-		return '%s %s' % (self.last_name, self.first_name)
+		return '%s, %s' % (self.last_name, self.first_name)
 	@property
 	def age(self) -> int:
 		diff = date.today() - self.date_of_birth

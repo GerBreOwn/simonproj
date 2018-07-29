@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3.6
 # /management/commands/prescription.py
 
 from django.core.management.base import BaseCommand, CommandError

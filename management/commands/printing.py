@@ -59,7 +59,7 @@ class MedrecPrint:
 		
 		pr1.showPage()
 		pr1.save()
-	response.write(pdf)
-	return response
+		response.write(pdf)
+		return response
 
 	
