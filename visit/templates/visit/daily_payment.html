@@ -1,29 +1,28 @@
 {% extends 'admin/base_site.html' %}
-{#% extends 'visit/base.html' %#}
 {% load i18n %}
 
 {% block breadcrumbs %}
 	<div class="breadcrumbs"><a href="/admin/">{% trans "Home" %}</a>Payments</div>
 {% endblock %}
 
+{# Additional <head> content here, some extra meta tags or favicon #}
+{#{% block extrahead %}}
+{#{% endblock %}}
+
 
 {% block content %}
 	<table>
-		
-	<thead>
-	<tr>
-	<th>Patient</th>
-	<th>Visit Pay</th>
-	<th>Medicine Pay</th>
-	</tr>
-	</thead>
+		<thead>
+			<tr>
+			<th>Patient</th>
+			<th>Visit Pay</th>
+			<th>Medicine Pay</th>
+			</tr>
+		</thead>
 	<tbody style="width:100%;">
 		
 	{% for pay in pay_list %}
 	<tr>
-<!--
-		<td style="width:10%;">{{counter}}</td>
--->
 		<td style="width:40%;">{{ pay.patient }}</td>
 		<td style="width:30%;"> <center>{{ pay.visit_payment }}</center> </td>
 		<td style="width:30%;"> <center>{{ pay.medicine_payment }}</center></td>

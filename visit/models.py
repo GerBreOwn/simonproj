@@ -348,7 +348,7 @@ class Treatment(CommonInfo):
 class Visit(CommonInfo):
 	id = models.AutoField(primary_key=True)
 
-	visit_date = models.DateField("Date", default = datetime.date.today)
+	visit_date = models.DateField("Date", default = datetime.date.today, blank = False)
 
 	patient = models.ForeignKey('patient.Patient',on_delete=models.PROTECT, default = None)
 

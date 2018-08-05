@@ -2,26 +2,12 @@ from django import forms
 from django.forms import Widget
 from django.contrib.admin import widgets
 from .models import Prescription, MedicineBrand
-from admin_reports import Report
 import datetime
 
-class PaymentReportForm(forms.Form):
+class GetDatesForm(forms.Form):
 	from_date = forms.DateField(label = "From:", widget=widgets.AdminDateWidget())
 	to_date = forms.DateField(label = "To:", widget=widgets.AdminDateWidget())
 	
-class PaymentReport(Report):
-	def aggregate(self, from_date=None, to_date=None, **kwargs):
-		# ~ visit-total = Visit.objects.aggregate(Sum(Visit.visit_amount))
-		# ~ medic-total = Visit.objects.aggregate(Sum(Visit.medicine_amount))
-		Visit.objects.aggregate(Sum(Visit.visit_amount))
-		Visit.objects.aggregate(Sum(Visit.medicine_amount))
-		fields = [Visit.patient, Visit.visit_amount, Visit.medicine_amount]
-		has_totals = True
-		title = "Payments Report"
-		list_per_page = 20
-		form_class = PaymentReportForm
-		return
-
 class BiopsyForm(forms.ModelForm):
 	class Meta:
 		widgets = {
