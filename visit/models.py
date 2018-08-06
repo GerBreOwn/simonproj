@@ -357,7 +357,7 @@ class Visit(CommonInfo):
 	medicine_payment = models.ForeignKey('MedicinePayment', on_delete = models.PROTECT, default = None)
 
 	def __str__(self):
-		return '%s, %s' % ( self.patient, self.visit_date)
+		return '%s, %s, %s, %s' % ( self.patient, self.visit_date, self.visit_payment, self.medicine_payment)
 		
 	class Meta:
 		ordering = ['patient', 'visit_date']

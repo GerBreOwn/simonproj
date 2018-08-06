@@ -19,7 +19,9 @@ class DashboardSite(AdminSite):
 
 urlpatterns = [
 	path('admin/patient/', patient_views.prescription_view),
-	path('admin/visit/', visit_views.daily_payment),
+	path('admin/visit/', visit_views.daily_payment_view),
+	path('admin/visit/', visit_views.weekly_payment_view),
+	path('admin/visit/', visit_views.monthly_payment_view),
     path('admin/', admin.site.urls),
     ]
 

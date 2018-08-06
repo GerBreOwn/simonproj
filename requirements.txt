@@ -3,10 +3,10 @@ gunicorn
 #pymysql
 mysqlclient
 python-dateutil
+django-crispy-forms
 #secretary
 #django-counter-field-py3
 django-suit
-#django-suit-dashboard
 reportlab
 django-crum
 #django-model-utils
