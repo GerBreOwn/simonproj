@@ -56,7 +56,6 @@
 
 {% block sidebar %}
 <div id="content-related">
-
 	<div class="module" id="print-prescriptions-module">
 		<h2>Print Prescriptions</h2>
 		<ul class="actionlist">
@@ -67,23 +66,34 @@
 		<br>
 	</div>
 	<br>
+	
+	<br>
 	<div class="module" id="daily-payments-module">
-		<h2>Payment Reports</h2>
+		<h2>Daily Payment Reports</h2>
 		<ul class="actionlist">
 			<li class="changelink">
 				<a href="/admin/visit/">Today's Payments</a>
+					<br>
+				<a href="/admin/visit/">Yesterday's Payments</a>
 			</li>
 		</ul>
 	</div>
 
 	<br>
-	<div class="module" id="yesterday-payments-module">
-<!--
-		<h2>Payment Reports</h2>
--->
+	<div class="module" id="weekly-payments-module">
+		<h2>Weekly Payment Reports</h2>
 		<ul class="actionlist">
 			<li class="changelink">
-				<a href="/admin/visit/">Yesterday's Payments</a>
+				<a href="/admin/visit/">This Weeks Payments</a>
+			</li>
+		</ul>
+	</div>
+
+	<br>
+	<div class="module" id="last-week-payments-module">
+		<ul class="actionlist">
+			<li class="changelink">
+				<a href="/admin/visit/">Last Weeks Payments</a>
 			</li>
 		</ul>
 	</div>

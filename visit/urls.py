@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import include, path
 
-from . import views
+from visit import views # as visit_views
 
-urlpatterns = [
-	path('visit/', views.daily_payment),
-	]
+# ~ urlpatterns = [
+	
+	# ~ ]
 

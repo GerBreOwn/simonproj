@@ -27,22 +27,24 @@ pdfdoc.PDFCatalog.OpenAction = '<</S/JavaScript/JS(this.print\({bUI:true,bSilent
 def prescription_view(request):
 	response = HttpResponse(['content'],content_type='application/pdf')
 	response['Content-Disposition'] = 'inline; filename="prescription.pdf"'
-
-	PAGE_HEIGHT = defaultPageSize[1]; PAGE_WIDTH = defaultPageSize[0]
-	BottomMargin = 0.4 * inch
-	TopMargin = 0.4 * inch
-	LeftMargin = .1 * inch  
-	RightMargin = .1 * inch
-	ContentBottomMargin = TopMargin + 0.25 * inch
-	ContentTopMargin = BottomMargin + 0.35 * inch
-	ContentLeftMargin = LeftMargin 
-	ContentRightMargin = RightMargin 
 	
-	fs19 = 19 #1
+	# ~ PAGE_HEIGHT = defaultPageSize[1]; PAGE_WIDTH = defaultPageSize[0]
+		
+	# ~ BottomMargin = 0.4 * inch
+	# ~ TopMargin = 10 * mm
+	# ~ LeftMargin = .1 * inch  
+	# ~ RightMargin = .1 * inch
+	# ~ ContentBottomMargin = TopMargin + 0.25 * inch
+	# ~ ContentTopMargin = BottomMargin + 0.35 * inch
+	# ~ ContentLeftMargin = LeftMargin 
+	# ~ ContentRightMargin = RightMargin 
+	
+	fs19 = 19 - 4 #1
 	fs17 = 17 #2
 	fs14 = 14 #3
 	fs12 = 12 #4
 	fs11 = 11 #5
+	fs10 = 10
 	
 	buffer = BytesIO()
 
@@ -82,8 +84,10 @@ def prescription_view(request):
 	#pr1 = canvas.Canvas(buffer)
 	pr1 = canvas.Canvas(response)
 	
-	pr1.PageSize = HALF_LETTER
+	pr1.pagesize = HALF_LETTER
 	#pr1.pagesize = A5
+
+	y = 100 * mm
 	
 	''' This draws the header info on the prescription form.
 	y = up from bottom
@@ -95,28 +99,26 @@ def prescription_view(request):
 	## This generates the doctor's information
 	### Line 1 = Doctor Name
 
-	
-	width , height  = HALF_LETTER
-	x = 20
-	y = 270
+	x = 10
+	#y -= 5
 	pr1.setFont('Helvetica-Bold', fs19)
 	pr1.drawString(*coord(x, y, mm), str(l1))
 		
 	### Line 2 Diplomate
 	pr1.setFont('Helvetica', fs12)
-	x = 28
-	y -= 5 # 270
+	x = 15
+	y -= 5 
 	pr1.drawString(*coord(x, y, mm), str(l2))
 	
 	### Line 3 Main Hospital
 	pr1.setFont('Helvetica-Bold', fs12)
-	x = 15
-	y -= 15 # 260
+	x = 10
+	y -= 8
 	pr1.drawString(*coord(x, y, mm), str(l3)) ## Main Hosp
 
 	### Line 4 Mon-Fri AM line
 	pr1.setFont('Helvetica', fs11)
-	y -= 5 # 250
+	y -= 5
 	pr1.drawString(*coord(x, y, mm), 'Mon. - Fri. :')
 	pr1.drawString(*coord(x + 20, y, mm), str(l4)) ## AM Hours
 
@@ -125,7 +127,7 @@ def prescription_view(request):
 	pr1.drawString(*coord(x + 20, y, mm), str(l5)) ## PM hours
 	## Affils
 	pr1.setFont('Helvetica-Bold', fs12)
-	pr1.drawString(*coord(x + 90, y, mm), 'HOSPITAL AFFILIATIONS')
+	pr1.drawString(*coord(x + 70, y, mm), 'HOSPITAL AFFILIATIONS')
 
 	### Line 6 Sat AM line
 	pr1.setFont('Helvetica', fs11)
@@ -135,7 +137,7 @@ def prescription_view(request):
 
 	### Line 6a NOPH
 	pr1.setFont('Helvetica', fs11)
-	pr1.drawString(*coord(x + 90, y, mm), 'NOPH')
+	pr1.drawString(*coord(x + 70, y, mm), 'NOPH')
 
 	### Line 7 Telephone
 	y -= 5
@@ -145,39 +147,40 @@ def prescription_view(request):
 
 	### Line 7a Holy Child Hosp
 	pr1.setFont('Helvetica', fs11)
-	pr1.drawString(*coord(x + 90, y, mm), 'Holy Child Hospital')
+	pr1.drawString(*coord(x + 70, y, mm), 'Holy Child Hospital')
 
 	### Line between heading & patient
 	pr1.setFont('Helvetica', fs12)
-	y -= 5
-	pr1.line(x * mm, y * mm, x + 170 * mm, y * mm)
+	# x = 12
+	y -= 4
+	pr1.line(x * mm, y * mm, x + 130 * mm, y * mm)
 	y -= 1
-	pr1.line(x * mm, y * mm, x + 170 * mm, y * mm)
+	pr1.line(x * mm, y * mm, x + 130 * mm, y * mm)
 	
 	## This generates the patient's information
 	pr1.setFont('Helvetica', fs11)
 	y -= 5
 	pr1.drawString(*coord(x, y, mm),'Patient')
-	pr1.line(x + 25*mm, y*mm, 90*mm, y*mm)
-	pr1.drawString(*coord(x + 15,y,mm), vi_pat)
+	pr1.line(x + 27*mm, y*mm, x + 80*mm, y*mm)
+	pr1.drawString(*coord(x + 20,y,mm), vi_pat)
 	
-	pr1.drawString(*coord(105, y, mm), 'Age')
-	pr1.line(113*mm, y*mm, 124*mm, y*mm)
-	pr1.drawString(*coord(115, y, mm), age)
+	pr1.drawString(*coord(x + 75, y, mm), 'Age')
+	pr1.line(x + 90*mm, y*mm, x + 100*mm, y*mm)
+	pr1.drawString(*coord(x + 85, y, mm), age)
 	
-	pr1.drawString(*coord(126, y, mm), 'Sex')
-	pr1.line(134*mm, y*mm, 143*mm, y*mm)
-	pr1.drawString(*coord(136, y, mm), vi_gen)
+	pr1.drawString(*coord(x + 100, y, mm), 'Sex')
+	pr1.line(x + 115*mm, y*mm, x + 125*mm, y*mm)
+	pr1.drawString(*coord(x + 110, y, mm), vi_gen)
 
 	y -= 6
 
 	pr1.drawString(*coord(x, y, mm), 'Address')
-	pr1.line(x + 27 *mm, y*mm, 90*mm, y*mm)
-	pr1.drawString(*coord(x + 15, y, mm), vi_twn)
+	pr1.line(x + 27 *mm, y*mm, x + 80*mm, y*mm)
+	pr1.drawString(*coord(x + 20, y, mm), vi_twn)
 
-	pr1.drawString(*coord(105, y, mm), 'Date')
-	pr1.line(115*mm, y*mm, 140*mm, y*mm)
-	pr1.drawString(*coord(115, y, mm), today)
+	pr1.drawString(*coord(x + 75, y, mm), 'Date')
+	pr1.line(x + 90*mm, y*mm, 120*mm, y*mm)
+	pr1.drawString(*coord(x + 85, y, mm), today)
 
 	x += 10
 	y -= 5
@@ -200,19 +203,19 @@ def prescription_view(request):
 		pr1.setFillColor(colors.blue)
 		pr1.drawString(*coord(x + 10, y - 5, mm), str(pr.medicine_brand))
 		pr1.setFillColor(colors.black)
-		
+
+		pr1.setFont('Helvetica', fs10)
 		pr1.drawString(*coord(x, y - 10, mm), str(mr))
-		
 		pr1.line(x*mm, (y - 15)*mm, 120*mm, (y - 15)*mm )
 
-		y = y - 20
+		y -= 15
 
 	### Prescription footer data
-	x = 85
-	y = 30
+	x = 80
+	y = 120
 	pr1.setFont('Helvetica', fs12)
 	pr1.line(x*mm, y*mm, (x + 35)*mm, y*mm)
-	pr1.drawString(*coord(x + 40, y, mm), 'M.D.')
+	pr1.drawString(*coord(x + 36, y, mm), 'M.D.')
 	
 	pr1.drawString(*coord(x, y - 4, mm), "Lic No.:")
 	pr1.drawString(*coord(x + 18, y - 4, mm), str(l7))
@@ -235,6 +238,4 @@ def prescription_view(request):
 	buffer.close()
 	response.write(pdf)
 	return response
-
-
 

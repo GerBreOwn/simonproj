@@ -1,4 +1,6 @@
 from django import forms
+from django.core.exceptions import ValidationError
+
 from django.forms import Widget
 from django.contrib.admin import widgets
 from .models import Prescription, MedicineBrand
@@ -6,7 +8,16 @@ import datetime
 
 class GetDatesForm(forms.Form):
 	from_date = forms.DateField(label = "From:", widget=widgets.AdminDateWidget())
+	
 	to_date = forms.DateField(label = "To:", widget=widgets.AdminDateWidget())
+	
+	def clean_from_date(self):
+		data = self.cleaned_data['from_date']
+		if data > datetime.date.today():
+			raise ValidationErr(_('Invaled date from_date in future'))
+		return data
+		
+	
 	
 class BiopsyForm(forms.ModelForm):
 	class Meta:
