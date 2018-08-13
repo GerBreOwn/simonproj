@@ -2,7 +2,11 @@
 
 {% load i18n static %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+{% block extrastyle %}
+	{{ block.super }}
+		<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+		<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+{% endblock %}
 
 {% block coltype %}colMS{% endblock %}
 
@@ -50,10 +54,64 @@
 </div>
 {% endblock %}
 
-<!--
 {% block sidebar %}
 <div id="content-related">
-    <div class="module" id="recent-actions-module">
+	<div class="module" id="print-prescriptions-module">
+		<h2>Print Prescriptions</h2>
+		<ul class="actionlist">
+			<li class="changelink">
+				<a href="/admin/patient/">Print Prescriptions</a>
+			</li>
+		</ul>
+		<br>
+	</div>
+	<br>
+	
+	<br>
+	<div class="module" id="daily-payments-module">
+		<h2>Daily Payment Reports</h2>
+		<ul class="actionlist">
+			<li class="changelink">
+				<a href="visit/">Today's Payments</a>
+					<br>
+				<a href="/visit/">Yesterday's Payments</a>
+			</li>
+		</ul>
+	</div>
+
+ <br>
+<br>
+
+<h4>
+The MedRec database has the following records,
+</h4>
+<ul>
+	<li><strong>Patients:</strong> {{ num_pats }}</li>
+	<li><strong>Visits:</strong> {{ num_visits}}</li>
+</ul>
+
+<!--
+	<br>
+	<div class="module" id="weekly-payments-module">
+		<h2>Weekly Payment Reports</h2>
+		<ul class="actionlist">
+			<li class="changelink">
+				<a href="/admin/visit/">This Weeks Payments</a>
+			</li>
+		</ul>
+	</div>
+
+	<br>
+	<div class="module" id="last-week-payments-module">
+		<ul class="actionlist">
+			<li class="changelink">
+				<a href="/admin/visit/">Last Weeks Payments</a>
+			</li>
+		</ul>
+	</div>
+	
+-->
+ <!--   <div class="module" id="recent-actions-module">
         <h2>{% trans 'Recent actions' %}</h2>
         <h3>{% trans 'My actions' %}</h3>
             {% load log %}
@@ -79,7 +137,7 @@
             {% endfor %}
             </ul>
             {% endif %}
-    </div>
+    </div> -->
 </div>
 {% endblock %}
--->
+

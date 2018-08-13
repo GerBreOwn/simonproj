@@ -6,7 +6,6 @@ from django.conf.urls import include, url
 
 from patient import views as patient_views
 from visit import views as visit_views
-#from visit.views import PaymentTodayArchiveView
 
 admin.site.site_header = 'MEDREC Administration'
 
@@ -21,14 +20,9 @@ class DashboardSite(AdminSite):
 
 urlpatterns = [
 	path('admin/patient/', patient_views.prescription_view),
-	
-	#path('today/', PaymentTodayArchiveView, name="today"),
 	path('admin/visit/', visit_views.daily_payment_view),
-	#path('admin/visit/today_view', visit_views.today_view),
-	#path('admin/visit/', visit_views.yesterday_view),
-	# ~ path('admin/visit/', views.weekly_payment_view),
-	# ~ path('admin/visit/', views.monthly_payment_view),
 	path('admin/', admin.site.urls),
+	path('visit/', include('visit.urls')),
 	]
 
 

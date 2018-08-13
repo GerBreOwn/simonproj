@@ -1,0 +1,15 @@
+<h1>{{ day }} </h1>
+
+<ul>
+	{% for visit in object_list %}
+	<li>
+		{{ visit.visit_date | date:"F j, Y" }} {{ visit.patient }} {{ visit.visit_payment }} {{ visit.medicine_payment}}
+	</li>
+	{% endfor %}
+</ul>
+
+<p>
+	{ if previous_day %}
+		Previous Day: {{ previous_day }}
+	{% endif %}
+</p>
