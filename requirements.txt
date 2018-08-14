@@ -6,7 +6,7 @@ python-dateutil
 django-crispy-forms
 #django-counter-field-py3
 django-suit
-django-suit-dashboard
+#django-suit-dashboard
 reportlab
 django-crum
 #django-model-utils

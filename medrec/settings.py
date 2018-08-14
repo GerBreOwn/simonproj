@@ -16,30 +16,29 @@ DEBUG = True
 ALLOWED_HOSTS = ['192.168.0.109','192.168.0.121',  '127.0.0.1', 'localhost']
 
 # Application definition
-SUIT = True
+# ~ SUIT = True
 
 INSTALLED_APPS = [
     'doctor',
     'patient',
     'visit',
+    'suit',
 #    'django_counter_field_py3',
-#     'suit',
     'django.contrib.admin',
-    # ~ 'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 #    'proyekt',
-    'suit_dashboard',
+#    'suit_dashboard',
 ]
 
-if SUIT:
-	INSTALLED_APPS = [
-		'suit',
-		'django.contrib.admin.apps.SimpleAdminConfig',
-	] + INSTALLED_APPS[1:]
+# ~ if SUIT:
+	# ~ INSTALLED_APPS = [
+		# ~ 'suit',
+		# ~ 'django.contrib.admin.apps.SimpleAdminConfig',
+	# ~ ] + INSTALLED_APPS[1:]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

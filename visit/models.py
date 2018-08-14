@@ -12,7 +12,7 @@ import datetime
 from crum import get_current_user
 from django.contrib import admin
 from patient.models import Patient
-from doctor.models import Doctor
+#from doctor.models import Doctor
 
 class CommonInfo(models.Model):
 	is_active = models.BooleanField(default = True, editable = False)

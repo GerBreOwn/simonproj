@@ -6,17 +6,12 @@ from django.conf.urls import include, url
 
 from patient import views as patient_views
 from visit import views as visit_views
+# ~ from .site import DashboardSite
 
 admin.site.site_header = 'MEDREC Administration'
-
-class DashboardSite(AdminSite):
-	def get_urls(self):
-		urls = super(DashboardSite, self).get_urls()
-		custom_urls = [
-			path('^$', self.admin_view(HomeView.as_view()), name='admin'),
-			]
-		del urls[2]
-		return custom_urls + urls
+# ~ admin.site = DashboardSite()
+# ~ admin.sites.site = admin.site
+# ~ admin.autodiscover()
 
 urlpatterns = [
 	path('admin/patient/', patient_views.prescription_view),

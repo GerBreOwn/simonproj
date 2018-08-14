@@ -1,5 +1,5 @@
-from django.apps import AppConfig
+# ~ from django.apps import AppConfig
 
 
-class PatientConfig(AppConfig):
-    name = 'patient'
+# ~ class PatientConfig(AppConfig):
+    # ~ name = 'patient'
