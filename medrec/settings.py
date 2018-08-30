@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     'doctor',
     'patient',
     'visit',
-    'suit',
+#    'suit',
 #    'django_counter_field_py3',
     'django.contrib.admin',
     'django.contrib.auth',

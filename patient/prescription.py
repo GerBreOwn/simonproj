@@ -30,7 +30,7 @@ for d1 in dr:
 	l1 = d1.first_name + d1.last_name + d1.suffix
 	l2 = d1.diplomate
 	l3 = d1.hosp_main
-	l3a = d1.hosp_affil
+	#l3a = d1.hosp_affil
 	l4 = d1.hours_am
 	l5 = d1.hours_pm
 	l6 = d1.telephone

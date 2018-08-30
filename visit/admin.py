@@ -7,13 +7,14 @@ from django.contrib import admin
 from django.contrib.admin import site
 from django.contrib.admin import site as admin_site
 
-#from reports.base import ModelReport
-#from .payment import PaymentReport
-
 admin.site.site_title = 'Medical Records Administration'
 admin.site.site_header = 'Medical Records Visits Administration'
 
 # Register your models here.
+# ~ from django.db.models.functions import Trunc
+# ~ from django.db.models import DateTimeField
+
+#from .models import SaleSummary
 
 from .models import  Biopsy,  BiopsyLocation, BiopsyName, BiopsyResult, Complaint, Dose, Diagnosis, Exam, Finding, HearingTest, Treatment, Prescription, Location, ComplaintName, Hearing, ExamName, Reminder, MedicineBrand, MedicineGeneric,  Patient, MedicinePayment, HearingResult, NumOfDays, MedicineQuantity, Visit, VisitPayment
 
@@ -33,13 +34,76 @@ def register_hidden_models(*model_names):
 
 register_hidden_models(mymodels)
 
-# ~ class PaymentReport(ModelReport):
-    # ~ name = "Daily Payment Report"
-    # ~ qs = Visit.objects.all()
-    # ~ report = PaymentReport()
-    # ~ report.run_report()
-    # ~ report.generate_output
-    # ~ report.collect_data()
+# ~ @admin.register(SaleSummary)
+# ~ class SaleSummaryAdmin(ModelAdmin):
+	# ~ change_list_template = 'admin/sale_summary_changd_list.html'
+	# ~ date_hierarchy = 'created'
+	# ~ list_filter = ('device',)
+	# ~ def changelist_view(self, request, extra_context=None):
+		# ~ response = super().changelist_view(
+			# ~ request,
+			# ~ extra_context=extra_context
+		# ~ )
+		
+		# ~ period = get_next_in_date_hierarchy(
+			# ~ request, 
+			# ~ self.date_hierarchy,
+		# ~ )
+		# ~ response.context_data['period'] = period
+		
+		# ~ try:
+			# ~ qs = response.context_data['c1'].queryset
+		# ~ except (AttributeError, KeyError):
+			# ~ return response
+			
+		# ~ metrics = {
+			# ~ 'total': Count('id'),
+			# ~ 'total_sales': Sum('price'),
+		# ~ }
+		
+		# ~ response.context_data['summary'] = list(
+			# ~ qs
+			# ~ .values('sale__category__name')
+			# ~ .annotate(**metrics)
+			# ~ .order_by('-total_sales')
+		# ~ )
+		# ~ response.context_data['summary_total'] = dict(qs.aggregate(**metrics)
+		# ~ )
+		
+		# ~ summary_over_time = qs.annotate(
+			# ~ period=Trunc(
+				# ~ 'created',
+				# ~ period,
+				# ~ output_field=DateTimeField(),
+			# ~ ),
+		# ~ ).values('period')	
+		# ~ .annotate(total=Sum('visit_amount'))
+		# ~ .order_by('period')
+		
+		# ~ summary_range = summary_over_time.aggregte(
+			# ~ low=Min('total'),
+			# ~ high=Max('total'),
+		# ~ )
+		# ~ high = summary_range.get('high', 0)
+		# ~ low = summary_range.get('low', 0)
+		
+		# ~ response.context_data['summery_over_time'] = [{
+			# ~ 'period': x['period'],
+			# ~ 'total': x['total'] or 0,
+			# ~ 'pct': \ ((x['total'] or 0) - low) / (high - low) * 100
+			# ~ if high > low else 0,
+			# ~ } for x in summary_over_time]
+		
+		# ~ return response	
+	
+	# ~ def get_next_in_date_hierarchy(request, date_hierarchy):
+		# ~ if date_hierarchy + '__day' in request.GET:
+			# ~ return 'hour'
+		# ~ if date_hierarchy + '__month' in request.GET:
+			# ~ return 'day'
+		# ~ if date_hierarchy + '__year' in request.GET:
+			# ~ return 'week'
+		# ~ return 'month'
 
 class BiopsyAdminInline(admin.TabularInline):
 	model = Biopsy

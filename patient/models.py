@@ -62,6 +62,9 @@ class Occupation(CommonInfo):
 			if val:
 				setattr(self, field_name, val.capitalize())
 		super(Occupation, self).save(*args, **kwargs)
+		
+	class Meta:
+		ordering = ['name']
 
 class Patient(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -93,11 +96,7 @@ class Patient(CommonInfo):
 class Province(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length=30, unique=True)
-	#prov_count = CounterField()
 	
-	# ~ class Meta:
-		# ~ ordering = ['-prov_count','name']
-
 	def __str__(self):
 		return '%s' % (self.name)
 		
@@ -107,6 +106,9 @@ class Province(CommonInfo):
 			if val:
 				setattr(self, field_name, val.capitalize())
 		super(Province, self).save(*args, **kwargs)
+	
+	class Meta:
+		ordering = ['name']
 
 class Town(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -114,12 +116,6 @@ class Town(CommonInfo):
 	zip_code = models.CharField(max_length=10, blank=True, null=True)
 	prov = models.ForeignKey('Province', default = None, blank = True, null = True,  on_delete=models.DO_NOTHING)
 	
-	# ~ town_count = CounterField()
-	# ~ connect_counter('town_count', Patient.town)
-	
-	# ~ class Meta:
-		# ~ ordering = ['-town_count','name']
-
 	def __str__(self):
 		return '%s' % (self.name)
 
@@ -129,6 +125,9 @@ class Town(CommonInfo):
 			if val:
 				setattr(self, field_name, val.capitalize())
 		super(Town, self).save(*args, **kwargs)
+		
+	class Meta:
+		ordering = ['name']
 
 class Image(models.Model):
 	name = models.CharField(max_length=500)

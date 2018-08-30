@@ -6,7 +6,6 @@ from django.conf.urls import include, url
 
 from patient import views as patient_views
 from visit import views as visit_views
-# ~ from .site import DashboardSite
 
 admin.site.site_header = 'MEDREC Administration'
 # ~ admin.site = DashboardSite()

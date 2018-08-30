@@ -51,7 +51,7 @@ class Doctor(CommonInfo):
 	suffix = models.CharField(max_length = 55, default = "M.D.")
 	diplomate = models.CharField(max_length = 66)#, default = "Diplomate")
 	hosp_main = models.ForeignKey('doctor.Hospital', on_delete=models.DO_NOTHING, default = None)# related_name = "Main", 
-	hosp_affil = models.ManyToManyField('doctor.Hospital', related_name = "Affiliate")#,blank=True, null=True, on_delete=models.DO_NOTHING, , default = None)
+	#hosp_affil = models.ManyToManyField('doctor.Hospital', related_name = "Affiliate")#,blank=True, null=True, on_delete=models.DO_NOTHING, , default = None)
 	hours_am = models.CharField(max_length = 25, blank = True, null = True)
 	hours_pm = models.CharField(max_length = 25, blank = True, null = True)
 	telephone = models.CharField(max_length = 12, blank = True, null = True)
