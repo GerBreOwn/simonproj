@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+gunicorn = "*"
+mysqlclient = "*"
+python-dateutil = "*"
+django-crispy-forms = "*"
+django-suit = "*"
+reportlab = "*"
+django-crum = "*"
+django-versatileimagefield = "*"
+python-decouple = "*"
+django-extensions = "*"
+django-autocomplete-light = "*"
+django-images = "*"
+django-admin-tools = "*"
+Django = "*"
+Pillow = "<=5.0.0,>=2.4.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
