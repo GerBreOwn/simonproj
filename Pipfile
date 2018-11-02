@@ -19,6 +19,7 @@ django-images = "*"
 django-admin-tools = "*"
 Django = "*"
 Pillow = "<=5.0.0,>=2.4.0"
+django-popup-view-field = "*"
 
 [dev-packages]
 

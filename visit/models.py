@@ -101,7 +101,7 @@ class ComplaintName(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	complaint_name = models.CharField(max_length=250)#, unique = True)
 	
-	class meta:
+	class Meta:
 		ordering = ["complaint_name",]
 	
 	def __str__(self):
@@ -125,8 +125,8 @@ class Complaint(CommonInfo):
 	def __str__(self):
 		return '%s' % (self.complaint_name)
 
-	class meta:
-		ordering = [  'complaint_name',]
+	# ~ class Meta:
+		# ~ ordering = [  'complaint_name',]
 		
 class Diagnosis(CommonInfo):
 	id = models.AutoField(primary_key = True)
@@ -182,7 +182,7 @@ class Finding(CommonInfo):
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False, on_delete=models.SET_NULL)
 
 	class Meta:
-		ordering = [  'finding_name']
+		ordering = ['finding_name']
 
 	def __str__(self):
 		return '%s' % (self.finding_name)
@@ -218,7 +218,7 @@ class Location(CommonInfo):
 	location = models.CharField(max_length = 25)
 
 	class Meta:
-		ordering = [  'location']
+		ordering = ['location']
 
 	def __str__(self):
 		return '%s' % (self.location)
@@ -235,17 +235,17 @@ class MedicineGeneric(CommonInfo):
 	generic_name = models.CharField(max_length = 50)
 
 	class Meta:
-		ordering = [  'generic_name']
+		ordering = ['generic_name']
 
 	def __str__(self):
 		return '%s' % (self.generic_name)
 		
-	def save(self, *args, **kwargs):
-		for field_name in ['generic_name']:
-			val = getattr(self, field_name, False)
-			if val:
-				setattr(self, field_name, val.capitalize())
-		super(MedicineBrand, self).save(*args, **kwargs)		
+	# ~ def save(self, *args, **kwargs):
+		# ~ for field_name in ['generic_name']:
+			# ~ val = getattr(self, field_name, False)
+			# ~ if val:
+				# ~ setattr(self, field_name, val.capitalize())
+		# ~ super(MedicineBrand, self).save(*args, **kwargs)		
 
 class MedicineBrand(CommonInfo):
 	id = models.AutoField(primary_key=True)

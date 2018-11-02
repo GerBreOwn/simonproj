@@ -8,10 +8,11 @@ django-crispy-forms
 django-suit
 #django-suit-dashboard
 reportlab
+django-popup-view-field
 django-crum
 #django-model-utils
-pillow<=5.0.0,>=2.4.0
 django-versatileimagefield
+pillow
 python-decouple
 django-extensions
 django-autocomplete-light

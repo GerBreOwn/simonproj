@@ -13,10 +13,11 @@ admin.site.site_header = 'MEDREC Administration'
 # ~ admin.autodiscover()
 
 urlpatterns = [
-	path('admin/patient/', patient_views.prescription_view),
-	path('admin/visit/', visit_views.daily_payment_view),
+	#path('admin/patient/', patient_views.prescription_view),
+	#path('admin/visit/', visit_views.daily_payment_view),
 	path('admin/', admin.site.urls),
-	path('visit/', include('visit.urls')),
+	#path('visit/', include('visit.urls')),
+	path('',include('base.urls'))
 	]
 
 
