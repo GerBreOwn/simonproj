@@ -1,0 +1,492 @@
+.
+├── add buttons to form.txt
+├── bin
+│   ├── activate
+│   ├── activate.csh
+│   ├── activate.fish
+│   ├── django-admin
+│   ├── django-admin.py
+│   ├── easy_install
+│   ├── easy_install-3.6
+│   ├── gunicorn
+│   ├── gunicorn_paster
+│   ├── markdown2
+│   ├── pip
+│   ├── pip3
+│   ├── pip3.6
+│   ├── __pycache__
+│   │   └── django-admin.cpython-36.pyc
+│   └── sqlformat
+├── dbbackup.txt
+├── doctor
+│   ├── admin.py
+│   ├── apps.py
+│   ├── __init__.py
+│   ├── migrations
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── __pycache__
+│   │   ├── admin.cpython-35.pyc
+│   │   ├── admin.cpython-36.pyc
+│   │   ├── admin.cpython-37.pyc
+│   │   ├── __init__.cpython-35.pyc
+│   │   ├── __init__.cpython-36.pyc
+│   │   ├── __init__.cpython-37.pyc
+│   │   ├── models.cpython-35.pyc
+│   │   ├── models.cpython-36.pyc
+│   │   └── models.cpython-37.pyc
+│   ├── tests.py
+│   └── views.py
+├── __init__.py
+├── lib
+├── management
+│   ├── commands
+│   │   ├── datetime
+│   │   ├── __init__.py
+│   │   ├── prescription.py
+│   │   └── printing.py
+│   └── __init__.py
+├── manage.py
+├── media
+│   ├── images
+│   │   └── gerald-brown-2018-04-29-193324.jpg
+│   └── reports
+├── medrec
+│   ├── __pycache__
+│   │   ├── settings.cpython-35.pyc
+│   │   ├── settings.cpython-36.pyc
+│   │   ├── settings.cpython-37.pyc
+│   │   ├── urls.cpython-35.pyc
+│   │   ├── urls.cpython-36.pyc
+│   │   ├── urls.cpython-37.pyc
+│   │   ├── wsgi.cpython-35.pyc
+│   │   ├── wsgi.cpython-36.pyc
+│   │   └── wsgi.cpython-37.pyc
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── Medrec:Sat:2018-09-08.sql
+├── patient
+│   ├── admin.py
+│   ├── apps.py
+│   ├── datetime
+│   ├── forms.py
+│   ├── images
+│   │   ├── hospital_92072.zip
+│   │   ├── Hospital_Icon_16.png
+│   │   ├── Hospital_Icon_32.png
+│   │   ├── Hospital_Icon_48.png
+│   │   ├── Hospital_Icon_64.png
+│   │   ├── Hospital_Icon_72.png
+│   │   └── Hospital_Icon_96.png
+│   ├── images.html
+│   ├── __init__.py
+│   ├── migrations
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── prescription.py
+│   ├── __pycache__
+│   │   ├── admin.cpython-35.pyc
+│   │   ├── admin.cpython-36.pyc
+│   │   ├── admin.cpython-37.pyc
+│   │   ├── __init__.cpython-35.pyc
+│   │   ├── __init__.cpython-36.pyc
+│   │   ├── __init__.cpython-37.pyc
+│   │   ├── models.cpython-35.pyc
+│   │   ├── models.cpython-36.pyc
+│   │   ├── models.cpython-37.pyc
+│   │   ├── views.cpython-36.pyc
+│   │   └── views.cpython-37.pyc
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── Pipfile
+├── Pipfile.lock
+├── README.md
+├── requirements.txt
+├── static
+│   ├── admin
+│   │   ├── css
+│   │   │   ├── autocomplete.css
+│   │   │   ├── base.css
+│   │   │   ├── changelists.css
+│   │   │   ├── dashboard.css
+│   │   │   ├── fonts.css
+│   │   │   ├── forms.css
+│   │   │   ├── login.css
+│   │   │   ├── responsive.css
+│   │   │   ├── responsive_rtl.css
+│   │   │   ├── rtl.css
+│   │   │   ├── vendor
+│   │   │   │   └── select2
+│   │   │   │       ├── LICENSE-SELECT2.md
+│   │   │   │       ├── select2.css
+│   │   │   │       └── select2.min.css
+│   │   │   └── widgets.css
+│   │   ├── fonts
+│   │   │   ├── LICENSE.txt
+│   │   │   ├── README.txt
+│   │   │   ├── Roboto-Bold-webfont.woff
+│   │   │   ├── Roboto-Light-webfont.woff
+│   │   │   └── Roboto-Regular-webfont.woff
+│   │   ├── img
+│   │   │   ├── calendar-icons.svg
+│   │   │   ├── gis
+│   │   │   │   ├── move_vertex_off.svg
+│   │   │   │   └── move_vertex_on.svg
+│   │   │   ├── icon-addlink.svg
+│   │   │   ├── icon-alert.svg
+│   │   │   ├── icon-calendar.svg
+│   │   │   ├── icon-changelink.svg
+│   │   │   ├── icon-clock.svg
+│   │   │   ├── icon-deletelink.svg
+│   │   │   ├── icon-no.svg
+│   │   │   ├── icon-unknown-alt.svg
+│   │   │   ├── icon-unknown.svg
+│   │   │   ├── icon-yes.svg
+│   │   │   ├── inline-delete.svg
+│   │   │   ├── LICENSE
+│   │   │   ├── README.txt
+│   │   │   ├── search.svg
+│   │   │   ├── selector-icons.svg
+│   │   │   ├── sorting-icons.svg
+│   │   │   ├── tooltag-add.svg
+│   │   │   └── tooltag-arrowright.svg
+│   │   └── js
+│   │       ├── actions.js
+│   │       ├── actions.min.js
+│   │       ├── admin
+│   │       │   ├── DateTimeShortcuts.js
+│   │       │   └── RelatedObjectLookups.js
+│   │       ├── autocomplete.js
+│   │       ├── calendar.js
+│   │       ├── cancel.js
+│   │       ├── change_form.js
+│   │       ├── collapse.js
+│   │       ├── collapse.min.js
+│   │       ├── core.js
+│   │       ├── inlines.js
+│   │       ├── inlines.min.js
+│   │       ├── jquery.init.js
+│   │       ├── popup_response.js
+│   │       ├── prepopulate_init.js
+│   │       ├── prepopulate.js
+│   │       ├── prepopulate.min.js
+│   │       ├── SelectBox.js
+│   │       ├── SelectFilter2.js
+│   │       ├── timeparse.js
+│   │       ├── urlify.js
+│   │       └── vendor
+│   │           ├── jquery
+│   │           │   ├── jquery.js
+│   │           │   ├── jquery.min.js
+│   │           │   └── LICENSE-JQUERY.txt
+│   │           ├── select2
+│   │           │   ├── i18n
+│   │           │   │   ├── ar.js
+│   │           │   │   ├── az.js
+│   │           │   │   ├── bg.js
+│   │           │   │   ├── ca.js
+│   │           │   │   ├── cs.js
+│   │           │   │   ├── da.js
+│   │           │   │   ├── de.js
+│   │           │   │   ├── el.js
+│   │           │   │   ├── en.js
+│   │           │   │   ├── es.js
+│   │           │   │   ├── et.js
+│   │           │   │   ├── eu.js
+│   │           │   │   ├── fa.js
+│   │           │   │   ├── fi.js
+│   │           │   │   ├── fr.js
+│   │           │   │   ├── gl.js
+│   │           │   │   ├── he.js
+│   │           │   │   ├── hi.js
+│   │           │   │   ├── hr.js
+│   │           │   │   ├── hu.js
+│   │           │   │   ├── id.js
+│   │           │   │   ├── is.js
+│   │           │   │   ├── it.js
+│   │           │   │   ├── ja.js
+│   │           │   │   ├── km.js
+│   │           │   │   ├── ko.js
+│   │           │   │   ├── lt.js
+│   │           │   │   ├── lv.js
+│   │           │   │   ├── mk.js
+│   │           │   │   ├── ms.js
+│   │           │   │   ├── nb.js
+│   │           │   │   ├── nl.js
+│   │           │   │   ├── pl.js
+│   │           │   │   ├── pt-BR.js
+│   │           │   │   ├── pt.js
+│   │           │   │   ├── ro.js
+│   │           │   │   ├── ru.js
+│   │           │   │   ├── sk.js
+│   │           │   │   ├── sr-Cyrl.js
+│   │           │   │   ├── sr.js
+│   │           │   │   ├── sv.js
+│   │           │   │   ├── th.js
+│   │           │   │   ├── tr.js
+│   │           │   │   ├── uk.js
+│   │           │   │   ├── vi.js
+│   │           │   │   ├── zh-CN.js
+│   │           │   │   └── zh-TW.js
+│   │           │   ├── LICENSE-SELECT2.md
+│   │           │   ├── select2.full.js
+│   │           │   └── select2.full.min.js
+│   │           └── xregexp
+│   │               ├── LICENSE-XREGEXP.txt
+│   │               ├── xregexp.js
+│   │               └── xregexp.min.js
+│   ├── cms
+│   │   └── css
+│   │       └── pages.css
+│   ├── css
+│   │   └── visit.css
+│   └── suit
+│       ├── admin_filters.py
+│       ├── admin.py
+│       ├── apps.py
+│       ├── bootstrap
+│       │   ├── css
+│       │   │   ├── bootstrap.css
+│       │   │   ├── bootstrap.css.map
+│       │   │   ├── bootstrap-grid.css
+│       │   │   ├── bootstrap-grid.css.map
+│       │   │   ├── bootstrap-grid.min.css
+│       │   │   ├── bootstrap-grid.min.css.map
+│       │   │   ├── bootstrap.min.css
+│       │   │   ├── bootstrap.min.css.map
+│       │   │   ├── bootstrap-reboot.css
+│       │   │   ├── bootstrap-reboot.css.map
+│       │   │   ├── bootstrap-reboot.min.css
+│       │   │   └── bootstrap-reboot.min.css.map
+│       │   ├── img
+│       │   │   ├── glyphicons-halflings.png
+│       │   │   ├── glyphicons-halflings-white.png
+│       │   │   └── glyphicons-halflings-white-shadow.png
+│       │   └── js
+│       │       ├── bootstrap.bundle.js
+│       │       ├── bootstrap.bundle.js.map
+│       │       ├── bootstrap.bundle.min.js
+│       │       ├── bootstrap.bundle.min.js.map
+│       │       ├── bootstrap.js
+│       │       ├── bootstrap.js.map
+│       │       ├── bootstrap.min.js
+│       │       └── bootstrap.min.js.map
+│       ├── compat.py
+│       ├── config.py
+│       ├── css
+│       │   ├── djangocms.css
+│       │   ├── filer.css
+│       │   ├── font-awesome.min.css
+│       │   └── suit.css
+│       ├── fonts
+│       │   ├── FontAwesome.otf
+│       │   ├── fontawesome-webfont.eot
+│       │   ├── fontawesome-webfont.svg
+│       │   ├── fontawesome-webfont.ttf
+│       │   ├── fontawesome-webfont.woff
+│       │   └── fontawesome-webfont.woff2
+│       ├── img
+│       │   ├── ajax-loader.gif
+│       │   ├── bg_left_white.gif
+│       │   ├── bg_pattern.jpg
+│       │   ├── cc_active_nav.png
+│       │   ├── drag-handle.png
+│       │   ├── glyphicons-halflings-white-nav.png
+│       │   └── glyphicons-halflings-white-shadow.png
+│       ├── __init__.py
+│       ├── js
+│       │   ├── autosize.min.js
+│       │   ├── djangocms.js
+│       │   ├── jquery-1.8.3.min.js
+│       │   ├── jquery-2.2.4.min.js
+│       │   ├── jquery.autosize-min.js
+│       │   ├── sortables.js
+│       │   ├── suit-form-confirm.js
+│       │   ├── suit.js
+│       │   └── suit.sortables.js
+│       ├── less
+│       │   ├── djangocms
+│       │   │   └── list.less
+│       │   ├── djangocms.less
+│       │   ├── filer.less
+│       │   ├── footer.less
+│       │   ├── header.less
+│       │   ├── left-column.less
+│       │   ├── mixins.less
+│       │   ├── print.less
+│       │   ├── sticky-footer.less
+│       │   ├── suit.less
+│       │   ├── ui
+│       │   │   ├── actionlist.less
+│       │   │   ├── box.less
+│       │   │   ├── breadcrumb.less
+│       │   │   ├── calendar.less
+│       │   │   ├── datepicker.less
+│       │   │   ├── form.less
+│       │   │   ├── left-nav.less
+│       │   │   ├── list.less
+│       │   │   ├── login.less
+│       │   │   ├── pagination.less
+│       │   │   ├── table.less
+│       │   │   └── tabs.less
+│       │   └── variables.less
+│       ├── menu.py
+│       ├── sass
+│       │   ├── components
+│       │   │   ├── _alerts.scss
+│       │   │   ├── _breadcrumbs.scss
+│       │   │   ├── _buttons.scss
+│       │   │   ├── _cards.scss
+│       │   │   ├── _confirmations.scss
+│       │   │   ├── _forms.scss
+│       │   │   ├── _icons.scss
+│       │   │   ├── _results.scss
+│       │   │   ├── _sortables.scss
+│       │   │   ├── _submit_row.scss
+│       │   │   ├── _tables.scss
+│       │   │   ├── _tabs.scss
+│       │   │   └── _widgets.scss
+│       │   ├── layout
+│       │   │   ├── _content.scss
+│       │   │   ├── _footer.scss
+│       │   │   ├── _header.scss
+│       │   │   ├── _navbars.scss
+│       │   │   └── _vertical.scss
+│       │   ├── _mixins.scss
+│       │   ├── pages
+│       │   │   ├── _changeform.scss
+│       │   │   ├── _changelist.scss
+│       │   │   ├── _dashboard.scss
+│       │   │   └── _login.scss
+│       │   ├── suit.scss
+│       │   ├── _variables.scss
+│       │   └── _vendor.scss
+│       ├── sortables.py
+│       ├── static
+│       │   └── suit
+│       │       ├── css
+│       │       │   ├── font-awesome.min.css
+│       │       │   └── suit.css
+│       │       ├── fonts
+│       │       │   ├── FontAwesome.otf
+│       │       │   ├── fontawesome-webfont.eot
+│       │       │   ├── fontawesome-webfont.svg
+│       │       │   ├── fontawesome-webfont.ttf
+│       │       │   ├── fontawesome-webfont.woff
+│       │       │   └── fontawesome-webfont.woff2
+│       │       └── js
+│       │           ├── autosize.min.js
+│       │           ├── suit.js
+│       │           └── suit.sortables.js
+│       ├── template.py
+│       ├── templates
+│       │   ├── admin
+│       │   │   ├── auth
+│       │   │   │   └── user
+│       │   │   │       └── add_form.html
+│       │   │   ├── base.html
+│       │   │   ├── base_site.html
+│       │   │   ├── change_form.html
+│       │   │   ├── change_list.html
+│       │   │   ├── change_list_results.html
+│       │   │   ├── filter_horizontal.html
+│       │   │   ├── includes
+│       │   │   │   └── fieldset.html
+│       │   │   └── login.html
+│       │   ├── registration
+│       │   │   └── password_change_form.html
+│       │   └── suit
+│       │       ├── change_form_includes.html
+│       │       ├── menu.html
+│       │       ├── menu_item.html
+│       │       └── search_form.html
+│       ├── templatetags
+│       │   ├── __init__.py
+│       │   ├── suit_forms.py
+│       │   ├── suit_list.py
+│       │   ├── suit_menu.py
+│       │   └── suit_tags.py
+│       ├── tests
+│       │   ├── __init__.py
+│       │   ├── settings.py
+│       │   ├── test_menu.py
+│       │   ├── test_routes.py
+│       │   └── urls.py
+│       └── widgets.py
+├── templates
+│   └── admin
+│       ├── app_index.html
+│       ├── base.html
+│       ├── base_site.html
+│       ├── change_form.html
+│       ├── change_list.html
+│       ├── delete_confirmation.html
+│       ├── index.html
+│       ├── object_history.html
+│       └── popup_response.html
+├── tree.txt
+├── venv
+│   ├── bin
+│   │   ├── activate
+│   │   ├── activate.csh
+│   │   ├── activate.fish
+│   │   ├── easy_install
+│   │   ├── easy_install-3.7
+│   │   ├── python
+│   │   ├── python3
+│   │   └── python3.7
+│   ├── include
+│   ├── lib
+│   │   └── python3.7
+│   │       └── site-packages
+│   │           ├── easy-install.pth
+│   │           ├── setuptools-39.1.0-py3.7.egg
+│   │           └── setuptools.pth
+│   ├── lib64 -> lib
+│   └── pyvenv.cfg
+└── visit
+    ├── admin.py
+    ├── apps.py
+    ├── forms.py
+    ├── __init__.py
+    ├── migrations
+    │   └── __init__.py
+    ├── models.py
+    ├── payment_archive_today.html
+    ├── printing.py
+    ├── __pycache__
+    │   ├── admin.cpython-35.pyc
+    │   ├── admin.cpython-36.pyc
+    │   ├── admin.cpython-37.pyc
+    │   ├── apps.cpython-35.pyc
+    │   ├── forms.cpython-35.pyc
+    │   ├── forms.cpython-36.pyc
+    │   ├── forms.cpython-37.pyc
+    │   ├── __init__.cpython-35.pyc
+    │   ├── __init__.cpython-36.pyc
+    │   ├── __init__.cpython-37.pyc
+    │   ├── models.cpython-35.pyc
+    │   ├── models.cpython-36.pyc
+    │   ├── models.cpython-37.pyc
+    │   ├── myreports.cpython-36.pyc
+    │   ├── reports.cpython-36.pyc
+    │   ├── today_payment.cpython-36.pyc
+    │   ├── urls.cpython-36.pyc
+    │   ├── urls.cpython-37.pyc
+    │   ├── views.cpython-36.pyc
+    │   └── views.cpython-37.pyc
+    ├── templates
+    │   ├── admin
+    │   │   ├── index.html
+    │   │   └── visit
+    │   │       └── history_button.html
+    │   └── visit
+    │       ├── index.html
+    │       └── Pipfile
+    ├── tests.py
+    ├── urls.py
+    └── views.py
+
+81 directories, 408 files

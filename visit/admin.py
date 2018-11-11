@@ -14,13 +14,11 @@ admin.site.site_header = 'Medical Records Visits Administration'
 # ~ from django.db.models.functions import Trunc
 # ~ from django.db.models import DateTimeField
 
-#from .models import SaleSummary
-
-from .models import  Biopsy,  BiopsyLocation, BiopsyName, BiopsyResult, Complaint, Dose, Diagnosis, Exam, Finding, HearingTest, Treatment, Prescription, Location, ComplaintName, Hearing, ExamName, Reminder, MedicineBrand, MedicineGeneric,  Patient, MedicinePayment, HearingResult, NumOfDays, MedicineQuantity, Visit, VisitPayment
+from .models import  Biopsy,  BiopsyName, BiopsyResult, Complaint, Dose, Diagnosis, Exam, Finding, HearingTest, Treatment, Prescription, Location, ComplaintName, Hearing, ExamName, Reminder, MedicineBrand, MedicineGeneric,  Patient, MedicinePayment, HearingResult, NumOfDays, MedicineQuantity, Visit, VisitPayment #BiopsyLocation,
 
 from .forms import BiopsyForm, ComplaintForm, DiagnosisForm, ExamForm
 
-mymodels = [ Dose, Diagnosis, HearingTest, Treatment, ComplaintName, BiopsyName, BiopsyResult, BiopsyLocation, Location, Hearing, ExamName, Reminder, MedicineBrand, MedicineGeneric, Finding, VisitPayment, MedicinePayment, HearingResult, NumOfDays, MedicineQuantity] 
+mymodels = [ Dose, Diagnosis, HearingTest, Treatment, ComplaintName, BiopsyName, BiopsyResult, Location, Hearing, ExamName, Reminder, MedicineBrand, MedicineGeneric, Finding, VisitPayment, MedicinePayment, HearingResult, NumOfDays, MedicineQuantity] #BiopsyLocation,
 
 def register_hidden_models(*model_names):
 	for m in model_names:
@@ -34,77 +32,6 @@ def register_hidden_models(*model_names):
 
 register_hidden_models(mymodels)
 
-# ~ @admin.register(SaleSummary)
-# ~ class SaleSummaryAdmin(ModelAdmin):
-	# ~ change_list_template = 'admin/sale_summary_changd_list.html'
-	# ~ date_hierarchy = 'created'
-	# ~ list_filter = ('device',)
-	# ~ def changelist_view(self, request, extra_context=None):
-		# ~ response = super().changelist_view(
-			# ~ request,
-			# ~ extra_context=extra_context
-		# ~ )
-		
-		# ~ period = get_next_in_date_hierarchy(
-			# ~ request, 
-			# ~ self.date_hierarchy,
-		# ~ )
-		# ~ response.context_data['period'] = period
-		
-		# ~ try:
-			# ~ qs = response.context_data['c1'].queryset
-		# ~ except (AttributeError, KeyError):
-			# ~ return response
-			
-		# ~ metrics = {
-			# ~ 'total': Count('id'),
-			# ~ 'total_sales': Sum('price'),
-		# ~ }
-		
-		# ~ response.context_data['summary'] = list(
-			# ~ qs
-			# ~ .values('sale__category__name')
-			# ~ .annotate(**metrics)
-			# ~ .order_by('-total_sales')
-		# ~ )
-		# ~ response.context_data['summary_total'] = dict(qs.aggregate(**metrics)
-		# ~ )
-		
-		# ~ summary_over_time = qs.annotate(
-			# ~ period=Trunc(
-				# ~ 'created',
-				# ~ period,
-				# ~ output_field=DateTimeField(),
-			# ~ ),
-		# ~ ).values('period')	
-		# ~ .annotate(total=Sum('visit_amount'))
-		# ~ .order_by('period')
-		
-		# ~ summary_range = summary_over_time.aggregte(
-			# ~ low=Min('total'),
-			# ~ high=Max('total'),
-		# ~ )
-		# ~ high = summary_range.get('high', 0)
-		# ~ low = summary_range.get('low', 0)
-		
-		# ~ response.context_data['summery_over_time'] = [{
-			# ~ 'period': x['period'],
-			# ~ 'total': x['total'] or 0,
-			# ~ 'pct': \ ((x['total'] or 0) - low) / (high - low) * 100
-			# ~ if high > low else 0,
-			# ~ } for x in summary_over_time]
-		
-		# ~ return response	
-	
-	# ~ def get_next_in_date_hierarchy(request, date_hierarchy):
-		# ~ if date_hierarchy + '__day' in request.GET:
-			# ~ return 'hour'
-		# ~ if date_hierarchy + '__month' in request.GET:
-			# ~ return 'day'
-		# ~ if date_hierarchy + '__year' in request.GET:
-			# ~ return 'week'
-		# ~ return 'month'
-
 class BiopsyAdminInline(admin.TabularInline):
 	model = Biopsy
 	classes = ['collapse']
@@ -117,8 +44,8 @@ class ComplaintAdminInline(admin.TabularInline):
 class DiagnosisAdminInline(admin.TabularInline):
 	model = Diagnosis
 	classes = ['collapse']
-	extra = 1	
-	
+	extra = 1
+
 class ExamAdminInline(admin.TabularInline):
 	model = Exam
 	classes = ['collapse']
@@ -159,13 +86,13 @@ class VisitAdmin(admin.ModelAdmin):
    'fields': ('visit_date', 'patient', 'visit_payment', 'medicine_payment')
     }),
     )
-    
-	
+
+
 
 	inlines = (ComplaintAdminInline,
-		PrescriptionAdminInline, 
-		DiagnosisAdminInline, 
-		BiopsyAdminInline, 
-		HearingAdminInline, 
-		ExamAdminInline 
-		) 
+		PrescriptionAdminInline,
+		DiagnosisAdminInline,
+		BiopsyAdminInline,
+		HearingAdminInline,
+		ExamAdminInline
+		)

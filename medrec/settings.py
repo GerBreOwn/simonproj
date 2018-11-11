@@ -22,17 +22,16 @@ INSTALLED_APPS = [
     'doctor',
     'patient',
     'visit',
-#    'suit',
-#    'django_counter_field_py3',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+#    'suit',
+#    'django_counter_field_py3',
 #    'proyekt',
 #    'suit_dashboard',
-    'base',
 ]
 
 # ~ if SUIT:

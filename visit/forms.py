@@ -6,19 +6,16 @@ from django.contrib.admin import widgets
 from .models import Prescription, MedicineBrand
 import datetime
 
-class GetDatesForm(forms.Form):
-	from_date = forms.DateField(label = "From:", widget=widgets.AdminDateWidget())
-	
-	to_date = forms.DateField(label = "To:", widget=widgets.AdminDateWidget())
-	
-	def clean_from_date(self):
-		data = self.cleaned_data['from_date']
-		if data > datetime.date.today():
-			raise ValidationErr(_('Invaled date from_date in future'))
-		return data
-		
-	
-	
+# ~ class GetDatesForm(forms.Form):
+	# ~ from_date = forms.DateField(label = "From:", widget=widgets.AdminDateWidget())
+	# ~ to_date = forms.DateField(label = "To:", widget=widgets.AdminDateWidget())
+
+	# ~ def clean_from_date(self):
+		# ~ data = self.cleaned_data['from_date']
+		# ~ if data > datetime.date.today():
+			# ~ raise ValidationErr(_('Invalid date from_date today or in future'))
+		# ~ return data
+
 class BiopsyForm(forms.ModelForm):
 	class Meta:
 		widgets = {
@@ -34,16 +31,16 @@ class ComplaintForm(forms.ModelForm):
 			'location': forms.Select(attrs = {'size': 25}),
 			'finding': forms.CheckboxSelectMultiple(attrs = {'size': 25}),
 			'treatment': forms.CheckboxSelectMultiple(attrs = {'size': 25}),
-			
+
 		}
-		
+
 class DiagnosisForm(forms.ModelForm):
 	class Meta:
 		widgets = {
 			'diagnosis': forms.TextInput(attrs = {'size': 30}),
 			'remarks': forms.TextInput(attrs = {'size': 30}),
 		}
-		
+
 
 class ExamForm(forms.ModelForm):
 	class Meta:
@@ -74,11 +71,11 @@ class PrescriptionForm(forms.ModelForm):
 			'medicine_reminder': forms.TextInput(attrs = {'size': 50}),
 			'medicine_quantity': forms.TextInput(attrs = {'size': 25}),
 		}
-		
+
 		def __init__(self, *args, **kwargs):
 			super().__init__(*args, **kwargs)
 			self.fields['medicine_brand'].queryset = MedicineBrand.objects.none()
-			
+
 			if 'medicinegeneric' in self.data:
 				try:
 					medicinegeneric_id = int(self.data.get('medicinegeneric'))
@@ -87,4 +84,4 @@ class PrescriptionForm(forms.ModelForm):
 					pass  # invalid input from the client; ignore and fallback to empty medicinebrand queryset
 			elif self.instance.pk:
 				self.fields['medicinebrand'].queryset = self.instance.medicinegeneric.medicinebrand_set.order_by('name')
-			
+

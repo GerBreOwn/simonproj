@@ -1,0 +1,28 @@
+<div id="content-related">
+	<div class="module" id="print-prescriptions-module">
+		<h2>Print Prescriptions</h2>
+		<ul class="actionlist">
+			<li class="changelink">
+				<a href="/admin/patient/">Print Prescriptions</a>
+			</li>
+		</ul>
+		<br>
+	</div>
+	<br>
+
+	<br>
+	<div class="module" id="daily-payments-module">
+		<h2>Daily Payment Reports</h2>
+		<ul class="actionlist">
+			<li class="changelink">
+				<a href="visit/">Today's Payments</a>
+					<br>
+<!--
+				<a href="/visit/">Yesterday's Payments</a>
+-->
+			</li>
+		</ul>
+	</div>
+
+ <br>
+<br>

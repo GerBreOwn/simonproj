@@ -1,0 +1,11 @@
+{% extends "admin/add_form.html"}
+{% load i18n %}
+
+{% block history_button %}
+	<div class="history-button">
+		<input type="button" value="{% trans 'Show History' %}" name="_historybutton" />
+	</div>
+
+	{{ block.super }}
+
+{% endblock %}

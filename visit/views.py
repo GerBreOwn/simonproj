@@ -44,7 +44,7 @@ def daily_payment_view(request):
 
 # This is where the queryset is generated
 	queryset = Visit.objects.filter(visit_date = mydate)
-	
+
 	pa1 = canvas.Canvas(response)
 	pa1.PageSize = letter
 	pa1.setLineWidth(.5)
@@ -52,8 +52,8 @@ def daily_payment_view(request):
 	y = 900
 ### Print the heading
 	y -= 100
-	x = 200	
-	
+	x = 200
+
 	l1 = "Payment Report for %s" % mydate
 	lw1 = stringWidth(l1,'Helvetica-Bold', 24)
 	pa1.drawString(x, y, str(l1))
@@ -74,7 +74,7 @@ def daily_payment_view(request):
 	vip = 0
 	mep = 0
 	ptct = 0
-	
+
 	for v in queryset:
 		ttlpay = 0
 		ptct += 1
@@ -98,11 +98,20 @@ def daily_payment_view(request):
 	pa1.drawString(x + 170, y, str(vip))
 	pa1.drawString(x + 270, y, str(mep))
 	pa1.drawString(x + 360, y, str(int(vip) + int(mep)))
-	
+
 	pa1.showPage()
 	pa1.save()
-	
+
 	return response
-	
+
+def patient_history_view(request):
+	response = HttpResponse(['content'],content_type='application/pdf')
+	response['Content-Disposition'] ='inline;filename="pat_hist.pdf"'
+
+	pat_id = patient.selected.value
+	vis = Visit.objects.filter(patient = pat_id)
+	for hist in vis:
+		comp = Complaint.objects.filter(visit = hist.id)
+
 
 
