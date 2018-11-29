@@ -14,11 +14,11 @@ admin.site.site_header = 'Medical Records Visits Administration'
 # ~ from django.db.models.functions import Trunc
 # ~ from django.db.models import DateTimeField
 
-from .models import  Biopsy,  BiopsyName, BiopsyResult, Complaint, Dose, Diagnosis, Exam, Finding, HearingTest, Treatment, Prescription, Location, ComplaintName, Hearing, ExamName, Reminder, MedicineBrand, MedicineGeneric,  Patient, MedicinePayment, HearingResult, NumOfDays, MedicineQuantity, Visit, VisitPayment #BiopsyLocation,
+from .models import  Biopsy,  BiopsyName, BiopsyResult, Complaint, ComplaintName, Dose, Diagnosis, Exam, Finding, HearingTest, Treatment, Prescription, Location,  Hearing, ExamName, ExamResult, Reminder, MedicineBrand, MedicineGeneric,  Patient, MedicinePayment, HearingResult, NumOfDays, MedicineQuantity, Visit, VisitPayment #BiopsyLocation,
 
 from .forms import BiopsyForm, ComplaintForm, DiagnosisForm, ExamForm
 
-mymodels = [ Dose, Diagnosis, HearingTest, Treatment, ComplaintName, BiopsyName, BiopsyResult, Location, Hearing, ExamName, Reminder, MedicineBrand, MedicineGeneric, Finding, VisitPayment, MedicinePayment, HearingResult, NumOfDays, MedicineQuantity] #BiopsyLocation,
+mymodels = [ Dose, Diagnosis, HearingTest, Treatment, ComplaintName, BiopsyName, BiopsyResult, Location, Hearing, ExamName, ExamResult, Reminder, MedicineBrand, MedicineGeneric, Finding, VisitPayment, MedicinePayment, HearingResult, NumOfDays, MedicineQuantity] #BiopsyLocation, ComplaintName,
 
 def register_hidden_models(*model_names):
 	for m in model_names:
@@ -43,6 +43,7 @@ class ComplaintAdminInline(admin.TabularInline):
 
 class DiagnosisAdminInline(admin.TabularInline):
 	model = Diagnosis
+	form = DiagnosisForm
 	classes = ['collapse']
 	extra = 1
 
@@ -79,7 +80,7 @@ class PrescriptionAdminInline(admin.StackedInline):
 
 @admin.register(Visit)
 class VisitAdmin(admin.ModelAdmin):
-	view_on_site = False
+	#view_on_site = False
 	#list_display = ("patient", "visit_count")
 	fieldsets = (
 	('Date & Patient:', {

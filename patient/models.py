@@ -83,6 +83,7 @@ class Patient(CommonInfo):
 
 	class Meta:
 		ordering = ['last_name', 'first_name']
+		unique_together = (("last_name", "first_name", "date_of_birth"),)
 
 	def __str__(self):
 		return '%s, %s' % (self.last_name, self.first_name)

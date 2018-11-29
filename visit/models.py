@@ -58,12 +58,12 @@ class Biopsy(CommonInfo):
 	def __str__(self):
 		return '%s' % (self.biopsy_name)
 
-	def save(self, *args, **kwargs):
-		for field_name in ['biopsy_name', 'biopsy_location', 'biopsy_result' ]:
-			val = getattr(self, field_name, False)
-			if val:
-				setattr(self, field_name, val.capitalize())
-		super(Biopsy, self).save(*args, **kwargs)
+	# ~ def save(self, *args, **kwargs):
+		# ~ for field_name in ['biopsy_name', 'biopsy_location', 'biopsy_result' ]:
+			# ~ val = getattr(self, field_name, False)
+			# ~ if val:
+				# ~ setattr(self, field_name, val.capitalize())
+		# ~ super(Biopsy, self).save(*args, **kwargs)
 
 # ~ class BiopsyLocation(CommonInfo):
 	# ~ id = models.AutoField(primary_key = True)
@@ -98,9 +98,25 @@ class BiopsyResult(CommonInfo):
 	def __str__(self):
 		return '%s' % (self.biopsy_result)
 
+
+
+class Complaint(CommonInfo):
+	id = models.AutoField(primary_key=True)
+	complaint_name = models.ForeignKey('ComplaintName', db_column = 'complaint_name', default = "", on_delete=models.SET_DEFAULT)
+	complaint_location = models.ForeignKey('Location', db_column = 'complaint_location', default = "", on_delete=models.SET_DEFAULT)
+	finding = models.ManyToManyField('Finding')
+	treatment = models.ManyToManyField('Treatment')
+	visit = models.ForeignKey('Visit', editable = False, on_delete=models.PROTECT)
+
+	def __str__(self):
+		return '%s, %s' % (self.complaint_name, self.complaint_location)
+
+	class Meta:
+		ordering = [  'complaint_name',]
+
 class ComplaintName(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	complaint_name = models.CharField(max_length=250)#, unique = True)
+	complaint_name = models.CharField(max_length=250, unique = True)
 
 	class Meta:
 		ordering = ["complaint_name",]
@@ -108,31 +124,12 @@ class ComplaintName(CommonInfo):
 	def __str__(self):
 		return '%s' % (self.complaint_name)
 
-	def save(self, *args, **kwargs):
-		for field_name in ['complaint_name']:
-			val = getattr(self, field_name, False)
-			if val:
-				setattr(self, field_name, val.capitalize())
-		super(ComplaintName, self).save(*args, **kwargs)
-
-class Complaint(CommonInfo):
-	id = models.AutoField(primary_key=True)
-	complaint_name = models.ForeignKey('ComplaintName', on_delete=models.PROTECT)
-	complaint_location = models.ForeignKey('Location', on_delete=models.PROTECT)
-	finding = models.ManyToManyField('Finding')
-	treatment = models.ManyToManyField('Treatment')
-	visit = models.ForeignKey('Visit', editable = False, on_delete=models.PROTECT)
-
-	def __str__(self):
-		return '%s' % (self.complaint_name)
-
-	# ~ class Meta:
-		# ~ ordering = [  'complaint_name',]
-
 class Diagnosis(CommonInfo):
 	id = models.AutoField(primary_key = True)
-	diagnosis = models.CharField('Diagnosis',max_length = 100)
-	remarks = models.CharField('Remarks', max_length = 100, blank = True, null = True)
+	#diagnosis = models.CharField('Diagnosis',max_length=100)
+	diagnosis = models.TextField()
+	#remarks = models.CharField('Remarks', max_length=100, default = "")
+	remarks = models.TextField()
 	visit = models.ForeignKey('Visit', editable = False, on_delete=models.PROTECT)
 
 	class Meta:
@@ -180,7 +177,6 @@ class ExamResult(CommonInfo):
 class Finding(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	finding_name = models.CharField(max_length=250)
-	visit = models.ForeignKey('Visit', editable = False, on_delete=models.PROTECT)
 
 	class Meta:
 		ordering = ['finding_name']
@@ -196,7 +192,7 @@ class Hearing(CommonInfo):
 
 class HearingTest(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	hearing_name = models.CharField(max_length = 25)
+	hearing_name = models.CharField(max_length = 35)
 
 	class Meta:
 		ordering = ['hearing_name']
@@ -206,7 +202,7 @@ class HearingTest(CommonInfo):
 
 class HearingResult(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	hearing_result = models.CharField(max_length=50)
+	hearing_result = models.CharField(max_length=150)
 
 	class Meta:
 		ordering = ['hearing_result']
@@ -224,12 +220,12 @@ class Location(CommonInfo):
 	def __str__(self):
 		return '%s' % (self.location)
 
-	def save(self, *args, **kwargs):
-		for field_name in ['location']:
-			val = getattr(self, field_name, False)
-			if val:
-				setattr(self, field_name, val.capitalize())
-		super(Location, self).save(*args, **kwargs)
+	# ~ def save(self, *args, **kwargs):
+		# ~ for field_name in ['location']:
+			# ~ val = getattr(self, field_name, False)
+			# ~ if val:
+				# ~ setattr(self, field_name, val.capitalize())
+		# ~ super(Location, self).save(*args, **kwargs)
 
 class MedicineGeneric(CommonInfo):
 	id = models.AutoField(primary_key=True)
@@ -259,17 +255,17 @@ class MedicineBrand(CommonInfo):
 	def __str__(self):
 		return '%s' % (self.brand_name)
 
-	def save(self, *args, **kwargs):
-		for field_name in ['brand_name']:
-			val = getattr(self, field_name, False)
-			if val:
-				setattr(self, field_name, val.capitalize())
-		super(MedicineBrand, self).save(*args, **kwargs)
+	# ~ def save(self, *args, **kwargs):
+		# ~ for field_name in ['brand_name']:
+			# ~ val = getattr(self, field_name, False)
+			# ~ if val:
+				# ~ setattr(self, field_name, val.capitalize())
+		# ~ super(MedicineBrand, self).save(*args, **kwargs)
 
 
 class MedicinePayment(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	medicine_amount = models.PositiveIntegerField(blank=True, null=True)
+	medicine_amount = models.PositiveIntegerField(default = 0)
 
 	class Meta:
 		ordering = ['medicine_amount']
@@ -279,7 +275,7 @@ class MedicinePayment(CommonInfo):
 
 class VisitPayment(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	visit_amount = models.PositiveIntegerField(blank=True, null=True)
+	visit_amount = models.PositiveIntegerField(default = 500)
 	class Meta:
 		ordering = ['visit_amount']
 	def __str__(self):
@@ -288,7 +284,7 @@ class VisitPayment(CommonInfo):
 
 class MedicineQuantity(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	med_quantity = models.CharField(max_length = 15, blank = True, null = True)
+	med_quantity = models.CharField(max_length = 15, default = 1)
 	class Meta:
 		ordering = [ 'med_quantity' ]
 	def __str__(self):
@@ -296,7 +292,7 @@ class MedicineQuantity(CommonInfo):
 
 class NumOfDays(CommonInfo):
 	id = models.AutoField(primary_key=True)
-	numofdays = models.PositiveIntegerField(blank=True, null=True)
+	numofdays = models.PositiveIntegerField(default = 1)
 	class Meta:
 		ordering = ['numofdays']
 	def __str__(self):
@@ -330,7 +326,7 @@ class Reminder(CommonInfo):
 class Treatment(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	treatment_name = models.CharField(max_length=25)
-	visit = models.ForeignKey('Visit', editable = False, on_delete=models.PROTECT)
+	#visit = models.ForeignKey('Visit', editable = False, on_delete=models.PROTECT)
 
 	class Meta:
 		ordering = ['treatment_name']

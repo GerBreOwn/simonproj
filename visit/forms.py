@@ -1,20 +1,16 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from django.forms import Widget
+from django.forms import Widget, TextInput
 from django.contrib.admin import widgets
-from .models import Prescription, MedicineBrand
+from .models import Prescription, MedicineBrand, Visit
 import datetime
 
-# ~ class GetDatesForm(forms.Form):
-	# ~ from_date = forms.DateField(label = "From:", widget=widgets.AdminDateWidget())
-	# ~ to_date = forms.DateField(label = "To:", widget=widgets.AdminDateWidget())
+class VisitForm(forms.ModelForm):
+	class Meta:
+		model = Visit
+		fields = ('visit_date', 'patient', 'visit_payment', 'medicine_payment')
 
-	# ~ def clean_from_date(self):
-		# ~ data = self.cleaned_data['from_date']
-		# ~ if data > datetime.date.today():
-			# ~ raise ValidationErr(_('Invalid date from_date today or in future'))
-		# ~ return data
 
 class BiopsyForm(forms.ModelForm):
 	class Meta:
@@ -36,9 +32,9 @@ class ComplaintForm(forms.ModelForm):
 
 class DiagnosisForm(forms.ModelForm):
 	class Meta:
-		widgets = {
-			'diagnosis': forms.TextInput(attrs = {'size': 30}),
-			'remarks': forms.TextInput(attrs = {'size': 30}),
+		widget = {
+			'diagnosis': forms.TextInput(attrs = {'size': 100}),
+			'remarks': forms.TextInput(attrs = {'size': 100}),
 		}
 
 
@@ -54,9 +50,9 @@ class ExamForm(forms.ModelForm):
 class HearingForm(forms.ModelForm):
 	class Meta:
 		widgets = {
-			'hearing_test': forms.Select(attrs = {'size': 30}),
-			'hearing_result': forms.Select(attrs = {'size': 30}),
-			'hearing_text': forms.TextInput(attrs = {'size': 30}),
+			'hearing_test': forms.Select(attrs = {'size': '50'}),
+			'hearing_result': forms.Select(attrs = {'size': '50'}),
+			'hearing_text': forms.TextInput(attrs = {'size': '50'}),
 		}
 
 class PrescriptionForm(forms.ModelForm):
@@ -64,10 +60,10 @@ class PrescriptionForm(forms.ModelForm):
 		model =  Prescription
 		fields = ('medicine_brand', 'medicine_generic','medicine_dose','medicine_duration_days', 'medicine_reminder','medicine_quantity')
 		widgets = {
-			'medicine_brand': forms.Select(attrs = {'size': 15}),
-			'medicine_generic': forms.Select(attrs = {'size': 15}),
-			'medicine_dose': forms.Select(attrs = {'size': 10}),
-			'medicine_duration_days': forms.TextInput(attrs = {'size': 5}),
+			'medicine_brand': forms.Select(attrs = {'size': 25}),
+			'medicine_generic': forms.Select(attrs = {'size': 25}),
+			'medicine_dose': forms.Select(attrs = {'size': 25}),
+			'medicine_duration_days': forms.TextInput(attrs = {'size': 10}),
 			'medicine_reminder': forms.TextInput(attrs = {'size': 50}),
 			'medicine_quantity': forms.TextInput(attrs = {'size': 25}),
 		}

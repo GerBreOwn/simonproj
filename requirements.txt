@@ -3,7 +3,11 @@ gunicorn
 #pymysql
 mysqlclient
 python-dateutil
+djangorestframework
+markdown
+django-filter
 django-crispy-forms
+django-debug-toolbar
 #django-counter-field-py3
 django-suit
 #django-suit-dashboard

@@ -1,0 +1,139 @@
+ORM
+
+#1) v1 = Visit.objects.filter(patient_id = 881)
+>>> v1
+<QuerySet [<Visit: Balungcas, Adonis, 2018-05-25>, <Visit: Balungcas, Adonis, 2018-05-30>]>
+v1[0].id
+786
+>>> v1[1].id
+1051
+
+#2a ) cmp = Complaint.objects.filter(visit_id = 786)
+>>> cmp
+<QuerySet [<Complaint: ear check up, Right ear>]>
+cmp[0].id
+841
+
+#3a ) Finding.objects.filter(complaint__id = 841)
+<QuerySet [<Finding: (+) d/c>, <Finding: perforated TM>]>
+
+#3b ) Treatment.objects.filter(complaint__id = 841)
+<QuerySet [<Treatment: suction>]>
+
+#4a ) Prescription.objects.filter(visit = 786).values('medicine_dose', 'medicine_duration_days', 'medicine_reminder', 'medicine_brand', 'medicine_generic', 'medicine_quantity')
+
+<QuerySet [{'medicine_dose': 16, 'medicine_duration_days': None, 'medicine_reminder': 16, 'medicine_brand': None, 'medicine_generic': None, 'medicine_quantity': None}]>
+
+#5a) Dose.objects.filter(id = 16)
+<QuerySet [<Dose: 3-4 gtts>]>
+
+#6a) Reminder.objects.filter(id = 16)
+<QuerySet [<Reminder: BID>]>
+
+#7a)  Biopsy.objects.filter(visit_id = 786)
+<QuerySet []>
+
+#8a) Hearing.objects.filter(visit_id = 786)
+<QuerySet []>
+
+#9a) Exam.objects.filter(visit_id =786)
+<QuerySet []>
+
+#10a ) Diagnosis.objects.filter(visit_id =786)
+<QuerySet []>
+
+
+
+
+############################################################################################
+#2b ) cmp = Complaint.objects.filter(visit_id = 1051)
+>>> cmp
+<QuerySet [<Complaint: itchiness, Left ear>]>
+>>> cmp[0].id
+1116
+
+#3b )Finding.objects.filter(complaint__id = 1116)
+<QuerySet [<Finding: (+) d/c>, <Finding: perforated TM>]>
+
+#3c )Treatment.objects.filter(complaint__id = 1116)
+<QuerySet [<Treatment: Perscribed medicine>, <Treatment: suction>]>
+
+#4b )Prescription.objects.filter(visit = 1051).values('medicine_dose', 'medicine_duration_days', 'medicine_reminder', 'medicine_brand', 'medicine_generic', 'medicine_quantity')
+<QuerySet [{'medicine_dose': 16, 'medicine_duration_days': None, 'medicine_reminder': 26, 'medicine_brand': None, 'medicine_generic': None, 'medicine_quantity': None}]>
+
+#5b) Reminder.objects.filter(id = 26)
+<QuerySet [<Reminder: TID>]>
+
+###########################################################################################
+
+SQL
+#1) select id as visit_id, visit_date from visit_visit where patient_id = 881;
++----------+------------+
+| visit_id | visit_date |
++----------+------------+
+|      786 | 2018-05-25 |
+|     1051 | 2018-05-30 |
++----------+------------+
+2 rows in set (0.001 sec)
+
+
+
+#2) select id, complaint_name, complaint_location from visit_complaint where visit_id = 786 or visit_id = 1051;
++------+----------------+--------------------+
+| id   | complaint_name | complaint_location |
++------+----------------+--------------------+
+|  841 |             61 |                  6 |
+| 1116 |            156 |                  6 |
++------+----------------+--------------------+
+2 rows in set (0.001 sec)
+
+
+#3) select finding_id from visit_complaint_finding where complaint_id = 841;
++------------+
+| finding_id |
++------------+
+|         56 |
+|        376 |
++------------+
+2 rows in set (0.000 sec)
+
+
+#4) select finding_name from visit_finding where id = 56 or id = 376;
++---------------+
+| finding_name  |
++---------------+
+| (+) d/c       |
+| perforated TM |
++---------------+
+2 rows in set (0.000 sec)
+
+
+#5) select treatment_id from visit_complaint_treatment where complaint_id = 841;
++--------------+
+| treatment_id |
++--------------+
+|           36 |
++--------------+
+1 row in set (0.000 sec)
+
+
+#6) select treatment_name from visit_treatment where id = 36;
++----------------+
+| treatment_name |
++----------------+
+| suction        |
++----------------+
+1 row in set (0.000 sec)
+
+
+select * from visit_prescription where visit_id = 786 or visit_id = 1051;
+
+| is_active | created_on                 | modified_on                | id   | medicine_duration_days_id | created_by_id | medicine_dose_id | medicine_reminder_id | modified_by_id | visit_id | medicine_brand_id | medicine_generic_id | medicine_quantity_id |
++----------+-------------------+---------------------+----------------------+
+|         1 | 2018-05-25 06:20:45.194308 | 2018-05-25 06:20:45.194433 |  946 |                      NULL |            11 |               16 |                   16 |             11 |      786 |              NULL |                NULL |                 NULL |
+|         1 | 2018-05-30 02:25:40.357525 | 2018-05-30 02:25:40.357654 | 1181 |                      NULL |            11 |               16 |                   26 |             11 |     1051 |              NULL |                NULL |                 NULL |
+
+2 rows in set (0.001 sec)
+
+
+

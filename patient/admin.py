@@ -31,8 +31,8 @@ class Patient(admin.ModelAdmin):
 	def has_delete_permission(self, request, obj=None):
 		return False
 	view_on_site = False
-	list_display = ('last_name', 'first_name', 'middle_initial', 
-	'date_of_birth', 'contact_num', 'address', 'gender', 'email', 
+	list_display = ('last_name', 'first_name', 'middle_initial',
+	'date_of_birth', 'contact_num', 'address', 'gender', 'email',
 	'town','occupation', 'pat_pic')
 
 	fields = [('last_name', 'first_name', 'middle_initial'),
@@ -48,14 +48,17 @@ class Patient(admin.ModelAdmin):
 			path('my_view', self.admin_site.admin_view(self.my_view)),
 			]
 		return my_urls + urls
-		
+
 	def my_view(self, request):
-		pass 	
+		pass
 
 	def admin_action(self, request, queryset):
 		actions = ["export_as_pdf"]
 		pass
 
 	def export_as_pdf(self, request, queryset):
-		
+
 		export_as_pdf.short_description = "Print Prescription"
+
+	def has_delete_permission(self, request, obj=None):
+		return True
