@@ -13,7 +13,13 @@ SECRET_KEY = 'nf^(#gts_4-vfd74(3i-hv8qcnq&cv-9ozi-l+&j@oeb4)z3k%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.109','192.168.2.119',  '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['192.168.1.109','192.168.2.119', '127.0.0.1', 'localhost']
+
+# ~ def show_toolbar(request):
+    # ~ return True
+# ~ DEBUG_TOOLBAR_CONFIG = {
+    # ~ "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
+# ~ }
 
 # Application definition
 # ~ SUIT = True
@@ -29,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'django_tables2',
     #'django_rest_framework',
     #'django-filters',
 #    'suit',
@@ -52,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+   # 'django.contrib.staticfiles',
     ]
 MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)
 
@@ -92,17 +100,17 @@ DATABASES = {
        }
 }
 
-SUIT_CONFIG = {
-	'ADMIN_NAME' : 'MEDICAL RECORDS Administration',
-	'SHOW_REQUIRED_ASTERISK' : True,
-	'MENU_EXCLUDE' : ('auth.group', 'auth', '-', 'doctor_group','doctor'),
-	'HEADER_TIME_FORMAT' : 'h:i',
-	'MENU_OPEN_FIRST_CHILD': True,
-	'CONFIRM_UNSAVED_CHANGES': True,
-	'LIST_PER_PAGE': 20,
-	'label': 'Print Prescription', 'url':'path(admin/patient/)', 'icon': 'icon-user',
-	'label': 'Payment Report', 'url': 'path(admin/visit/)', 'icon': 'icon-user',
-}
+# ~ SUIT_CONFIG = {
+	# ~ 'ADMIN_NAME' : 'MEDICAL RECORDS Administration',
+	# ~ 'SHOW_REQUIRED_ASTERISK' : True,
+	# ~ 'MENU_EXCLUDE' : ('auth.group', 'auth', '-', 'doctor_group','doctor'),
+	# ~ 'HEADER_TIME_FORMAT' : 'h:i',
+	# ~ 'MENU_OPEN_FIRST_CHILD': True,
+	# ~ 'CONFIRM_UNSAVED_CHANGES': True,
+	# ~ 'LIST_PER_PAGE': 20,
+	# ~ 'label': 'Print Prescription', 'url':'path(admin/patient/)', 'icon': 'icon-user',
+	# ~ 'label': 'Payment Report', 'url': 'path(admin/visit/)', 'icon': 'icon-user',
+# ~ }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

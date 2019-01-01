@@ -1,6 +1,5 @@
 django
 gunicorn
-#pymysql
 mysqlclient
 python-dateutil
 djangorestframework
@@ -8,7 +7,7 @@ markdown
 django-filter
 django-crispy-forms
 django-debug-toolbar
-#django-counter-field-py3
+django-tables2
 django-suit
 #django-suit-dashboard
 reportlab
@@ -16,9 +15,11 @@ django-popup-view-field
 django-crum
 #django-model-utils
 django-versatileimagefield
-pillow
+pillow >= 5.2.0
 python-decouple
 django-extensions
 django-autocomplete-light
 django-images
 django-admin-tools
+
+

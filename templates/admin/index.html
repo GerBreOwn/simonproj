@@ -63,11 +63,8 @@
 				<a href="/admin/patient/">Print Prescriptions</a>
 			</li>
 		</ul>
-		<br>
 	</div>
-	<br>
 
-	<br>
 	<div class="module" id="daily-payments-module">
 		<h2>Daily Payment Reports</h2>
 		<ul class="actionlist">
@@ -78,19 +75,16 @@
 			</li>
 		</ul>
 	</div>
- <br>
-<br>
 
+
+	<p>The MedRec database has the following number of records:</p>
+	<ul>
+		<li>There are {{ num_pats }} patients in the database.</li>
+		<li>There are {{ num_visits }} visits in the database.</li>
+		<li>There are {{ num_prescp }} prescriptions in the database.</li>
+	</ul>
 
 <!--
-<h4>
-The MedRec database has the following records,
-</h4>
-<ul>
-	<li><strong>Patients:</strong> {{ num_pats }}</li>
-	<li><strong>Visits:</strong> {{ num_visits}}</li>
-</ul>
-
 	<br>
 	<div class="module" id="weekly-payments-module">
 		<h2>Weekly Payment Reports</h2>

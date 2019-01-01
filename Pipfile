@@ -18,8 +18,15 @@ django-autocomplete-light = "*"
 django-images = "*"
 django-admin-tools = "*"
 Django = "*"
-Pillow = "<=5.0.0,>=2.4.0"
+Pillow = ">=5.2.0"
 django-popup-view-field = "*"
+djangorestframework = "*"
+django-filter = "*"
+django-debug-toolbar = "*"
+"django-tables2" = "*"
+django-sql-explorer = "*"
+Markdown = "*"
+django-admin-easy = "==0.5"
 
 [dev-packages]
 

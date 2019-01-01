@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from django.views.generic.dates import TodayArchiveView
-from visit.models import Visit
+from visit.models import Visit, Prescription
 from patient.models import Patient
 
 import datetime
@@ -25,18 +25,20 @@ buffer = BytesIO()
 mydate = date.today()
 
 @staff_member_required
-# ~ class PaymentTodayArchiveView(TodayArchiveView):
-	# ~ queryset = Visit.objects.all()
-	# ~ date_field = "visit_date"
 
-def index(request):
-	num_pats =  Patient.objects.count()
+def showcount(request):
+	""""View function for home page of site"""
+	#num_pats =  Patient.objects.count()
+	num_pats = 10333
 	num_visits = Visit.objects.count()
+	num_prescp = Prescription.objects.count()
 	context = {
 		'num_pats': num_pats,
-		'numvisits': num_visits,
+		'num_visits': num_visits,
+		'num_prescp': num_prescp,
 	}
-	return render(request, 'index.html', context = context)
+
+	return render(request, '/admin/index.html',{'num_pats': num_pats, 'num_visits':num_visits, 'numPprescrp': num_prescrp})
 
 def daily_payment_view(request):
 	response = HttpResponse(['content'],content_type='application/pdf')

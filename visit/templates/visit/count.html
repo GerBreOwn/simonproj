@@ -1,0 +1,10 @@
+{% extends index.html %}
+
+{% block count %}
+<p>The MedRec database has the following number of records:</p>
+	<ul>
+		<li>There are {{ num_pats }} patients in the database.</li>
+		<li>There are {{ num_visits }} visits in the database.</li>
+		<li>There are {{ num_prescp }} prescriptions in the database.</li>
+	</ul>
+{% endblock %}

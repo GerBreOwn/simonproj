@@ -6,6 +6,7 @@
 	{{ block.super }}
 		<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
 		<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+
 {% endblock %}
 
 {% block coltype %}colMS{% endblock %}
@@ -52,6 +53,7 @@
     <p>{% trans "You don't have permission to edit anything." %}</p>
 {% endif %}
 </div>
+
 {% endblock %}
 
 {% block sidebar %}
@@ -63,11 +65,8 @@
 				<a href="/admin/patient/">Print Prescriptions</a>
 			</li>
 		</ul>
-		<br>
 	</div>
-	<br>
 
-	<br>
 	<div class="module" id="daily-payments-module">
 		<h2>Daily Payment Reports</h2>
 		<ul class="actionlist">
@@ -78,19 +77,23 @@
 			</li>
 		</ul>
 	</div>
- <br>
-<br>
 
+
+{% block count %}
+<p>The MedRec database has the following number of records:</p>
+	<ul>
+
+		<li>There are {{ num_pats }} patients in the database.</li>
 
 <!--
-<h4>
-The MedRec database has the following records,
-</h4>
-<ul>
-	<li><strong>Patients:</strong> {{ num_pats }}</li>
-	<li><strong>Visits:</strong> {{ num_visits}}</li>
-</ul>
+		<li>There are 1033 patients </li>
+-->
+		<li>There are {{ num_visits }} visits in the database.</li>
+		<li>There are {{ num_prescp }} prescriptions in the database.</li>
+	</ul>
+{% endblock %}
 
+<!--
 	<br>
 	<div class="module" id="weekly-payments-module">
 		<h2>Weekly Payment Reports</h2>

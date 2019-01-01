@@ -7,25 +7,17 @@ from django.conf.urls import include, url
 from patient import views as patient_views
 from visit import views as visit_views
 
-admin.site.site_header = 'MEDREC Administration'
+admin.site.site_header = 'Medical Records (MEDREC) Administration'
 # ~ admin.site = DashboardSite()
 # ~ admin.sites.site = admin.site
 # ~ admin.autodiscover()
 
 urlpatterns = [
-	#path('site_url/', None),
+	path('admin/visit/', visit_views.showcount),
 	path('admin/patient/', patient_views.prescription_view),
 	path('admin/visit/', visit_views.daily_payment_view),
 	path('admin/visit/', visit_views.patient_history_view),
-	path('admin/', admin.site.urls),
 	path('visit/', include('visit.urls')),
-]
-
-# ~ if settings.DEBUG:
-    # ~ import debug_toolbar
-    # ~ urlpatterns = [
-        # ~ path('__debug__/', include(debug_toolbar.urls)),
-    # ~ ] + urlpatterns
-
-
-
+	#path('patient/', include('patient.urls')),
+	path('admin/', admin.site.urls),
+	]

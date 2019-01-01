@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2> Patient History Form /h2>
+	<form method="post" id="pat_hist_form">
+	   {% csrf_token %}
+	   <table>
+		   {{ form.as_table }}
+	   </table>
+	   <button type="submitt">Exit</button>
+

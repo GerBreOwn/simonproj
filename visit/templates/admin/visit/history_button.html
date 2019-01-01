@@ -1,11 +1,11 @@
-{% extends "admin/add_form.html"}
+{% extends "admin/change_form.html"}
 {% load i18n %}
 
-{% block history_button %}
+{% block after_field_sets %}
+	{{block.super}}
 	<div class="history-button">
-		<input type="button" value="{% trans 'Show History' %}" name="_historybutton" />
+		<button type="button" title="Show History" name="_history" onclick="location.href='/admin/visit/history';">
+		<span class="text">History</span>
+	</button>
 	</div>
-
-	{{ block.super }}
-
 {% endblock %}

@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.apps import AppConfig
+import django_tables2 as tables
 import datetime
 from crum import get_current_user
 from django.contrib import admin
@@ -92,6 +93,11 @@ class Patient(CommonInfo):
 		diff = date.today() - self.date_of_birth
 		return diff.year
 
+class PatientTable(tables.Table):
+	num_pat = tables.TemplateColumn('{{ row_counter}}')
+
+	def __str__(self):
+		return '%s' % (self.num_pat)
 
 
 class Province(CommonInfo):

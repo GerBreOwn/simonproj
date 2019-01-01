@@ -1,0 +1,14 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block after_field_sets %}
+{{ block.super}}
+
+	<div class="submit-row list-group">
+		<button type="buttom" title="Show History" class="list-group-item active" name="_history" onclick="location.href='/admin/visit/patient';">
+		<span class="text">Show History</span>
+
+			</button>
+		</div>
+
+{% endblock %}

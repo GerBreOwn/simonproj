@@ -6,10 +6,17 @@ from django.contrib.admin import widgets
 from .models import Prescription, MedicineBrand, Visit
 import datetime
 
+
 class VisitForm(forms.ModelForm):
 	class Meta:
-		model = Visit
-		fields = ('visit_date', 'patient', 'visit_payment', 'medicine_payment')
+		# ~ model = Visit
+		# ~ fields = ('visit_date', 'patient', 'visit_payment', 'medicine_payment')
+		widgets = {
+			'visit_date': forms.Select(attrs = {'size':25}),
+			'patient': forms.Select(attrs = {'size':25}),
+			'visit_payment': forms.Select(attrs = {'size':25}),
+			'medicine_payment': forms.Select(attrs = {'size':25}),
+		}
 
 
 class BiopsyForm(forms.ModelForm):
